@@ -1,0 +1,12 @@
+---
+# See: https://dependabot.com/docs/config-file/
+version: 1
+update_configs:
+  - directory: "/"
+    package_manager: "javascript"
+    update_schedule: "weekly"
+    version_requirement_updates: "increase_versions"
+    commit_message:
+      prefix: "fix"
+      prefix_development: "chore"
+      include_scope: true
