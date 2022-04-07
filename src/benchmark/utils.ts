@@ -9,7 +9,7 @@ export const quantile = (arr: number[], q: number): number => {
   if (sorted[base + 1] !== undefined) {
     return twoDecimals(sorted[base] + rest * (sorted[base + 1] - sorted[base]));
   } else {
-    return sorted[base];
+    return twoDecimals(sorted[base]);
   }
 };
 

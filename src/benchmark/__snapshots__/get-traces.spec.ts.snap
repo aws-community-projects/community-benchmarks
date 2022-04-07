@@ -1,0 +1,86 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`get-traces function fetch and parse traces 1`] = `
+Array [
+  Object {
+    "averageColdStart": 504.18,
+    "averageDuration": 2413.51,
+    "coldStartPercent": 50,
+    "durations": Array [
+      2362.4744415283203,
+      2464.5466804504395,
+    ],
+    "inits": Array [
+      504.1818618774414,
+      0,
+    ],
+    "name": "csv2ddb-sdk2-layer",
+    "p90ColdStart": 504.18,
+    "p90Duration": 2454.34,
+  },
+  Object {
+    "averageColdStart": 494.13,
+    "averageDuration": 2475.8,
+    "coldStartPercent": 50,
+    "durations": Array [
+      2351.0706424713135,
+      2600.536823272705,
+    ],
+    "inits": Array [
+      0,
+      494.13204193115234,
+    ],
+    "name": "csv2ddb-sdk2",
+    "p90ColdStart": 494.13,
+    "p90Duration": 2575.59,
+  },
+  Object {
+    "averageColdStart": 512.29,
+    "averageDuration": 2723.27,
+    "coldStartPercent": 50,
+    "durations": Array [
+      2546.1673736572266,
+      2900.376796722412,
+    ],
+    "inits": Array [
+      0,
+      512.2928619384766,
+    ],
+    "name": "csv2ddb-sdk3",
+    "p90ColdStart": 512.29,
+    "p90Duration": 2864.96,
+  },
+  Object {
+    "averageColdStart": 492.53,
+    "averageDuration": 2657.59,
+    "coldStartPercent": 50,
+    "durations": Array [
+      2432.806968688965,
+      2882.368803024292,
+    ],
+    "inits": Array [
+      0,
+      492.52843856811523,
+    ],
+    "name": "csv2ddb-sdk2-native",
+    "p90ColdStart": 492.53,
+    "p90Duration": 2837.41,
+  },
+  Object {
+    "averageColdStart": 490.24,
+    "averageDuration": 2565.17,
+    "coldStartPercent": 50,
+    "durations": Array [
+      2445.6546306610107,
+      2684.6818923950195,
+    ],
+    "inits": Array [
+      0,
+      490.236759185791,
+    ],
+    "name": "csv2ddb-sdk2-clients",
+    "p90ColdStart": 490.24,
+    "p90Duration": 2660.78,
+  },
+]
+`;

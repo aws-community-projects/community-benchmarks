@@ -77,16 +77,17 @@ export const handler = async (event: GetTracesEvent): Promise<Stat[]> => {
 
   const command = new BatchGetTracesCommand({ TraceIds: [traceId] });
 
-  const traces = (await client.send(command)).Traces || [];
+  const traces = (await client.send(command)).Traces;
 
-  if (!traces.length) {
+  if (!traces || !traces.length) {
     throw new Error('No traces!');
   }
 
   // Extract and parse the Documents.
   const docs =
     traces[0].Segments?.map(
-      (seg) => JSON.parse(seg.Document || '') as TraceDocument
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      (seg) => JSON.parse(seg.Document!) as TraceDocument
     ) || [];
 
   // Only looking for Lambda Function traces (not `AWS::Lambda` which is the trace of the Lambda service).
