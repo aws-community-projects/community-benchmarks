@@ -22,8 +22,9 @@ State Machines are nested because executing all the functions in a single state 
 
 - [x] Implement and test PoC using nested State Machines.
 - [x] Write unit tests.
-- [ ] Trigger with EventBridge cron.
-- [ ] Store results in a table.
+- [x] Store results in a table.
+- [ ] Aggregate results
 - [ ] Write results back to a website (using [mkdocs](https://www.mkdocs.org/)?).
+- [ ] Trigger with EventBridge cron.
 - [ ] Implement some http patterns.
 - [ ] Package up as a CDK Construct

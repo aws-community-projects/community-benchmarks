@@ -2,6 +2,9 @@
 
 // Useful for determining average (p50) and p90.
 export const quantile = (arr: number[], q: number): number => {
+  if (!arr.length) {
+    return 0;
+  }
   const sorted = asc(arr);
   const pos = (sorted.length - 1) * q;
   const base = Math.floor(pos);

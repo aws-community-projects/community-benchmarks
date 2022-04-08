@@ -12,6 +12,7 @@ interface Stat {
   averageDuration: number;
   averageColdStart: number;
   coldStartPercent: number;
+  date: string;
   durations: number[];
   inits: number[];
   p90Duration: number;
@@ -77,6 +78,8 @@ export const handler = async (event: GetTracesEvent): Promise<Stat[]> => {
 
   const command = new BatchGetTracesCommand({ TraceIds: [traceId] });
 
+  const date = new Date().toISOString().split('T')[0];
+
   const traces = (await client.send(command)).Traces;
 
   if (!traces || !traces.length) {
@@ -113,6 +116,7 @@ export const handler = async (event: GetTracesEvent): Promise<Stat[]> => {
         averageColdStart: 0,
         averageDuration: 0,
         coldStartPercent: 0,
+        date,
         durations: [],
         name: curr,
         inits: [],
@@ -158,7 +162,9 @@ export const handler = async (event: GetTracesEvent): Promise<Stat[]> => {
       ...stat,
       averageColdStart: quantile(coldStarts, 0.5),
       averageDuration: quantile(stat.durations, 0.5),
-      coldStartPercent: (coldStarts.length / stat.inits.length) * 100,
+      coldStartPercent: Math.round(
+        (coldStarts.length / stat.inits.length) * 100
+      ),
       p90ColdStart: quantile(coldStarts, 0.9),
       p90Duration: quantile(stat.durations, 0.9),
     };

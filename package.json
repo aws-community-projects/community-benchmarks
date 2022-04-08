@@ -50,5 +50,21 @@
     "setupFilesAfterEnv": [
       "./jest.setup.ts"
     ]
-  }
+  },
+  "description": "Benchmarking the cloud using [AWS CDK](https://aws.amazon.com/cdk/) and [Serverless Stack](https://serverless-stack.com/).",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aws-community-projects/community-benchmarks.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aws-community-projects/community-benchmarks/issues"
+  },
+  "homepage": "https://github.com/aws-community-projects/community-benchmarks#readme"
 }

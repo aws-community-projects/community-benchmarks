@@ -1,5 +1,12 @@
-import { Function, Stack, StackProps } from '@serverless-stack/resources';
-import { Duration } from 'aws-cdk-lib';
+import {
+  Function,
+  Stack,
+  StackProps,
+  Table,
+  TableFieldType,
+} from '@serverless-stack/resources';
+import { Duration, RemovalPolicy } from 'aws-cdk-lib';
+import { BillingMode } from 'aws-cdk-lib/aws-dynamodb';
 import { PolicyStatement } from 'aws-cdk-lib/aws-iam';
 import { Tracing } from 'aws-cdk-lib/aws-lambda';
 import {
@@ -14,6 +21,8 @@ import {
 } from 'aws-cdk-lib/aws-stepfunctions';
 import {
   CallAwsService,
+  DynamoAttributeValue,
+  DynamoPutItem,
   LambdaInvoke,
   StepFunctionsStartExecution,
 } from 'aws-cdk-lib/aws-stepfunctions-tasks';
@@ -35,16 +44,15 @@ export class BenchmarkMachineStack extends Stack {
     super(scope, id, props);
     const { lambdaTests } = props;
 
-    // Table not in use right now so this is commented. Will probably bring it back soon.
-    // const table = new Table(stack, 'BenchmarksTable', {
-    //   dynamodbTable: {
-    //     billingMode: BillingMode.PAY_PER_REQUEST,
-    //     removalPolicy: RemovalPolicy.DESTROY,
-    //     tableName: 'Benchmarks',
-    //   },
-    //   fields: { pk: TableFieldType.STRING, sk: TableFieldType.STRING },
-    //   primaryIndex: { partitionKey: 'pk', sortKey: 'sk' },
-    // });
+    const table = new Table(this, 'BenchmarksTable', {
+      dynamodbTable: {
+        billingMode: BillingMode.PAY_PER_REQUEST,
+        removalPolicy: RemovalPolicy.DESTROY,
+        tableName: 'Benchmarks',
+      },
+      fields: { pk: TableFieldType.STRING, sk: TableFieldType.STRING },
+      primaryIndex: { partitionKey: 'pk', sortKey: 'sk' },
+    });
 
     // Declare get-traces function with permission to grab xray traces.
     const getTraces = new Function(this, 'GetTraces', {
@@ -106,6 +114,93 @@ export class BenchmarkMachineStack extends Stack {
 
       invokeGetTraces.addRetry({ maxAttempts: 10 });
 
+      // Get additional stats like memory, runtime, etc from Lambda service
+      const getFunctionDescription = new CallAwsService(
+        this,
+        `GetFunc ${index}`,
+        {
+          action: 'getFunction',
+          iamResources: [lambdaTest.arn],
+          parameters: { FunctionName: lambdaTest.arn },
+          resultPath: '$.Function',
+          service: 'lambda',
+        }
+      );
+
+      const saveRun = new DynamoPutItem(this, `PutItem ${index}`, {
+        item: {
+          pk: DynamoAttributeValue.fromString(
+            JsonPath.stringAt('$.Traces.Payload[0].name')
+          ),
+          sk: DynamoAttributeValue.fromString(
+            JsonPath.format(
+              '{}#{}',
+              JsonPath.stringAt('$.Traces.Payload[0].date'),
+              JsonPath.stringAt('$.Traces.Payload[0].name')
+            )
+          ),
+          date: DynamoAttributeValue.fromString(
+            JsonPath.stringAt('$.Traces.Payload[0].date')
+          ),
+          architectures: DynamoAttributeValue.fromString(
+            JsonPath.stringAt('$.Function.Configuration.Architectures[0]')
+          ),
+          codeSize: DynamoAttributeValue.numberFromString(
+            JsonPath.format(
+              '{}',
+              JsonPath.stringAt('$.Function.Configuration.CodeSize')
+            )
+          ),
+          description: DynamoAttributeValue.fromString(
+            JsonPath.stringAt('$.Function.Configuration.Description')
+          ),
+          name: DynamoAttributeValue.fromString(
+            JsonPath.stringAt('$.Traces.Payload[0].name')
+          ),
+          memorySize: DynamoAttributeValue.numberFromString(
+            JsonPath.format(
+              '{}',
+              JsonPath.stringAt('$.Function.Configuration.MemorySize')
+            )
+          ),
+          runtime: DynamoAttributeValue.fromString(
+            JsonPath.stringAt('$.Function.Configuration.Runtime')
+          ),
+          coldStartPercent: DynamoAttributeValue.numberFromString(
+            JsonPath.format(
+              '{}',
+              JsonPath.stringAt('$.Traces.Payload[0].coldStartPercent')
+            )
+          ),
+          averageColdStart: DynamoAttributeValue.numberFromString(
+            JsonPath.format(
+              '{}',
+              JsonPath.stringAt('$.Traces.Payload[0].averageColdStart')
+            )
+          ),
+          averageDuration: DynamoAttributeValue.numberFromString(
+            JsonPath.format(
+              '{}',
+              JsonPath.stringAt('$.Traces.Payload[0].averageDuration')
+            )
+          ),
+          p90ColdStart: DynamoAttributeValue.numberFromString(
+            JsonPath.format(
+              '{}',
+              JsonPath.stringAt('$.Traces.Payload[0].p90ColdStart')
+            )
+          ),
+          p90Duration: DynamoAttributeValue.numberFromString(
+            JsonPath.format(
+              '{}',
+              JsonPath.stringAt('$.Traces.Payload[0].p90Duration')
+            )
+          ),
+        },
+        resultPath: '$.PutItem',
+        table: table.dynamodbTable,
+      });
+
       // Return the task token to the parent state machine.
       // Is there a better way to do this? Feels odd using the SDK.
       const sendSuccess = new CallAwsService(this, `SendSuccess ${index}`, {
@@ -124,7 +219,11 @@ export class BenchmarkMachineStack extends Stack {
         `Parallel State Machine ${index}`,
         {
           definition: pass.next(
-            lambdaMap.next(invokeGetTraces.next(sendSuccess))
+            lambdaMap.next(
+              invokeGetTraces.next(
+                getFunctionDescription.next(saveRun.next(sendSuccess))
+              )
+            )
           ),
           tracingEnabled: true,
         }
