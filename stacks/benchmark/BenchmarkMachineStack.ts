@@ -56,7 +56,6 @@ export class BenchmarkMachineStack extends Stack {
 
     // Declare get-traces function with permission to grab xray traces.
     const getTraces = new Function(this, 'GetTraces', {
-      // environment: { TABLE_NAME: table.tableName },
       functionName: 'get-traces',
       handler: 'get-traces.handler',
       initialPolicy: [

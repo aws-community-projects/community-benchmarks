@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import { createReadStream } from 'fs';
 
-import { putFn } from '../../__mocks__/aws-sdk/clients/dynamodb';
-import { awsSdkV2PromiseResponse } from '../../__mocks__/awsSdkV2PromiseResponse';
+import { putFn } from '../../../__mocks__/aws-sdk/clients/dynamodb';
+import { awsSdkV2PromiseResponse } from '../../../__mocks__/awsSdkV2PromiseResponse';
 
 const handler = require('./csv2ddb-sdk2-js').handler;
 

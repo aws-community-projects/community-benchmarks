@@ -77,7 +77,6 @@ export class Csv2DdbStack extends Stack {
                   cwd: outputDir,
                 });
               } catch {
-                /* istanbul ignore next */
                 return false;
               }
               execSync(`npm init -y && npm i aws-sdk`, {
@@ -166,7 +165,7 @@ export class Csv2DdbStack extends Stack {
 
     const csv2ddbSdk2Js = new LambdaFunction(this, 'csv2ddb-sdk2-js', {
       architecture: Architecture.ARM_64,
-      code: Code.fromAsset(`src/csv2ddb`, {
+      code: Code.fromAsset(`src/csv2ddb/js`, {
         assetHashType: AssetHashType.OUTPUT,
         bundling: {
           command: ['sh', '-c', 'echo "Docker build not supported."'],
@@ -175,8 +174,49 @@ export class Csv2DdbStack extends Stack {
             tryBundle(outputDir: string) {
               try {
                 copyFileSync(
-                  'src/csv2ddb/csv2ddb-sdk2-js.js',
+                  'src/csv2ddb/js/csv2ddb-sdk2-js.js',
                   `${outputDir}/csv2ddb-sdk2-js.js`
+                );
+              } catch {
+                return false;
+              }
+              execSync(`npm init -y && npm i csvtojson`, {
+                ...execOptions,
+                cwd: outputDir,
+              });
+              return true;
+            },
+          },
+        },
+      }),
+      description: `Reads ${fileSize} rows of CSV and writes to DynamoDB. Uses native aws-sdk v2 and is CommonJS JavaScript-only with no transpiling.`,
+      environment,
+      handler: 'csv2ddb-sdk2-js.handler',
+      functionName: 'csv2ddb-sdk2-js',
+      logRetention: RetentionDays.ONE_DAY,
+      memorySize: 512,
+      runtime: Runtime.NODEJS_14_X,
+      timeout: Duration.minutes(1),
+      tracing: Tracing.ACTIVE,
+    });
+
+    const csv2ddbSdk2Mjs = new LambdaFunction(this, 'csv2ddb-sdk2-mjs', {
+      architecture: Architecture.ARM_64,
+      code: Code.fromAsset(`src/csv2ddb/mjs`, {
+        assetHashType: AssetHashType.OUTPUT,
+        bundling: {
+          command: ['sh', '-c', 'echo "Docker build not supported."'],
+          image: DockerImage.fromRegistry('alpine'),
+          local: {
+            tryBundle(outputDir: string) {
+              try {
+                copyFileSync(
+                  'src/csv2ddb/mjs/csv2ddb-sdk2-mjs.mjs',
+                  `${outputDir}/csv2ddb-sdk2-mjs.mjs`
+                );
+                copyFileSync(
+                  'src/csv2ddb/mjs/imports.cjs',
+                  `${outputDir}/imports.cjs`
                 );
               } catch {
                 /* istanbul ignore next */
@@ -191,10 +231,10 @@ export class Csv2DdbStack extends Stack {
           },
         },
       }),
-      description: `Reads ${fileSize} rows of CSV and writes to DynamoDB. Uses native aws-sdk v2 and is JavaScript-only with no transpiling.`,
+      description: `Reads ${fileSize} rows of CSV and writes to DynamoDB. Uses native aws-sdk v2 and is ESModule JavaScript-only with no transpiling.`,
       environment,
-      handler: 'csv2ddb-sdk2-js.handler',
-      functionName: 'csv2ddb-sdk2-js',
+      handler: 'csv2ddb-sdk2-mjs.handler',
+      functionName: 'csv2ddb-sdk2-mjs',
       logRetention: RetentionDays.ONE_DAY,
       memorySize: 512,
       runtime: Runtime.NODEJS_14_X,
@@ -210,6 +250,7 @@ export class Csv2DdbStack extends Stack {
       csv2ddbSdk2Layer,
       csv2ddbSdk3,
       csv2ddbSdk2Js,
+      csv2ddbSdk2Mjs,
     ];
 
     fns.forEach((fn) => {

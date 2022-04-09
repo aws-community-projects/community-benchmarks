@@ -15,14 +15,23 @@ const mockFnResult = {
   },
 };
 
+beforeAll(() => {
+  jest.useFakeTimers('modern');
+  jest.setSystemTime(new Date(2020, 3, 1));
+});
+
 beforeEach(() => xrayMock.reset());
+
+afterAll(() => {
+  jest.useRealTimers();
+});
 
 describe('get-traces function', () => {
   test('fetch and parse traces', async () => {
     xrayMock.on(BatchGetTracesCommand).resolves(trace);
 
     const result = await handler({
-      MapResult: Array(10).fill(mockFnResult),
+      MapResult: Array(20).fill(mockFnResult),
       token: 'FAKE_TASK_TOKEN',
     });
     expect(result).toMatchSnapshot();
@@ -32,7 +41,7 @@ describe('get-traces function', () => {
     xrayMock.on(BatchGetTracesCommand).resolves({ Traces: [] });
     try {
       await handler({
-        MapResult: Array(10).fill(mockFnResult),
+        MapResult: Array(20).fill(mockFnResult),
         token: 'FAKE_TASK_TOKEN',
       });
     } catch (e) {
@@ -44,7 +53,7 @@ describe('get-traces function', () => {
     xrayMock.on(BatchGetTracesCommand).resolves({ Traces: [{}] });
     try {
       await handler({
-        MapResult: Array(10).fill(mockFnResult),
+        MapResult: Array(20).fill(mockFnResult),
         token: 'FAKE_TASK_TOKEN',
       });
     } catch (e) {
