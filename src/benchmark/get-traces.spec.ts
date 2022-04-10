@@ -1,7 +1,7 @@
 import { BatchGetTracesCommand, XRayClient } from '@aws-sdk/client-xray';
 import { mockClient } from 'aws-sdk-client-mock';
 
-import trace from '../../sample-trace.json';
+import trace from '../../fixtures/sample-trace.json';
 import { handler } from './get-traces';
 
 const xrayMock = mockClient(XRayClient);

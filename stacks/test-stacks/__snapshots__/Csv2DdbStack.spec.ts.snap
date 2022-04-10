@@ -649,7 +649,7 @@ Object {
             "BUCKET_NAME": Object {
               "Ref": "SalesCsvBucket1224326F",
             },
-            "COLD_STARTER": "2020-04-01T05:00:00.000Z",
+            "COLD_STARTER": "2020-04-01T04:00:00.000Z",
             "NODE_OPTIONS": "--enable-source-maps",
             "TABLE_NAME": Object {
               "Ref": "SalesTableB987FA65",
@@ -843,7 +843,7 @@ Object {
             "BUCKET_NAME": Object {
               "Ref": "SalesCsvBucket1224326F",
             },
-            "COLD_STARTER": "2020-04-01T05:00:00.000Z",
+            "COLD_STARTER": "2020-04-01T04:00:00.000Z",
             "NODE_OPTIONS": "--enable-source-maps",
             "TABLE_NAME": Object {
               "Ref": "SalesTableB987FA65",
@@ -1037,7 +1037,7 @@ Object {
             "BUCKET_NAME": Object {
               "Ref": "SalesCsvBucket1224326F",
             },
-            "COLD_STARTER": "2020-04-01T05:00:00.000Z",
+            "COLD_STARTER": "2020-04-01T04:00:00.000Z",
             "NODE_OPTIONS": "--enable-source-maps",
             "TABLE_NAME": Object {
               "Ref": "SalesTableB987FA65",
@@ -1230,7 +1230,7 @@ Object {
             "BUCKET_NAME": Object {
               "Ref": "SalesCsvBucket1224326F",
             },
-            "COLD_STARTER": "2020-04-01T05:00:00.000Z",
+            "COLD_STARTER": "2020-04-01T04:00:00.000Z",
             "NODE_OPTIONS": "--enable-source-maps",
             "TABLE_NAME": Object {
               "Ref": "SalesTableB987FA65",
@@ -1424,7 +1424,7 @@ Object {
             "BUCKET_NAME": Object {
               "Ref": "SalesCsvBucket1224326F",
             },
-            "COLD_STARTER": "2020-04-01T05:00:00.000Z",
+            "COLD_STARTER": "2020-04-01T04:00:00.000Z",
             "NODE_OPTIONS": "--enable-source-maps",
             "TABLE_NAME": Object {
               "Ref": "SalesTableB987FA65",
@@ -1622,7 +1622,7 @@ Object {
             "BUCKET_NAME": Object {
               "Ref": "SalesCsvBucket1224326F",
             },
-            "COLD_STARTER": "2020-04-01T05:00:00.000Z",
+            "COLD_STARTER": "2020-04-01T04:00:00.000Z",
             "NODE_OPTIONS": "--enable-source-maps",
             "TABLE_NAME": Object {
               "Ref": "SalesTableB987FA65",
@@ -1816,7 +1816,7 @@ Object {
             "BUCKET_NAME": Object {
               "Ref": "SalesCsvBucket1224326F",
             },
-            "COLD_STARTER": "2020-04-01T05:00:00.000Z",
+            "COLD_STARTER": "2020-04-01T04:00:00.000Z",
             "NODE_OPTIONS": "--enable-source-maps",
             "TABLE_NAME": Object {
               "Ref": "SalesTableB987FA65",
@@ -2010,7 +2010,7 @@ Object {
             "BUCKET_NAME": Object {
               "Ref": "SalesCsvBucket1224326F",
             },
-            "COLD_STARTER": "2020-04-01T05:00:00.000Z",
+            "COLD_STARTER": "2020-04-01T04:00:00.000Z",
             "NODE_OPTIONS": "--enable-source-maps",
             "TABLE_NAME": Object {
               "Ref": "SalesTableB987FA65",

@@ -15,6 +15,7 @@ interface Stat {
   date: string;
   durations: number[];
   inits: number[];
+  iterations: number;
   p90Duration: number;
   p90ColdStart: number;
 }
@@ -120,6 +121,7 @@ export const handler = async (event: GetTracesEvent): Promise<Stat[]> => {
         durations: [],
         name: curr,
         inits: [],
+        iterations: 0,
         p90ColdStart: 0,
         p90Duration: 0,
       },
@@ -165,6 +167,7 @@ export const handler = async (event: GetTracesEvent): Promise<Stat[]> => {
       coldStartPercent: Math.round(
         (coldStarts.length / stat.inits.length) * 100
       ),
+      iterations: stat.durations.length,
       p90ColdStart: quantile(coldStarts, 0.9),
       p90Duration: quantile(stat.durations, 0.9),
     };

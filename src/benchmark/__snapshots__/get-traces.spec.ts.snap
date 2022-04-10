@@ -51,6 +51,7 @@ Array [
       0,
       1254.162073135376,
     ],
+    "iterations": 20,
     "name": "csv2ddb-sdk2-esm",
     "p90ColdStart": 1243.36,
     "p90Duration": 1014.34,

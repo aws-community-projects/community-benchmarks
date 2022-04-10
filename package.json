@@ -29,12 +29,12 @@
     "typescript": "^4.6.3"
   },
   "dependencies": {
-    "@aws-sdk/client-dynamodb": "^3.58.0",
-    "@aws-sdk/client-lambda": "^3.65.0",
-    "@aws-sdk/client-s3": "^3.58.0",
-    "@aws-sdk/client-xray": "^3.58.0",
-    "@aws-sdk/lib-dynamodb": "^3.58.0",
-    "aws-sdk": "^2.1109.0",
+    "@aws-sdk/client-dynamodb": "^3.67.0",
+    "@aws-sdk/client-lambda": "^3.67.0",
+    "@aws-sdk/client-s3": "^3.67.0",
+    "@aws-sdk/client-xray": "^3.67.0",
+    "@aws-sdk/lib-dynamodb": "^3.67.0",
+    "aws-sdk": "^2.1111.0",
     "csvtojson": "^2.0.10"
   },
   "jest": {
@@ -44,6 +44,7 @@
       "!**/.sst/**",
       "!**/cdk.out/**",
       "!**/coverage/**",
+      "!**/fixtures/**",
       "!**/node_modules/**",
       "!stacks/index.ts"
     ],

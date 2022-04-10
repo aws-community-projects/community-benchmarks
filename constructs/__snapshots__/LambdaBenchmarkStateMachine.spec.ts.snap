@@ -1,0 +1,394 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BenchmarkStateMachine 1`] = `
+Object {
+  "Parameters": Object {
+    "BootstrapVersion": Object {
+      "Default": "/cdk-bootstrap/hnb659fds/version",
+      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+  },
+  "Resources": Object {
+    "BenchmarksTable35A54DAA": Object {
+      "DeletionPolicy": "Retain",
+      "Properties": Object {
+        "AttributeDefinitions": Array [
+          Object {
+            "AttributeName": "pk",
+            "AttributeType": "S",
+          },
+          Object {
+            "AttributeName": "sk",
+            "AttributeType": "S",
+          },
+        ],
+        "BillingMode": "PAY_PER_REQUEST",
+        "KeySchema": Array [
+          Object {
+            "AttributeName": "pk",
+            "KeyType": "HASH",
+          },
+          Object {
+            "AttributeName": "sk",
+            "KeyType": "RANGE",
+          },
+        ],
+        "PointInTimeRecoverySpecification": Object {
+          "PointInTimeRecoveryEnabled": true,
+        },
+        "TableName": "dev-my-app-BenchmarksTable",
+        "Tags": Array [
+          Object {
+            "Key": "sst:app",
+            "Value": "my-app",
+          },
+          Object {
+            "Key": "sst:stage",
+            "Value": "dev",
+          },
+        ],
+      },
+      "Type": "AWS::DynamoDB::Table",
+      "UpdateReplacePolicy": "Retain",
+    },
+    "GetTraces3BC6EA9B": Object {
+      "DependsOn": Array [
+        "GetTracesServiceRoleDefaultPolicyCE8FA86E",
+        "GetTracesServiceRoleAB8F12D9",
+      ],
+      "Properties": Object {
+        "Code": Object {
+          "S3Bucket": "cdk-hnb659fds-assets-my-account-us-east-1",
+          "S3Key": "[HASH REMOVED].zip",
+        },
+        "Environment": Object {
+          "Variables": Object {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+          },
+        },
+        "Handler": "src/benchmark/get-traces.handler",
+        "MemorySize": 1024,
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "GetTracesServiceRoleAB8F12D9",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs12.x",
+        "Tags": Array [
+          Object {
+            "Key": "sst:app",
+            "Value": "my-app",
+          },
+          Object {
+            "Key": "sst:stage",
+            "Value": "dev",
+          },
+        ],
+        "Timeout": 10,
+        "TracingConfig": Object {
+          "Mode": "Active",
+        },
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "GetTracesServiceRoleAB8F12D9": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+        "Tags": Array [
+          Object {
+            "Key": "sst:app",
+            "Value": "my-app",
+          },
+          Object {
+            "Key": "sst:stage",
+            "Value": "dev",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "GetTracesServiceRoleDefaultPolicyCE8FA86E": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": Array [
+                "xray:PutTraceSegments",
+                "xray:PutTelemetryRecords",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "GetTracesServiceRoleDefaultPolicyCE8FA86E",
+        "Roles": Array [
+          Object {
+            "Ref": "GetTracesServiceRoleAB8F12D9",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "SSTMetadata": Object {
+      "Metadata": Object {
+        "sst:constructs": Array [
+          Object {
+            "addr": "c8ec2d4dcb4e875f0933e26b27315ac410acfe7909",
+            "data": Object {
+              "arn": Object {
+                "Fn::GetAtt": Array [
+                  "GetTraces3BC6EA9B",
+                  "Arn",
+                ],
+              },
+              "localId": "dev-my-app-test-stack-GetTraces",
+            },
+            "id": "GetTraces",
+            "stack": "dev-my-app-test-stack",
+            "type": "Function",
+          },
+          Object {
+            "addr": "c88a2d14f35684213fa9de999b19bfb671a345c172",
+            "data": Object {
+              "consumers": Array [],
+              "tableName": Object {
+                "Ref": "BenchmarksTable35A54DAA",
+              },
+            },
+            "id": "BenchmarksTable",
+            "stack": "dev-my-app-test-stack",
+            "type": "Table",
+          },
+        ],
+        "sst:version": "0.69.5",
+      },
+      "Type": "AWS::CDK::Metadata",
+    },
+    "testmachineLambdaBenchmarkStateMachine66A187C9": Object {
+      "DependsOn": Array [
+        "testmachineLambdaBenchmarkStateMachineRoleDefaultPolicy2A9124EA",
+        "testmachineLambdaBenchmarkStateMachineRole2F0CE792",
+      ],
+      "Properties": Object {
+        "DefinitionString": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "{"StartAt":"Configure","States":{"Configure":{"Type":"Pass","Result":[0,1,2,3,4,5,6,7,8,9],"ResultPath":"$.Passes","Next":"Lambda Map"},"Lambda Map":{"Type":"Map","ResultPath":"$.MapResult","Next":"GetTraces","Iterator":{"StartAt":"LambdaInvoke","States":{"LambdaInvoke":{"End":true,"Retry":[{"ErrorEquals":["Lambda.ServiceException","Lambda.AWSLambdaException","Lambda.SdkClientException"],"IntervalSeconds":2,"MaxAttempts":6,"BackoffRate":2}],"Type":"Task","Resource":"arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":states:::lambda:invoke","Parameters":{"FunctionName":"arn:aws:lambda:us-east-9:987654321:function:test-func1","Payload":{}}}}},"ItemsPath":"$.Passes","MaxConcurrency":5},"GetTraces":{"Next":"GetFunc","Retry":[{"ErrorEquals":["Lambda.ServiceException","Lambda.AWSLambdaException","Lambda.SdkClientException"],"IntervalSeconds":2,"MaxAttempts":6,"BackoffRate":2},{"ErrorEquals":["States.ALL"],"MaxAttempts":10}],"Type":"Task","ResultPath":"$.Traces","Resource":"arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":states:::lambda:invoke","Parameters":{"FunctionName":"",
+              Object {
+                "Fn::GetAtt": Array [
+                  "GetTraces3BC6EA9B",
+                  "Arn",
+                ],
+              },
+              "","Payload.$":"$"}},"GetFunc":{"Next":"PutItem","Type":"Task","ResultPath":"$.Function","Resource":"arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":states:::aws-sdk:lambda:getFunction","Parameters":{"FunctionName":"arn:aws:lambda:us-east-9:987654321:function:test-func1"}},"PutItem":{"Next":"SendSuccess","Type":"Task","ResultPath":"$.PutItem","Resource":"arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":states:::dynamodb:putItem","Parameters":{"Item":{"pk":{"S.$":"$.Traces.Payload[0].name"},"sk":{"S.$":"States.Format('{}#{}', $.Traces.Payload[0].date, $.Traces.Payload[0].name)"},"date":{"S.$":"$.Traces.Payload[0].date"},"architectures":{"S.$":"$.Function.Configuration.Architectures[0]"},"codeSize":{"N.$":"States.Format('{}', $.Function.Configuration.CodeSize)"},"description":{"S.$":"$.Function.Configuration.Description"},"name":{"S.$":"$.Traces.Payload[0].name"},"memorySize":{"N.$":"States.Format('{}', $.Function.Configuration.MemorySize)"},"runtime":{"S.$":"$.Function.Configuration.Runtime"},"coldStartPercent":{"N.$":"States.Format('{}', $.Traces.Payload[0].coldStartPercent)"},"averageColdStart":{"N.$":"States.Format('{}', $.Traces.Payload[0].averageColdStart)"},"averageDuration":{"N.$":"States.Format('{}', $.Traces.Payload[0].averageDuration)"},"iterations":{"N.$":"States.Format('{}', $.Traces.Payload[0].iterations)"},"p90ColdStart":{"N.$":"States.Format('{}', $.Traces.Payload[0].p90ColdStart)"},"p90Duration":{"N.$":"States.Format('{}', $.Traces.Payload[0].p90Duration)"}},"TableName":"",
+              Object {
+                "Ref": "BenchmarksTable35A54DAA",
+              },
+              ""}},"SendSuccess":{"End":true,"Type":"Task","Resource":"arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":states:::aws-sdk:sfn:sendTaskSuccess","Parameters":{"Output.$":"$.Traces.Payload","TaskToken.$":"$.token"}}}}",
+            ],
+          ],
+        },
+        "RoleArn": Object {
+          "Fn::GetAtt": Array [
+            "testmachineLambdaBenchmarkStateMachineRole2F0CE792",
+            "Arn",
+          ],
+        },
+        "Tags": Array [
+          Object {
+            "Key": "sst:app",
+            "Value": "my-app",
+          },
+          Object {
+            "Key": "sst:stage",
+            "Value": "dev",
+          },
+        ],
+        "TracingConfiguration": Object {
+          "Enabled": true,
+        },
+      },
+      "Type": "AWS::StepFunctions::StateMachine",
+    },
+    "testmachineLambdaBenchmarkStateMachineRole2F0CE792": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "states.us-east-1.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "Tags": Array [
+          Object {
+            "Key": "sst:app",
+            "Value": "my-app",
+          },
+          Object {
+            "Key": "sst:stage",
+            "Value": "dev",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "testmachineLambdaBenchmarkStateMachineRoleDefaultPolicy2A9124EA": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": Array [
+                "xray:PutTraceSegments",
+                "xray:PutTelemetryRecords",
+                "xray:GetSamplingRules",
+                "xray:GetSamplingTargets",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+            Object {
+              "Action": "lambda:InvokeFunction",
+              "Effect": "Allow",
+              "Resource": Object {
+                "Fn::GetAtt": Array [
+                  "GetTraces3BC6EA9B",
+                  "Arn",
+                ],
+              },
+            },
+            Object {
+              "Action": "lambda:getFunction",
+              "Effect": "Allow",
+              "Resource": "arn:aws:lambda:us-east-9:987654321:function:test-func1",
+            },
+            Object {
+              "Action": "dynamodb:PutItem",
+              "Effect": "Allow",
+              "Resource": Object {
+                "Fn::Join": Array [
+                  "",
+                  Array [
+                    "arn:",
+                    Object {
+                      "Ref": "AWS::Partition",
+                    },
+                    ":dynamodb:us-east-1:my-account:table/",
+                    Object {
+                      "Ref": "BenchmarksTable35A54DAA",
+                    },
+                  ],
+                ],
+              },
+            },
+            Object {
+              "Action": "sfn:sendTaskSuccess",
+              "Effect": "Allow",
+              "Resource": "arn:aws:states:us-east-1:my-account:stateMachine:benchmark-machine",
+            },
+            Object {
+              "Action": "lambda:InvokeFunction",
+              "Effect": "Allow",
+              "Resource": "arn:aws:lambda:us-east-9:987654321:function:test-func1",
+            },
+            Object {
+              "Action": "states:SendTaskSuccess",
+              "Effect": "Allow",
+              "Resource": "arn:aws:states:us-east-1:my-account:stateMachine:benchmark-machine",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "testmachineLambdaBenchmarkStateMachineRoleDefaultPolicy2A9124EA",
+        "Roles": Array [
+          Object {
+            "Ref": "testmachineLambdaBenchmarkStateMachineRole2F0CE792",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+  },
+  "Rules": Object {
+    "CheckBootstrapVersion": Object {
+      "Assertions": Array [
+        Object {
+          "Assert": Object {
+            "Fn::Not": Array [
+              Object {
+                "Fn::Contains": Array [
+                  Array [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                  ],
+                  Object {
+                    "Ref": "BootstrapVersion",
+                  },
+                ],
+              },
+            ],
+          },
+          "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI.",
+        },
+      ],
+    },
+  },
+}
+`;
