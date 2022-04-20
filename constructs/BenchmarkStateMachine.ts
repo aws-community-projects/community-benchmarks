@@ -70,6 +70,8 @@ export class BenchmarkStateMachine extends Construct {
         }
       );
 
+      executeParallel.addRetry({ maxAttempts: 2 });
+
       parallel.branch(executeParallel);
     });
 

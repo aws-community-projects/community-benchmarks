@@ -9,6 +9,27 @@ const tableName = process.env.TABLE_NAME;
 const docClient = new AWS.DynamoDB.DocumentClient();
 const s3 = new AWS.S3();
 
+const writeBatch = async (items) => {
+  if (!tableName) {
+    throw new Error('Missing required env var!');
+  }
+  return docClient
+    .batchWrite({
+      RequestItems: {
+        [tableName]: items.map((i) => ({
+          PutRequest: {
+            Item: {
+              ...i,
+              pk: i['Order ID'],
+              sk: i['Order Date'],
+            },
+          },
+        })),
+      },
+    })
+    .promise();
+};
+
 exports.handler = async () => {
   if (!bucketName || !bucketKey || !tableName) {
     throw new Error('Missing required env var!');
@@ -17,16 +38,21 @@ exports.handler = async () => {
     .getObject({ Bucket: bucketName, Key: bucketKey })
     .createReadStream();
 
+  let items = [];
+
   await csv()
     .fromStream(s3Stream)
     .subscribe(async (item) => {
-      await docClient
-        .put({
-          Item: { ...item, pk: item['Order ID'], sk: item['Order Date'] },
-          TableName: tableName,
-        })
-        .promise();
+      items.push(item);
+      if (items.length > 24) {
+        await writeBatch(items);
+        items = [];
+      }
     });
+
+  if (items.length) {
+    await writeBatch(items);
+  }
 
   return {
     statusCode: 200,

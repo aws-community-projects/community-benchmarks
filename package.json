@@ -16,25 +16,26 @@
     ]
   },
   "devDependencies": {
-    "@serverless-stack/cli": "0.69.5",
-    "@serverless-stack/resources": "0.69.5",
+    "@serverless-stack/cli": "0.69.6",
+    "@serverless-stack/resources": "0.69.6",
     "@tsconfig/node14": "^1.0.1",
     "@types/aws-lambda": "^8.10.70",
     "@types/jest": "^27.4.1",
-    "@types/node": "<15.0.0",
+    "@types/node": "^14.18.13",
     "aws-cdk-lib": "2.15.0",
     "aws-sdk-client-mock": "^0.6.2",
     "aws-sdk-mock": "^5.6.2",
-    "typesafe-dynamodb": "^0.1.5",
+    "typesafe-dynamodb": "^0.1.7",
     "typescript": "^4.6.3"
   },
   "dependencies": {
-    "@aws-sdk/client-dynamodb": "^3.67.0",
-    "@aws-sdk/client-lambda": "^3.67.0",
-    "@aws-sdk/client-s3": "^3.67.0",
-    "@aws-sdk/client-xray": "^3.67.0",
-    "@aws-sdk/lib-dynamodb": "^3.67.0",
-    "aws-sdk": "^2.1111.0",
+    "@aws-sdk/client-dynamodb": "^3.72.0",
+    "@aws-sdk/client-lambda": "^3.72.0",
+    "@aws-sdk/client-s3": "^3.72.0",
+    "@aws-sdk/client-xray": "^3.72.0",
+    "@aws-sdk/lib-dynamodb": "^3.72.0",
+    "aws-sdk": "^2.1116.0",
+    "aws-xray-sdk-core": "^3.3.5",
     "csvtojson": "^2.0.10"
   },
   "jest": {

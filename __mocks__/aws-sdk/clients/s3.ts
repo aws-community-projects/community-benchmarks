@@ -6,10 +6,11 @@
 
 import { awsSdkV2PromiseResponse } from '../../awsSdkV2PromiseResponse';
 
-const getObject = jest.fn().mockImplementation(() => ({
+export const getObjectFn = jest.fn().mockImplementation(() => ({
   createReadStream: awsSdkV2PromiseResponse,
 }));
 
 export default class S3 {
-  getObject = getObject;
+  customizeRequests = () => true;
+  getObject = getObjectFn;
 }

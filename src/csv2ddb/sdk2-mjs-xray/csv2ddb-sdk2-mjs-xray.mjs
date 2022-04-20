@@ -1,16 +1,15 @@
-import { DynamoDB, S3 } from 'aws-sdk';
-import csv from 'csvtojson';
+import imports from './imports.cjs';
 
 const bucketName = process.env.BUCKET_NAME;
 const bucketKey = process.env.BUCKET_KEY;
 const tableName = process.env.TABLE_NAME;
 
-const docClient = new DynamoDB.DocumentClient();
-const s3 = new S3();
+const docClient = new imports.DynamoDB.DocumentClient();
+imports.XRay.captureAWSClient(docClient.service);
+const s3 = new imports.S3();
+imports.XRay.captureAWSClient(s3);
 
-type item = { [key: string]: string };
-
-const writeBatch = async (items: item[]) => {
+const writeBatch = async (items) => {
   if (!tableName) {
     throw new Error('Missing required env var!');
   }
@@ -39,9 +38,10 @@ export const handler = async () => {
     .getObject({ Bucket: bucketName, Key: bucketKey })
     .createReadStream();
 
-  let items = [] as item[];
+  let items = [];
 
-  await csv()
+  await imports
+    .csv()
     .fromStream(s3Stream)
     .subscribe(async (item) => {
       items.push(item);

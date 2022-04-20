@@ -16,15 +16,16 @@ interface Stat {
   durations: number[];
   inits: number[];
   iterations: number;
+  name: string;
   p90Duration: number;
   p90ColdStart: number;
 }
 
-// Maybe don't need this?
-// I was thinking we might collect stats from multiple functions in a single go, but that seems infeasible due to xray limits.
-interface Stats {
-  [name: string]: Stat;
-}
+// // Maybe don't need this?
+// // I was thinking we might collect stats from multiple functions in a single go, but that seems infeasible due to xray limits.
+// interface Stats {
+//   [name: string]: Stat;
+// }
 
 // Custom event passed to this function.
 interface GetTracesEvent {
@@ -71,7 +72,7 @@ interface TraceDocument {
 }
 
 // TODO: Break out some of these functions into utils!
-export const handler = async (event: GetTracesEvent): Promise<Stat[]> => {
+export const handler = async (event: GetTracesEvent): Promise<Stat> => {
   // The actual trace we need is embedded in this header.
   const traceString =
     event.MapResult[0].SdkHttpMetadata.HttpHeaders['X-Amzn-Trace-Id'];
@@ -110,68 +111,99 @@ export const handler = async (event: GetTracesEvent): Promise<Stat[]> => {
   }
 
   // Create stat blocks to be populated.
-  const emptyStats = [...new Set(fns.map((f) => f.name))].reduce(
-    (prev, curr) => ({
-      ...prev,
-      [curr]: {
-        averageColdStart: 0,
-        averageDuration: 0,
-        coldStartPercent: 0,
-        date,
-        durations: [],
-        name: curr,
-        inits: [],
-        iterations: 0,
-        p90ColdStart: 0,
-        p90Duration: 0,
-      },
-    }),
-    {} as Stats
-  );
+  // const emptyStats = [...new Set(fns.map((f) => f.name))].reduce(
+  //   (prev, curr) => ({
+  //     ...prev,
+  //     [curr]: {
+  //       averageColdStart: 0,
+  //       averageDuration: 0,
+  //       coldStartPercent: 0,
+  //       date,
+  //       durations: [],
+  //       name: curr,
+  //       inits: [],
+  //       iterations: 0,
+  //       p90ColdStart: 0,
+  //       p90Duration: 0,
+  //     },
+  //   }),
+  //   {} as Stats
+  // );
 
   // Populating `durations` and `inits`.
   // Traces include labels: `Invocation`, `Initialization` and `Overhead`. Ignoring Overhead for now.
   // Other traces like instrumented SDK calls could go here as well.
-  const collectedStats = fns.reduce(
-    (prev, curr) => ({
-      ...prev,
-      [curr.name]: {
-        ...prev[curr.name],
-        durations: [
-          ...prev[curr.name].durations,
-          curr.subsegments
-            .filter((s) => s.name === 'Invocation')
-            .map((i) => (i.end_time - i.start_time) * 1000)[0],
-        ],
-        inits: [
-          ...prev[curr.name].inits,
-          curr.subsegments
-            .filter((s) => s.name === 'Initialization')
-            .map((i) => (i.end_time - i.start_time) * 1000)[0] || 0,
-        ],
-      },
-    }),
-    emptyStats
-  );
+  // const collectedStats = fns.reduce(
+  //   (prev, curr) => ({
+  //     ...prev,
+  //     [curr.name]: {
+  //       ...prev[curr.name],
+  //       durations: [
+  //         ...prev[curr.name].durations,
+  //         curr.subsegments
+  //           .filter((s) => s.name === 'Invocation')
+  //           .map((i) => (i.end_time - i.start_time) * 1000)[0],
+  //       ],
+  //       inits: [
+  //         ...prev[curr.name].inits,
+  //         curr.subsegments
+  //           .filter((s) => s.name === 'Initialization')
+  //           .map((i) => (i.end_time - i.start_time) * 1000)[0] || 0,
+  //       ],
+  //     },
+  //   }),
+  //   emptyStats
+  // );
 
-  const computedStats = Object.keys(collectedStats).map((name): Stat => {
-    const stat = collectedStats[name];
-    // If `init` is `0` then it wasn't a cold start.
-    const coldStarts = stat.inits.filter((init) => init > 0);
+  const stat = {
+    date,
+    durations: [] as number[],
+    inits: [] as number[],
+    name: fns[0].name,
+  } as Stat;
 
-    // Determine averages and p90 as well as the percent of cold starts and return it.
-    return {
-      ...stat,
-      averageColdStart: quantile(coldStarts, 0.5),
-      averageDuration: quantile(stat.durations, 0.5),
-      coldStartPercent: Math.round(
-        (coldStarts.length / stat.inits.length) * 100
-      ),
-      iterations: stat.durations.length,
-      p90ColdStart: quantile(coldStarts, 0.9),
-      p90Duration: quantile(stat.durations, 0.9),
-    };
+  fns.forEach((fn) => {
+    const invocation = fn.subsegments.filter((s) => s.name === 'Invocation')[0];
+    const initializations = fn.subsegments.filter(
+      (s) => s.name === 'Initialization'
+    )[0];
+    stat.durations.push((invocation.end_time - invocation.start_time) * 1000);
+    stat.inits.push(
+      initializations
+        ? (initializations.end_time - initializations.start_time) * 1000
+        : 0
+    );
   });
 
-  return computedStats;
+  const coldStarts = stat.inits.filter((init) => init > 0);
+
+  stat.averageColdStart = quantile(coldStarts, 0.5);
+  stat.averageDuration = quantile(stat.durations, 0.5);
+  stat.coldStartPercent = Math.round(
+    (coldStarts.length / stat.inits.length) * 100
+  );
+  stat.iterations = stat.durations.length;
+  stat.p90ColdStart = quantile(coldStarts, 0.9);
+  stat.p90Duration = quantile(stat.durations, 0.9);
+
+  // const computedStats = Object.keys(collectedStats).map((name): Stat => {
+  //   const stat = collectedStats[name];
+  //   // If `init` is `0` then it wasn't a cold start.
+  //   const coldStarts = stat.inits.filter((init) => init > 0);
+
+  //   // Determine averages and p90 as well as the percent of cold starts and return it.
+  //   return {
+  //     ...stat,
+  //     averageColdStart: quantile(coldStarts, 0.5),
+  //     averageDuration: quantile(stat.durations, 0.5),
+  //     coldStartPercent: Math.round(
+  //       (coldStarts.length / stat.inits.length) * 100
+  //     ),
+  //     iterations: stat.durations.length,
+  //     p90ColdStart: quantile(coldStarts, 0.9),
+  //     p90Duration: quantile(stat.durations, 0.9),
+  //   };
+  // });
+
+  return stat;
 };

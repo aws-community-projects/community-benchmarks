@@ -1,4 +1,6 @@
-import { DynamoDB, S3 } from 'aws-sdk';
+import DynamoDB, { DocumentClient } from 'aws-sdk/clients/dynamodb';
+import S3 from 'aws-sdk/clients/s3';
+import { captureAWSClient } from 'aws-xray-sdk-core';
 import csv from 'csvtojson';
 
 const bucketName = process.env.BUCKET_NAME;
@@ -6,7 +8,9 @@ const bucketKey = process.env.BUCKET_KEY;
 const tableName = process.env.TABLE_NAME;
 
 const docClient = new DynamoDB.DocumentClient();
+captureAWSClient((docClient as DocumentClient & { service: DynamoDB }).service);
 const s3 = new S3();
+captureAWSClient(s3);
 
 type item = { [key: string]: string };
 

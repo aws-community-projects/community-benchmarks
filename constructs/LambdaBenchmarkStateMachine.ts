@@ -73,6 +73,19 @@ export class LambdaBenchmarkStateMachine extends Construct {
       })
     );
 
+    // Return the task token to the parent state machine.
+    const sendFailure = new CallAwsService(this, `SendFailure`, {
+      action: 'sendTaskFailure',
+      iamResources: [parentStateMachineArn],
+      inputPath: '$',
+      parameters: {
+        Cause: 'No Traces Found!',
+        Error: '404',
+        'TaskToken.$': '$$.Execution.Input.token',
+      },
+      service: 'sfn',
+    });
+
     // Lambda Function grabs xray traces and parses them.
     // Requires retry because it'll throw an exception if the traces aren't available yet.
     const invokeGetTraces = new LambdaInvoke(this, `GetTraces`, {
@@ -81,7 +94,8 @@ export class LambdaBenchmarkStateMachine extends Construct {
       retryOnServiceExceptions: true,
     });
 
-    invokeGetTraces.addRetry({ maxAttempts: 10 });
+    invokeGetTraces.addCatch(sendFailure);
+    invokeGetTraces.addRetry({ maxAttempts: 5 });
 
     // Get additional stats like memory, runtime, etc from Lambda service
     const getFunctionDescription = new CallAwsService(this, `GetFunc`, {
@@ -95,17 +109,17 @@ export class LambdaBenchmarkStateMachine extends Construct {
     const saveRun = new DynamoPutItem(this, `PutItem`, {
       item: {
         pk: DynamoAttributeValue.fromString(
-          JsonPath.stringAt('$.Traces.Payload[0].name')
+          JsonPath.stringAt('$.Traces.Payload.name')
         ),
         sk: DynamoAttributeValue.fromString(
           JsonPath.format(
             '{}#{}',
-            JsonPath.stringAt('$.Traces.Payload[0].date'),
-            JsonPath.stringAt('$.Traces.Payload[0].name')
+            JsonPath.stringAt('$.Traces.Payload.date'),
+            JsonPath.stringAt('$.Traces.Payload.name')
           )
         ),
         date: DynamoAttributeValue.fromString(
-          JsonPath.stringAt('$.Traces.Payload[0].date')
+          JsonPath.stringAt('$.Traces.Payload.date')
         ),
         architectures: DynamoAttributeValue.fromString(
           JsonPath.stringAt('$.Function.Configuration.Architectures[0]')
@@ -120,7 +134,7 @@ export class LambdaBenchmarkStateMachine extends Construct {
           JsonPath.stringAt('$.Function.Configuration.Description')
         ),
         name: DynamoAttributeValue.fromString(
-          JsonPath.stringAt('$.Traces.Payload[0].name')
+          JsonPath.stringAt('$.Traces.Payload.name')
         ),
         memorySize: DynamoAttributeValue.numberFromString(
           JsonPath.format(
@@ -134,37 +148,37 @@ export class LambdaBenchmarkStateMachine extends Construct {
         coldStartPercent: DynamoAttributeValue.numberFromString(
           JsonPath.format(
             '{}',
-            JsonPath.stringAt('$.Traces.Payload[0].coldStartPercent')
+            JsonPath.stringAt('$.Traces.Payload.coldStartPercent')
           )
         ),
         averageColdStart: DynamoAttributeValue.numberFromString(
           JsonPath.format(
             '{}',
-            JsonPath.stringAt('$.Traces.Payload[0].averageColdStart')
+            JsonPath.stringAt('$.Traces.Payload.averageColdStart')
           )
         ),
         averageDuration: DynamoAttributeValue.numberFromString(
           JsonPath.format(
             '{}',
-            JsonPath.stringAt('$.Traces.Payload[0].averageDuration')
+            JsonPath.stringAt('$.Traces.Payload.averageDuration')
           )
         ),
         iterations: DynamoAttributeValue.numberFromString(
           JsonPath.format(
             '{}',
-            JsonPath.stringAt('$.Traces.Payload[0].iterations')
+            JsonPath.stringAt('$.Traces.Payload.iterations')
           )
         ),
         p90ColdStart: DynamoAttributeValue.numberFromString(
           JsonPath.format(
             '{}',
-            JsonPath.stringAt('$.Traces.Payload[0].p90ColdStart')
+            JsonPath.stringAt('$.Traces.Payload.p90ColdStart')
           )
         ),
         p90Duration: DynamoAttributeValue.numberFromString(
           JsonPath.format(
             '{}',
-            JsonPath.stringAt('$.Traces.Payload[0].p90Duration')
+            JsonPath.stringAt('$.Traces.Payload.p90Duration')
           )
         ),
       },
@@ -197,7 +211,7 @@ export class LambdaBenchmarkStateMachine extends Construct {
     // Unable to use `grantTaskResponse` because it introduces a circular dependency.
     this.stateMachine.addToRolePolicy(
       new PolicyStatement({
-        actions: ['states:SendTaskSuccess'],
+        actions: ['states:SendTaskFailure', 'states:SendTaskSuccess'],
         resources: [parentStateMachineArn],
       })
     );

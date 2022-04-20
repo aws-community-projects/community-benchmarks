@@ -178,7 +178,7 @@ Object {
               Object {
                 "Ref": "AWS::Partition",
               },
-              ":states:::lambda:invoke","Parameters":{"FunctionName":"arn:aws:lambda:us-east-9:987654321:function:test-func1","Payload":{}}}}},"ItemsPath":"$.Passes","MaxConcurrency":5},"GetTraces":{"Next":"GetFunc","Retry":[{"ErrorEquals":["Lambda.ServiceException","Lambda.AWSLambdaException","Lambda.SdkClientException"],"IntervalSeconds":2,"MaxAttempts":6,"BackoffRate":2},{"ErrorEquals":["States.ALL"],"MaxAttempts":10}],"Type":"Task","ResultPath":"$.Traces","Resource":"arn:",
+              ":states:::lambda:invoke","Parameters":{"FunctionName":"arn:aws:lambda:us-east-9:987654321:function:test-func1","Payload":{}}}}},"ItemsPath":"$.Passes","MaxConcurrency":5},"GetTraces":{"Next":"GetFunc","Retry":[{"ErrorEquals":["Lambda.ServiceException","Lambda.AWSLambdaException","Lambda.SdkClientException"],"IntervalSeconds":2,"MaxAttempts":6,"BackoffRate":2},{"ErrorEquals":["States.ALL"],"MaxAttempts":5}],"Catch":[{"ErrorEquals":["States.ALL"],"Next":"SendFailure"}],"Type":"Task","ResultPath":"$.Traces","Resource":"arn:",
               Object {
                 "Ref": "AWS::Partition",
               },
@@ -197,7 +197,7 @@ Object {
               Object {
                 "Ref": "AWS::Partition",
               },
-              ":states:::dynamodb:putItem","Parameters":{"Item":{"pk":{"S.$":"$.Traces.Payload[0].name"},"sk":{"S.$":"States.Format('{}#{}', $.Traces.Payload[0].date, $.Traces.Payload[0].name)"},"date":{"S.$":"$.Traces.Payload[0].date"},"architectures":{"S.$":"$.Function.Configuration.Architectures[0]"},"codeSize":{"N.$":"States.Format('{}', $.Function.Configuration.CodeSize)"},"description":{"S.$":"$.Function.Configuration.Description"},"name":{"S.$":"$.Traces.Payload[0].name"},"memorySize":{"N.$":"States.Format('{}', $.Function.Configuration.MemorySize)"},"runtime":{"S.$":"$.Function.Configuration.Runtime"},"coldStartPercent":{"N.$":"States.Format('{}', $.Traces.Payload[0].coldStartPercent)"},"averageColdStart":{"N.$":"States.Format('{}', $.Traces.Payload[0].averageColdStart)"},"averageDuration":{"N.$":"States.Format('{}', $.Traces.Payload[0].averageDuration)"},"iterations":{"N.$":"States.Format('{}', $.Traces.Payload[0].iterations)"},"p90ColdStart":{"N.$":"States.Format('{}', $.Traces.Payload[0].p90ColdStart)"},"p90Duration":{"N.$":"States.Format('{}', $.Traces.Payload[0].p90Duration)"}},"TableName":"",
+              ":states:::dynamodb:putItem","Parameters":{"Item":{"pk":{"S.$":"$.Traces.Payload.name"},"sk":{"S.$":"States.Format('{}#{}', $.Traces.Payload.date, $.Traces.Payload.name)"},"date":{"S.$":"$.Traces.Payload.date"},"architectures":{"S.$":"$.Function.Configuration.Architectures[0]"},"codeSize":{"N.$":"States.Format('{}', $.Function.Configuration.CodeSize)"},"description":{"S.$":"$.Function.Configuration.Description"},"name":{"S.$":"$.Traces.Payload.name"},"memorySize":{"N.$":"States.Format('{}', $.Function.Configuration.MemorySize)"},"runtime":{"S.$":"$.Function.Configuration.Runtime"},"coldStartPercent":{"N.$":"States.Format('{}', $.Traces.Payload.coldStartPercent)"},"averageColdStart":{"N.$":"States.Format('{}', $.Traces.Payload.averageColdStart)"},"averageDuration":{"N.$":"States.Format('{}', $.Traces.Payload.averageDuration)"},"iterations":{"N.$":"States.Format('{}', $.Traces.Payload.iterations)"},"p90ColdStart":{"N.$":"States.Format('{}', $.Traces.Payload.p90ColdStart)"},"p90Duration":{"N.$":"States.Format('{}', $.Traces.Payload.p90Duration)"}},"TableName":"",
               Object {
                 "Ref": "BenchmarksTable35A54DAA",
               },
@@ -205,7 +205,11 @@ Object {
               Object {
                 "Ref": "AWS::Partition",
               },
-              ":states:::aws-sdk:sfn:sendTaskSuccess","Parameters":{"Output.$":"$.Traces.Payload","TaskToken.$":"$.token"}}}}",
+              ":states:::aws-sdk:sfn:sendTaskSuccess","Parameters":{"Output.$":"$.Traces.Payload","TaskToken.$":"$.token"}},"SendFailure":{"End":true,"Type":"Task","InputPath":"$","Resource":"arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":states:::aws-sdk:sfn:sendTaskFailure","Parameters":{"Cause":"No Traces Found!","Error":"404","TaskToken.$":"$$.Execution.Input.token"}}}}",
             ],
           ],
         },
@@ -312,12 +316,20 @@ Object {
               "Resource": "arn:aws:states:us-east-1:my-account:stateMachine:benchmark-machine",
             },
             Object {
+              "Action": "sfn:sendTaskFailure",
+              "Effect": "Allow",
+              "Resource": "arn:aws:states:us-east-1:my-account:stateMachine:benchmark-machine",
+            },
+            Object {
               "Action": "lambda:InvokeFunction",
               "Effect": "Allow",
               "Resource": "arn:aws:lambda:us-east-9:987654321:function:test-func1",
             },
             Object {
-              "Action": "states:SendTaskSuccess",
+              "Action": Array [
+                "states:SendTaskFailure",
+                "states:SendTaskSuccess",
+              ],
               "Effect": "Allow",
               "Resource": "arn:aws:states:us-east-1:my-account:stateMachine:benchmark-machine",
             },
@@ -347,7 +359,7 @@ Object {
               Object {
                 "Ref": "AWS::Partition",
               },
-              ":states:::lambda:invoke","Parameters":{"FunctionName":"arn:aws:lambda:us-east-9:987654321:function:test-func2","Payload":{}}}}},"ItemsPath":"$.Passes","MaxConcurrency":5},"GetTraces":{"Next":"GetFunc","Retry":[{"ErrorEquals":["Lambda.ServiceException","Lambda.AWSLambdaException","Lambda.SdkClientException"],"IntervalSeconds":2,"MaxAttempts":6,"BackoffRate":2},{"ErrorEquals":["States.ALL"],"MaxAttempts":10}],"Type":"Task","ResultPath":"$.Traces","Resource":"arn:",
+              ":states:::lambda:invoke","Parameters":{"FunctionName":"arn:aws:lambda:us-east-9:987654321:function:test-func2","Payload":{}}}}},"ItemsPath":"$.Passes","MaxConcurrency":5},"GetTraces":{"Next":"GetFunc","Retry":[{"ErrorEquals":["Lambda.ServiceException","Lambda.AWSLambdaException","Lambda.SdkClientException"],"IntervalSeconds":2,"MaxAttempts":6,"BackoffRate":2},{"ErrorEquals":["States.ALL"],"MaxAttempts":5}],"Catch":[{"ErrorEquals":["States.ALL"],"Next":"SendFailure"}],"Type":"Task","ResultPath":"$.Traces","Resource":"arn:",
               Object {
                 "Ref": "AWS::Partition",
               },
@@ -366,7 +378,7 @@ Object {
               Object {
                 "Ref": "AWS::Partition",
               },
-              ":states:::dynamodb:putItem","Parameters":{"Item":{"pk":{"S.$":"$.Traces.Payload[0].name"},"sk":{"S.$":"States.Format('{}#{}', $.Traces.Payload[0].date, $.Traces.Payload[0].name)"},"date":{"S.$":"$.Traces.Payload[0].date"},"architectures":{"S.$":"$.Function.Configuration.Architectures[0]"},"codeSize":{"N.$":"States.Format('{}', $.Function.Configuration.CodeSize)"},"description":{"S.$":"$.Function.Configuration.Description"},"name":{"S.$":"$.Traces.Payload[0].name"},"memorySize":{"N.$":"States.Format('{}', $.Function.Configuration.MemorySize)"},"runtime":{"S.$":"$.Function.Configuration.Runtime"},"coldStartPercent":{"N.$":"States.Format('{}', $.Traces.Payload[0].coldStartPercent)"},"averageColdStart":{"N.$":"States.Format('{}', $.Traces.Payload[0].averageColdStart)"},"averageDuration":{"N.$":"States.Format('{}', $.Traces.Payload[0].averageDuration)"},"iterations":{"N.$":"States.Format('{}', $.Traces.Payload[0].iterations)"},"p90ColdStart":{"N.$":"States.Format('{}', $.Traces.Payload[0].p90ColdStart)"},"p90Duration":{"N.$":"States.Format('{}', $.Traces.Payload[0].p90Duration)"}},"TableName":"",
+              ":states:::dynamodb:putItem","Parameters":{"Item":{"pk":{"S.$":"$.Traces.Payload.name"},"sk":{"S.$":"States.Format('{}#{}', $.Traces.Payload.date, $.Traces.Payload.name)"},"date":{"S.$":"$.Traces.Payload.date"},"architectures":{"S.$":"$.Function.Configuration.Architectures[0]"},"codeSize":{"N.$":"States.Format('{}', $.Function.Configuration.CodeSize)"},"description":{"S.$":"$.Function.Configuration.Description"},"name":{"S.$":"$.Traces.Payload.name"},"memorySize":{"N.$":"States.Format('{}', $.Function.Configuration.MemorySize)"},"runtime":{"S.$":"$.Function.Configuration.Runtime"},"coldStartPercent":{"N.$":"States.Format('{}', $.Traces.Payload.coldStartPercent)"},"averageColdStart":{"N.$":"States.Format('{}', $.Traces.Payload.averageColdStart)"},"averageDuration":{"N.$":"States.Format('{}', $.Traces.Payload.averageDuration)"},"iterations":{"N.$":"States.Format('{}', $.Traces.Payload.iterations)"},"p90ColdStart":{"N.$":"States.Format('{}', $.Traces.Payload.p90ColdStart)"},"p90Duration":{"N.$":"States.Format('{}', $.Traces.Payload.p90Duration)"}},"TableName":"",
               Object {
                 "Ref": "BenchmarksTable35A54DAA",
               },
@@ -374,7 +386,11 @@ Object {
               Object {
                 "Ref": "AWS::Partition",
               },
-              ":states:::aws-sdk:sfn:sendTaskSuccess","Parameters":{"Output.$":"$.Traces.Payload","TaskToken.$":"$.token"}}}}",
+              ":states:::aws-sdk:sfn:sendTaskSuccess","Parameters":{"Output.$":"$.Traces.Payload","TaskToken.$":"$.token"}},"SendFailure":{"End":true,"Type":"Task","InputPath":"$","Resource":"arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":states:::aws-sdk:sfn:sendTaskFailure","Parameters":{"Cause":"No Traces Found!","Error":"404","TaskToken.$":"$$.Execution.Input.token"}}}}",
             ],
           ],
         },
@@ -481,12 +497,20 @@ Object {
               "Resource": "arn:aws:states:us-east-1:my-account:stateMachine:benchmark-machine",
             },
             Object {
+              "Action": "sfn:sendTaskFailure",
+              "Effect": "Allow",
+              "Resource": "arn:aws:states:us-east-1:my-account:stateMachine:benchmark-machine",
+            },
+            Object {
               "Action": "lambda:InvokeFunction",
               "Effect": "Allow",
               "Resource": "arn:aws:lambda:us-east-9:987654321:function:test-func2",
             },
             Object {
-              "Action": "states:SendTaskSuccess",
+              "Action": Array [
+                "states:SendTaskFailure",
+                "states:SendTaskSuccess",
+              ],
               "Effect": "Allow",
               "Resource": "arn:aws:states:us-east-1:my-account:stateMachine:benchmark-machine",
             },
@@ -516,7 +540,7 @@ Object {
               Object {
                 "Ref": "AWS::Partition",
               },
-              ":states:::lambda:invoke","Parameters":{"FunctionName":"arn:aws:lambda:us-east-9:987654321:function:test-func3","Payload":{}}}}},"ItemsPath":"$.Passes","MaxConcurrency":5},"GetTraces":{"Next":"GetFunc","Retry":[{"ErrorEquals":["Lambda.ServiceException","Lambda.AWSLambdaException","Lambda.SdkClientException"],"IntervalSeconds":2,"MaxAttempts":6,"BackoffRate":2},{"ErrorEquals":["States.ALL"],"MaxAttempts":10}],"Type":"Task","ResultPath":"$.Traces","Resource":"arn:",
+              ":states:::lambda:invoke","Parameters":{"FunctionName":"arn:aws:lambda:us-east-9:987654321:function:test-func3","Payload":{}}}}},"ItemsPath":"$.Passes","MaxConcurrency":5},"GetTraces":{"Next":"GetFunc","Retry":[{"ErrorEquals":["Lambda.ServiceException","Lambda.AWSLambdaException","Lambda.SdkClientException"],"IntervalSeconds":2,"MaxAttempts":6,"BackoffRate":2},{"ErrorEquals":["States.ALL"],"MaxAttempts":5}],"Catch":[{"ErrorEquals":["States.ALL"],"Next":"SendFailure"}],"Type":"Task","ResultPath":"$.Traces","Resource":"arn:",
               Object {
                 "Ref": "AWS::Partition",
               },
@@ -535,7 +559,7 @@ Object {
               Object {
                 "Ref": "AWS::Partition",
               },
-              ":states:::dynamodb:putItem","Parameters":{"Item":{"pk":{"S.$":"$.Traces.Payload[0].name"},"sk":{"S.$":"States.Format('{}#{}', $.Traces.Payload[0].date, $.Traces.Payload[0].name)"},"date":{"S.$":"$.Traces.Payload[0].date"},"architectures":{"S.$":"$.Function.Configuration.Architectures[0]"},"codeSize":{"N.$":"States.Format('{}', $.Function.Configuration.CodeSize)"},"description":{"S.$":"$.Function.Configuration.Description"},"name":{"S.$":"$.Traces.Payload[0].name"},"memorySize":{"N.$":"States.Format('{}', $.Function.Configuration.MemorySize)"},"runtime":{"S.$":"$.Function.Configuration.Runtime"},"coldStartPercent":{"N.$":"States.Format('{}', $.Traces.Payload[0].coldStartPercent)"},"averageColdStart":{"N.$":"States.Format('{}', $.Traces.Payload[0].averageColdStart)"},"averageDuration":{"N.$":"States.Format('{}', $.Traces.Payload[0].averageDuration)"},"iterations":{"N.$":"States.Format('{}', $.Traces.Payload[0].iterations)"},"p90ColdStart":{"N.$":"States.Format('{}', $.Traces.Payload[0].p90ColdStart)"},"p90Duration":{"N.$":"States.Format('{}', $.Traces.Payload[0].p90Duration)"}},"TableName":"",
+              ":states:::dynamodb:putItem","Parameters":{"Item":{"pk":{"S.$":"$.Traces.Payload.name"},"sk":{"S.$":"States.Format('{}#{}', $.Traces.Payload.date, $.Traces.Payload.name)"},"date":{"S.$":"$.Traces.Payload.date"},"architectures":{"S.$":"$.Function.Configuration.Architectures[0]"},"codeSize":{"N.$":"States.Format('{}', $.Function.Configuration.CodeSize)"},"description":{"S.$":"$.Function.Configuration.Description"},"name":{"S.$":"$.Traces.Payload.name"},"memorySize":{"N.$":"States.Format('{}', $.Function.Configuration.MemorySize)"},"runtime":{"S.$":"$.Function.Configuration.Runtime"},"coldStartPercent":{"N.$":"States.Format('{}', $.Traces.Payload.coldStartPercent)"},"averageColdStart":{"N.$":"States.Format('{}', $.Traces.Payload.averageColdStart)"},"averageDuration":{"N.$":"States.Format('{}', $.Traces.Payload.averageDuration)"},"iterations":{"N.$":"States.Format('{}', $.Traces.Payload.iterations)"},"p90ColdStart":{"N.$":"States.Format('{}', $.Traces.Payload.p90ColdStart)"},"p90Duration":{"N.$":"States.Format('{}', $.Traces.Payload.p90Duration)"}},"TableName":"",
               Object {
                 "Ref": "BenchmarksTable35A54DAA",
               },
@@ -543,7 +567,11 @@ Object {
               Object {
                 "Ref": "AWS::Partition",
               },
-              ":states:::aws-sdk:sfn:sendTaskSuccess","Parameters":{"Output.$":"$.Traces.Payload","TaskToken.$":"$.token"}}}}",
+              ":states:::aws-sdk:sfn:sendTaskSuccess","Parameters":{"Output.$":"$.Traces.Payload","TaskToken.$":"$.token"}},"SendFailure":{"End":true,"Type":"Task","InputPath":"$","Resource":"arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":states:::aws-sdk:sfn:sendTaskFailure","Parameters":{"Cause":"No Traces Found!","Error":"404","TaskToken.$":"$$.Execution.Input.token"}}}}",
             ],
           ],
         },
@@ -650,12 +678,20 @@ Object {
               "Resource": "arn:aws:states:us-east-1:my-account:stateMachine:benchmark-machine",
             },
             Object {
+              "Action": "sfn:sendTaskFailure",
+              "Effect": "Allow",
+              "Resource": "arn:aws:states:us-east-1:my-account:stateMachine:benchmark-machine",
+            },
+            Object {
               "Action": "lambda:InvokeFunction",
               "Effect": "Allow",
               "Resource": "arn:aws:lambda:us-east-9:987654321:function:test-func3",
             },
             Object {
-              "Action": "states:SendTaskSuccess",
+              "Action": Array [
+                "states:SendTaskFailure",
+                "states:SendTaskSuccess",
+              ],
               "Effect": "Allow",
               "Resource": "arn:aws:states:us-east-1:my-account:stateMachine:benchmark-machine",
             },
@@ -702,7 +738,7 @@ Object {
             "type": "Function",
           },
         ],
-        "sst:version": "0.69.5",
+        "sst:version": "0.69.6",
       },
       "Type": "AWS::CDK::Metadata",
     },
@@ -716,7 +752,7 @@ Object {
           "Fn::Join": Array [
             "",
             Array [
-              "{"StartAt":"Parallel Execution","States":{"Parallel Execution":{"Type":"Parallel","End":true,"Branches":[{"StartAt":"ParallelBenchmarkMachine 0","States":{"ParallelBenchmarkMachine 0":{"End":true,"Type":"Task","Resource":"arn:",
+              "{"StartAt":"Parallel Execution","States":{"Parallel Execution":{"Type":"Parallel","End":true,"Branches":[{"StartAt":"ParallelBenchmarkMachine 0","States":{"ParallelBenchmarkMachine 0":{"End":true,"Retry":[{"ErrorEquals":["States.ALL"],"MaxAttempts":2}],"Type":"Task","Resource":"arn:",
               Object {
                 "Ref": "AWS::Partition",
               },
@@ -724,7 +760,7 @@ Object {
               Object {
                 "Ref": "LambdaBenchmarkSM0LambdaBenchmarkStateMachine646A28DC",
               },
-              ""}}}},{"StartAt":"ParallelBenchmarkMachine 1","States":{"ParallelBenchmarkMachine 1":{"End":true,"Type":"Task","Resource":"arn:",
+              ""}}}},{"StartAt":"ParallelBenchmarkMachine 1","States":{"ParallelBenchmarkMachine 1":{"End":true,"Retry":[{"ErrorEquals":["States.ALL"],"MaxAttempts":2}],"Type":"Task","Resource":"arn:",
               Object {
                 "Ref": "AWS::Partition",
               },
@@ -732,7 +768,7 @@ Object {
               Object {
                 "Ref": "LambdaBenchmarkSM1LambdaBenchmarkStateMachine05189E5D",
               },
-              ""}}}},{"StartAt":"ParallelBenchmarkMachine 2","States":{"ParallelBenchmarkMachine 2":{"End":true,"Type":"Task","Resource":"arn:",
+              ""}}}},{"StartAt":"ParallelBenchmarkMachine 2","States":{"ParallelBenchmarkMachine 2":{"End":true,"Retry":[{"ErrorEquals":["States.ALL"],"MaxAttempts":2}],"Type":"Task","Resource":"arn:",
               Object {
                 "Ref": "AWS::Partition",
               },

@@ -6,12 +6,13 @@
 
 import { awsSdkV2PromiseResponse } from '../../awsSdkV2PromiseResponse';
 
-export const putFn = jest
+export const batchWriteFn = jest
   .fn()
   .mockImplementation(() => ({ promise: awsSdkV2PromiseResponse }));
 
 class DocumentClient {
-  put = putFn;
+  batchWrite = batchWriteFn;
+  service = { customizeRequests: () => true };
 }
 
 const DynamoDB = {

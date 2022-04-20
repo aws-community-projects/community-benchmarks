@@ -13,9 +13,7 @@ const tableName = process.env.TABLE_NAME;
 const docClient = DynamoDBDocumentClient.from(new DynamoDBClient({}));
 const s3 = new S3({});
 
-type item = { [key: string]: string };
-
-const writeBatch = async (items: item[]) => {
+const writeBatch = async (items) => {
   if (!tableName) {
     throw new Error('Missing required env var!');
   }
@@ -45,7 +43,7 @@ export const handler = async () => {
   });
   const response = await s3.send(getCommand);
 
-  let items = [] as item[];
+  let items = [];
 
   await csv()
     .fromStream(response.Body)

@@ -4,18 +4,18 @@ import {
   BatchWriteCommand,
   DynamoDBDocumentClient,
 } from '@aws-sdk/lib-dynamodb';
-import csv from 'csvtojson';
+import imports from './imports.cjs';
 
 const bucketName = process.env.BUCKET_NAME;
 const bucketKey = process.env.BUCKET_KEY;
 const tableName = process.env.TABLE_NAME;
 
-const docClient = DynamoDBDocumentClient.from(new DynamoDBClient({}));
-const s3 = new S3({});
+const docClient = DynamoDBDocumentClient.from(
+  imports.XRay.captureAWSv3Client(new DynamoDBClient({}))
+);
+const s3 = imports.XRay.captureAWSv3Client(new S3({}));
 
-type item = { [key: string]: string };
-
-const writeBatch = async (items: item[]) => {
+const writeBatch = async (items, fnName) => {
   if (!tableName) {
     throw new Error('Missing required env var!');
   }
@@ -25,7 +25,7 @@ const writeBatch = async (items: item[]) => {
         PutRequest: {
           Item: {
             ...i,
-            pk: i['Order ID'],
+            pk: `${i['Order ID']}-${fnName}`,
             sk: i['Order Date'],
           },
         },
@@ -35,7 +35,7 @@ const writeBatch = async (items: item[]) => {
   return docClient.send(command);
 };
 
-export const handler = async () => {
+export const handler = async (_, ctx) => {
   if (!bucketName || !bucketKey || !tableName) {
     throw new Error('Missing required env var!');
   }
@@ -45,20 +45,21 @@ export const handler = async () => {
   });
   const response = await s3.send(getCommand);
 
-  let items = [] as item[];
+  let items = [];
 
-  await csv()
+  await imports
+    .csv()
     .fromStream(response.Body)
     .subscribe(async (item) => {
       items.push(item);
       if (items.length > 24) {
-        await writeBatch(items);
+        await writeBatch(items, ctx.functionName);
         items = [];
       }
     });
 
   if (items.length) {
-    await writeBatch(items);
+    await writeBatch(items, ctx.functionName);
   }
 
   return {

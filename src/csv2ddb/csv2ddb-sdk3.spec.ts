@@ -18,28 +18,8 @@ describe('csv 3 dynamodb full sdk', () => {
 
     const result = await handler();
     expect(result).toEqual({ statusCode: 200 });
-    expect(docClientMock.call(0).args[0].input).toEqual({
-      Item: {
-        Country: 'Tuvalu',
-        'Item Type': 'Baby Food',
-        'Order Date': '5/28/2010',
-        'Order ID': '669165933',
-        'Order Priority': 'H',
-        Region: 'Australia and Oceania',
-        'Sales Channel': 'Offline',
-        'Ship Date': '6/27/2010',
-        'Total Cost': '1582243.50',
-        'Total Profit': '951410.50',
-        'Total Revenue': '2533654.00',
-        'Unit Cost': '159.42',
-        'Unit Price': '255.28',
-        'Units Sold': '9925',
-        pk: '669165933',
-        sk: '5/28/2010',
-      },
-      TableName: 'my-table',
-    });
-    expect(docClientMock.calls()).toHaveLength(100);
+    expect(docClientMock.calls()).toMatchSnapshot();
+    expect(docClientMock.calls()).toHaveLength(4);
   });
 
   test('ensure env vars are set', async () => {

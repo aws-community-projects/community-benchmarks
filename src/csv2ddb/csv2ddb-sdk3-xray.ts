@@ -4,14 +4,17 @@ import {
   BatchWriteCommand,
   DynamoDBDocumentClient,
 } from '@aws-sdk/lib-dynamodb';
+import { captureAWSv3Client } from 'aws-xray-sdk-core';
 import csv from 'csvtojson';
 
 const bucketName = process.env.BUCKET_NAME;
 const bucketKey = process.env.BUCKET_KEY;
 const tableName = process.env.TABLE_NAME;
 
-const docClient = DynamoDBDocumentClient.from(new DynamoDBClient({}));
-const s3 = new S3({});
+const docClient = DynamoDBDocumentClient.from(
+  captureAWSv3Client(new DynamoDBClient({}))
+);
+const s3 = captureAWSv3Client(new S3({}));
 
 type item = { [key: string]: string };
 
