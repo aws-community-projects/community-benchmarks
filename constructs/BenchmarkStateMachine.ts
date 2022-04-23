@@ -50,7 +50,10 @@ export class BenchmarkStateMachine extends Construct {
     });
 
     // Step Functions parallel step to fan out to nested Sfn executions.
-    const parallel = new Parallel(scope, 'Parallel Execution');
+    const parallel = new Parallel(scope, 'Parallel Execution 0');
+    let p = parallel;
+
+    const MAX_PARALLEL = 10;
 
     // Loop over functions to test. We will create a new nested state machine for each function.
     props.lambdaTests.forEach((lambdaTest, index) => {
@@ -60,7 +63,7 @@ export class BenchmarkStateMachine extends Construct {
         { benchmarkMachineName: stateMachineName, getTraces, lambdaTest, table }
       );
 
-      const executeParallel = new StepFunctionsStartExecution(
+      const sfExecution = new StepFunctionsStartExecution(
         scope,
         `ParallelBenchmarkMachine ${index}`,
         {
@@ -70,9 +73,18 @@ export class BenchmarkStateMachine extends Construct {
         }
       );
 
-      executeParallel.addRetry({ maxAttempts: 2 });
+      // sfExecution.addRetry({ maxAttempts: 2 });
 
-      parallel.branch(executeParallel);
+      if (index && index % MAX_PARALLEL === 0) {
+        const np = new Parallel(
+          scope,
+          `Parallel Execution ${index / MAX_PARALLEL}`
+        );
+        p.next(np);
+        p = np;
+      }
+
+      p.branch(sfExecution);
     });
 
     new StateMachine(this, 'BenchmarkStateMachine', {
