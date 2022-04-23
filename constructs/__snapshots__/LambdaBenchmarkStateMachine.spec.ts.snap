@@ -189,7 +189,7 @@ Object {
             "type": "Table",
           },
         ],
-        "sst:version": "0.69.6",
+        "sst:version": "0.69.7",
       },
       "Type": "AWS::CDK::Metadata",
     },
