@@ -7,7 +7,7 @@ import {
   TableFieldType,
 } from '@serverless-stack/resources';
 import { Duration, RemovalPolicy } from 'aws-cdk-lib';
-import { Architecture, Tracing } from 'aws-cdk-lib/aws-lambda';
+import { Tracing } from 'aws-cdk-lib/aws-lambda';
 import { BucketDeployment, Source } from 'aws-cdk-lib/aws-s3-deployment';
 import { Construct } from 'constructs';
 
@@ -89,7 +89,6 @@ export class Csv2DdbStack extends Stack {
 
     // Default Lambda props that can be overridden in function declarations.
     const lambdaProps: FunctionProps = {
-      architecture: Architecture.ARM_64,
       environment,
       memorySize: 512,
       srcPath: './src/csv2ddb',
@@ -115,7 +114,7 @@ export class Csv2DdbStack extends Stack {
           extension: 'ts',
           name: 'csv2ddb',
           variations: {
-            format: ['cjs'],
+            format: ['cjs', 'esm'],
             memorySize: [512],
             minify: [true],
             sdk: [
@@ -490,7 +489,7 @@ export class Csv2DdbStack extends Stack {
       this.lambdaTests.push({
         arn: fn.functionArn,
         concurrency: 10,
-        passes: 20,
+        passes: 50,
         payload: {},
       });
     });

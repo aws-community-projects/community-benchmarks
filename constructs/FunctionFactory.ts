@@ -4,6 +4,7 @@ import {
   Stack,
 } from '@serverless-stack/resources';
 import { RemovalPolicy } from 'aws-cdk-lib';
+import { Architecture } from 'aws-cdk-lib/aws-lambda';
 import { LogGroup, RetentionDays } from 'aws-cdk-lib/aws-logs';
 import { findImportsSync } from 'find-imports-ts';
 
@@ -19,6 +20,7 @@ export enum NodeJSSDKOptions {
 }
 
 interface FunctionVariation {
+  architecture: Architecture;
   format: 'cjs' | 'esm';
   memorySize: number;
   minify: boolean;
@@ -27,11 +29,12 @@ interface FunctionVariation {
 }
 
 interface Variations {
-  format: ('cjs' | 'esm')[];
-  memorySize: number[];
-  minify: boolean[];
+  architecture?: Architecture[];
+  format?: ('cjs' | 'esm')[];
+  memorySize?: number[];
+  minify?: boolean[];
   sdk: NodeJSSDKOptions[];
-  xray: boolean[];
+  xray?: boolean[];
 }
 
 type VariationTypes =
@@ -80,10 +83,17 @@ const buildFunction = (
   defaultProps: FunctionProps
 ): SSTFunction => {
   const { extension, name } = benchmarkProps;
-  const { format, memorySize, minify, sdk, xray } = variation;
+  const {
+    architecture = Architecture.ARM_64,
+    format = 'esm',
+    memorySize = 128,
+    minify = true,
+    sdk,
+    xray = false,
+  } = variation;
   const modules = useModules(sdk);
   const fileName = `${name}-${sdk}${xray ? '-xray' : ''}`;
-  const functionName = `${fileName}-${format}${
+  const functionName = `${fileName}-${architecture.name}-${format}${
     minify ? '-minify' : ''
   }-${memorySize}`;
   new LogGroup(scope, `LG-${functionName}`, {
@@ -93,6 +103,7 @@ const buildFunction = (
   });
   return new SSTFunction(scope, functionName, {
     ...defaultProps,
+    architecture,
     bundle: {
       format,
       minify,
