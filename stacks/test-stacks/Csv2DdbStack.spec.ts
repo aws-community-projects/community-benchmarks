@@ -17,7 +17,7 @@ test('Csv2DdbStack', () => {
   const stack = new Csv2DdbStack(app, 'test-stack');
   const template = Template.fromStack(stack);
   template.resourceCountIs('AWS::DynamoDB::Table', 1);
-  template.resourceCountIs('AWS::Lambda::Function', 18);
+  template.resourceCountIs('AWS::Lambda::Function', 14);
   template.resourceCountIs('AWS::S3::Bucket', 1);
   expect(template.toJSON()).toMatchSnapshot();
 });

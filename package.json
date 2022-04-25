@@ -25,6 +25,7 @@
     "aws-cdk-lib": "2.15.0",
     "aws-sdk-client-mock": "^0.6.2",
     "aws-sdk-mock": "^5.6.2",
+    "find-imports-ts": "^0.4.0",
     "typesafe-dynamodb": "^0.1.8",
     "typescript": "^4.6.3"
   },

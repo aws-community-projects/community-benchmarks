@@ -752,7 +752,7 @@ Object {
           "Fn::Join": Array [
             "",
             Array [
-              "{"StartAt":"Parallel Execution 0","States":{"Parallel Execution 0":{"Type":"Parallel","End":true,"Branches":[{"StartAt":"ParallelBenchmarkMachine 0","States":{"ParallelBenchmarkMachine 0":{"End":true,"Type":"Task","Resource":"arn:",
+              "{"StartAt":"Parallel Execution 0","States":{"Parallel Execution 0":{"Type":"Parallel","End":true,"Branches":[{"StartAt":"ParallelBenchmarkMachine 0","States":{"ParallelBenchmarkMachine 0":{"End":true,"Retry":[{"ErrorEquals":["States.ALL"],"MaxAttempts":2}],"Type":"Task","Resource":"arn:",
               Object {
                 "Ref": "AWS::Partition",
               },
@@ -760,7 +760,7 @@ Object {
               Object {
                 "Ref": "LambdaBenchmarkSM0LambdaBenchmarkStateMachine646A28DC",
               },
-              ""}}}},{"StartAt":"ParallelBenchmarkMachine 1","States":{"ParallelBenchmarkMachine 1":{"End":true,"Type":"Task","Resource":"arn:",
+              ""}}}},{"StartAt":"ParallelBenchmarkMachine 1","States":{"ParallelBenchmarkMachine 1":{"End":true,"Retry":[{"ErrorEquals":["States.ALL"],"MaxAttempts":2}],"Type":"Task","Resource":"arn:",
               Object {
                 "Ref": "AWS::Partition",
               },
@@ -768,7 +768,7 @@ Object {
               Object {
                 "Ref": "LambdaBenchmarkSM1LambdaBenchmarkStateMachine05189E5D",
               },
-              ""}}}},{"StartAt":"ParallelBenchmarkMachine 2","States":{"ParallelBenchmarkMachine 2":{"End":true,"Type":"Task","Resource":"arn:",
+              ""}}}},{"StartAt":"ParallelBenchmarkMachine 2","States":{"ParallelBenchmarkMachine 2":{"End":true,"Retry":[{"ErrorEquals":["States.ALL"],"MaxAttempts":2}],"Type":"Task","Resource":"arn:",
               Object {
                 "Ref": "AWS::Partition",
               },

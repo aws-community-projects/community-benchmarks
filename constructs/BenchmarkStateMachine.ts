@@ -53,7 +53,7 @@ export class BenchmarkStateMachine extends Construct {
     const parallel = new Parallel(scope, 'Parallel Execution 0');
     let p = parallel;
 
-    const MAX_PARALLEL = 10;
+    const MAX_PARALLEL = 8;
 
     // Loop over functions to test. We will create a new nested state machine for each function.
     props.lambdaTests.forEach((lambdaTest, index) => {
@@ -73,7 +73,7 @@ export class BenchmarkStateMachine extends Construct {
         }
       );
 
-      // sfExecution.addRetry({ maxAttempts: 2 });
+      sfExecution.addRetry({ maxAttempts: 2 });
 
       if (index && index % MAX_PARALLEL === 0) {
         const np = new Parallel(

@@ -231,24 +231,11 @@ Object {
       },
       "Type": "AWS::IAM::Role",
     },
-    "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A": Object {
-      "DependsOn": Array [
-        "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRoleDefaultPolicyADDA7DEB",
-        "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB",
-      ],
+    "LGcsv2ddbsdk2cjsminify512930239DC": Object {
+      "DeletionPolicy": "Delete",
       "Properties": Object {
-        "Code": Object {
-          "S3Bucket": "cdk-hnb659fds-assets-my-account-us-east-1",
-          "S3Key": "[HASH REMOVED].zip",
-        },
-        "Handler": "index.handler",
-        "Role": Object {
-          "Fn::GetAtt": Array [
-            "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB",
-            "Arn",
-          ],
-        },
-        "Runtime": "nodejs14.x",
+        "LogGroupName": "/aws/lambda/csv2ddb-sdk2-cjs-minify-512",
+        "RetentionInDays": 1,
         "Tags": Array [
           Object {
             "Key": "sst:app",
@@ -260,36 +247,14 @@ Object {
           },
         ],
       },
-      "Type": "AWS::Lambda::Function",
+      "Type": "AWS::Logs::LogGroup",
+      "UpdateReplacePolicy": "Delete",
     },
-    "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB": Object {
+    "LGcsv2ddbsdk2clientscjsminify512981A4375": Object {
+      "DeletionPolicy": "Delete",
       "Properties": Object {
-        "AssumeRolePolicyDocument": Object {
-          "Statement": Array [
-            Object {
-              "Action": "sts:AssumeRole",
-              "Effect": "Allow",
-              "Principal": Object {
-                "Service": "lambda.amazonaws.com",
-              },
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "ManagedPolicyArns": Array [
-          Object {
-            "Fn::Join": Array [
-              "",
-              Array [
-                "arn:",
-                Object {
-                  "Ref": "AWS::Partition",
-                },
-                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
-              ],
-            ],
-          },
-        ],
+        "LogGroupName": "/aws/lambda/csv2ddb-sdk2-clients-cjs-minify-512",
+        "RetentionInDays": 1,
         "Tags": Array [
           Object {
             "Key": "sst:app",
@@ -301,31 +266,198 @@ Object {
           },
         ],
       },
-      "Type": "AWS::IAM::Role",
+      "Type": "AWS::Logs::LogGroup",
+      "UpdateReplacePolicy": "Delete",
     },
-    "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRoleDefaultPolicyADDA7DEB": Object {
+    "LGcsv2ddbsdk2clientsxraycjsminify512663DFA70": Object {
+      "DeletionPolicy": "Delete",
       "Properties": Object {
-        "PolicyDocument": Object {
-          "Statement": Array [
-            Object {
-              "Action": Array [
-                "logs:PutRetentionPolicy",
-                "logs:DeleteRetentionPolicy",
-              ],
-              "Effect": "Allow",
-              "Resource": "*",
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "PolicyName": "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRoleDefaultPolicyADDA7DEB",
-        "Roles": Array [
+        "LogGroupName": "/aws/lambda/csv2ddb-sdk2-clients-xray-cjs-minify-512",
+        "RetentionInDays": 1,
+        "Tags": Array [
           Object {
-            "Ref": "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB",
+            "Key": "sst:app",
+            "Value": "my-app",
+          },
+          Object {
+            "Key": "sst:stage",
+            "Value": "dev",
           },
         ],
       },
-      "Type": "AWS::IAM::Policy",
+      "Type": "AWS::Logs::LogGroup",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "LGcsv2ddbsdk2xraycjsminify512CD63B1AC": Object {
+      "DeletionPolicy": "Delete",
+      "Properties": Object {
+        "LogGroupName": "/aws/lambda/csv2ddb-sdk2-xray-cjs-minify-512",
+        "RetentionInDays": 1,
+        "Tags": Array [
+          Object {
+            "Key": "sst:app",
+            "Value": "my-app",
+          },
+          Object {
+            "Key": "sst:stage",
+            "Value": "dev",
+          },
+        ],
+      },
+      "Type": "AWS::Logs::LogGroup",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "LGcsv2ddbsdk3cjsminify51270434523": Object {
+      "DeletionPolicy": "Delete",
+      "Properties": Object {
+        "LogGroupName": "/aws/lambda/csv2ddb-sdk3-cjs-minify-512",
+        "RetentionInDays": 1,
+        "Tags": Array [
+          Object {
+            "Key": "sst:app",
+            "Value": "my-app",
+          },
+          Object {
+            "Key": "sst:stage",
+            "Value": "dev",
+          },
+        ],
+      },
+      "Type": "AWS::Logs::LogGroup",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "LGcsv2ddbsdk3esmminify51285D3DDF1": Object {
+      "DeletionPolicy": "Delete",
+      "Properties": Object {
+        "LogGroupName": "/aws/lambda/csv2ddb-sdk3-esm-minify-512",
+        "RetentionInDays": 1,
+        "Tags": Array [
+          Object {
+            "Key": "sst:app",
+            "Value": "my-app",
+          },
+          Object {
+            "Key": "sst:stage",
+            "Value": "dev",
+          },
+        ],
+      },
+      "Type": "AWS::Logs::LogGroup",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "LGcsv2ddbsdk3modulescjsminify512004737D2": Object {
+      "DeletionPolicy": "Delete",
+      "Properties": Object {
+        "LogGroupName": "/aws/lambda/csv2ddb-sdk3-modules-cjs-minify-512",
+        "RetentionInDays": 1,
+        "Tags": Array [
+          Object {
+            "Key": "sst:app",
+            "Value": "my-app",
+          },
+          Object {
+            "Key": "sst:stage",
+            "Value": "dev",
+          },
+        ],
+      },
+      "Type": "AWS::Logs::LogGroup",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "LGcsv2ddbsdk3modulesesmminify512CD4F5105": Object {
+      "DeletionPolicy": "Delete",
+      "Properties": Object {
+        "LogGroupName": "/aws/lambda/csv2ddb-sdk3-modules-esm-minify-512",
+        "RetentionInDays": 1,
+        "Tags": Array [
+          Object {
+            "Key": "sst:app",
+            "Value": "my-app",
+          },
+          Object {
+            "Key": "sst:stage",
+            "Value": "dev",
+          },
+        ],
+      },
+      "Type": "AWS::Logs::LogGroup",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "LGcsv2ddbsdk3modulesxraycjsminify512ED9413AD": Object {
+      "DeletionPolicy": "Delete",
+      "Properties": Object {
+        "LogGroupName": "/aws/lambda/csv2ddb-sdk3-modules-xray-cjs-minify-512",
+        "RetentionInDays": 1,
+        "Tags": Array [
+          Object {
+            "Key": "sst:app",
+            "Value": "my-app",
+          },
+          Object {
+            "Key": "sst:stage",
+            "Value": "dev",
+          },
+        ],
+      },
+      "Type": "AWS::Logs::LogGroup",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "LGcsv2ddbsdk3modulesxrayesmminify5126E3EB6A5": Object {
+      "DeletionPolicy": "Delete",
+      "Properties": Object {
+        "LogGroupName": "/aws/lambda/csv2ddb-sdk3-modules-xray-esm-minify-512",
+        "RetentionInDays": 1,
+        "Tags": Array [
+          Object {
+            "Key": "sst:app",
+            "Value": "my-app",
+          },
+          Object {
+            "Key": "sst:stage",
+            "Value": "dev",
+          },
+        ],
+      },
+      "Type": "AWS::Logs::LogGroup",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "LGcsv2ddbsdk3xraycjsminify51244419233": Object {
+      "DeletionPolicy": "Delete",
+      "Properties": Object {
+        "LogGroupName": "/aws/lambda/csv2ddb-sdk3-xray-cjs-minify-512",
+        "RetentionInDays": 1,
+        "Tags": Array [
+          Object {
+            "Key": "sst:app",
+            "Value": "my-app",
+          },
+          Object {
+            "Key": "sst:stage",
+            "Value": "dev",
+          },
+        ],
+      },
+      "Type": "AWS::Logs::LogGroup",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "LGcsv2ddbsdk3xrayesmminify5120FDFDE9E": Object {
+      "DeletionPolicy": "Delete",
+      "Properties": Object {
+        "LogGroupName": "/aws/lambda/csv2ddb-sdk3-xray-esm-minify-512",
+        "RetentionInDays": 1,
+        "Tags": Array [
+          Object {
+            "Key": "sst:app",
+            "Value": "my-app",
+          },
+          Object {
+            "Key": "sst:stage",
+            "Value": "dev",
+          },
+        ],
+      },
+      "Type": "AWS::Logs::LogGroup",
+      "UpdateReplacePolicy": "Delete",
     },
     "SSTMetadata": Object {
       "Metadata": Object {
@@ -355,137 +487,182 @@ Object {
             "type": "Bucket",
           },
           Object {
-            "addr": "c8b59500cda6c3765e52165932bead25b89bc0394f",
+            "addr": "c8afd64478d7e803934f472137cb4806c3708703cb",
             "data": Object {
               "arn": Object {
                 "Fn::GetAtt": Array [
-                  "csv2ddbsdk2clientsesmA6A974D3",
+                  "csv2ddbsdk2cjsminify5125F978CF7",
                   "Arn",
                 ],
               },
-              "localId": "dev-my-app-test-stack-csv2ddb-sdk2-clients-esm",
+              "localId": "dev-my-app-test-stack-csv2ddb-sdk2-cjs-minify-512",
             },
-            "id": "csv2ddb-sdk2-clients-esm",
+            "id": "csv2ddb-sdk2-cjs-minify-512",
             "stack": "dev-my-app-test-stack",
             "type": "Function",
           },
           Object {
-            "addr": "c8e2577bb554f9b4bf4c6ecc4482f1e94a4ca526dc",
+            "addr": "c8df9b5081974f9c05b3b5c8c47375182b235e09c6",
             "data": Object {
               "arn": Object {
                 "Fn::GetAtt": Array [
-                  "csv2ddbsdk2clientsesmxray2C0FF26C",
+                  "csv2ddbsdk2xraycjsminify512DDF87217",
                   "Arn",
                 ],
               },
-              "localId": "dev-my-app-test-stack-csv2ddb-sdk2-clients-esm-xray",
+              "localId": "dev-my-app-test-stack-csv2ddb-sdk2-xray-cjs-minify-512",
             },
-            "id": "csv2ddb-sdk2-clients-esm-xray",
+            "id": "csv2ddb-sdk2-xray-cjs-minify-512",
             "stack": "dev-my-app-test-stack",
             "type": "Function",
           },
           Object {
-            "addr": "c814986176a6c9a67b2702d7807e45865e2ba95e8f",
+            "addr": "c8a4768fc3b69be36f71512625cee915bb69a37537",
             "data": Object {
               "arn": Object {
                 "Fn::GetAtt": Array [
-                  "csv2ddbsdk2clientsnativeBE3257EF",
+                  "csv2ddbsdk2clientscjsminify512EBB0FB35",
                   "Arn",
                 ],
               },
-              "localId": "dev-my-app-test-stack-csv2ddb-sdk2-clients-native",
+              "localId": "dev-my-app-test-stack-csv2ddb-sdk2-clients-cjs-minify-512",
             },
-            "id": "csv2ddb-sdk2-clients-native",
+            "id": "csv2ddb-sdk2-clients-cjs-minify-512",
             "stack": "dev-my-app-test-stack",
             "type": "Function",
           },
           Object {
-            "addr": "c8a3bc9c530b511116b7fb3200890234bb9228edff",
+            "addr": "c8d5e1280f7f4b3d777f8ad9dacaa2da66d410abef",
             "data": Object {
               "arn": Object {
                 "Fn::GetAtt": Array [
-                  "csv2ddbsdk2clientsnativexrayA37185C1",
+                  "csv2ddbsdk2clientsxraycjsminify512E6E7868F",
                   "Arn",
                 ],
               },
-              "localId": "dev-my-app-test-stack-csv2ddb-sdk2-clients-native-xray",
+              "localId": "dev-my-app-test-stack-csv2ddb-sdk2-clients-xray-cjs-minify-512",
             },
-            "id": "csv2ddb-sdk2-clients-native-xray",
+            "id": "csv2ddb-sdk2-clients-xray-cjs-minify-512",
             "stack": "dev-my-app-test-stack",
             "type": "Function",
           },
           Object {
-            "addr": "c8798cc191b0ff9573cb273130a752e1812336bd87",
+            "addr": "c86e1b35c54cfaf8310ca5a8a91cfec108219746a6",
             "data": Object {
               "arn": Object {
                 "Fn::GetAtt": Array [
-                  "csv2ddbsdk2esm3E1312F5",
+                  "csv2ddbsdk3xraycjsminify512DB4EDD6D",
                   "Arn",
                 ],
               },
-              "localId": "dev-my-app-test-stack-csv2ddb-sdk2-esm",
+              "localId": "dev-my-app-test-stack-csv2ddb-sdk3-xray-cjs-minify-512",
             },
-            "id": "csv2ddb-sdk2-esm",
+            "id": "csv2ddb-sdk3-xray-cjs-minify-512",
             "stack": "dev-my-app-test-stack",
             "type": "Function",
           },
           Object {
-            "addr": "c850d45fd9792e5edae750cb359bf4032640e63e91",
+            "addr": "c81a342026b60c928e77aff44a9312e039999bdfbd",
             "data": Object {
               "arn": Object {
                 "Fn::GetAtt": Array [
-                  "csv2ddbsdk2nativeE2BC785A",
+                  "csv2ddbsdk3cjsminify5120F04D776",
                   "Arn",
                 ],
               },
-              "localId": "dev-my-app-test-stack-csv2ddb-sdk2-native",
+              "localId": "dev-my-app-test-stack-csv2ddb-sdk3-cjs-minify-512",
             },
-            "id": "csv2ddb-sdk2-native",
+            "id": "csv2ddb-sdk3-cjs-minify-512",
             "stack": "dev-my-app-test-stack",
             "type": "Function",
           },
           Object {
-            "addr": "c8866b930dcc13ea6d9364681f1378617f7061860d",
+            "addr": "c84d0e96fbcd4b3c0656b9dae14be0a46cc5344b62",
             "data": Object {
               "arn": Object {
                 "Fn::GetAtt": Array [
-                  "csv2ddbsdk2layer5594B8E6",
+                  "csv2ddbsdk3modulesxraycjsminify5128D939583",
                   "Arn",
                 ],
               },
-              "localId": "dev-my-app-test-stack-csv2ddb-sdk2-layer",
+              "localId": "dev-my-app-test-stack-csv2ddb-sdk3-modules-xray-cjs-minify-512",
             },
-            "id": "csv2ddb-sdk2-layer",
+            "id": "csv2ddb-sdk3-modules-xray-cjs-minify-512",
             "stack": "dev-my-app-test-stack",
             "type": "Function",
           },
           Object {
-            "addr": "c8657d584b190e333219fedf523b006b2e6aec4999",
+            "addr": "c8841624f09b2af0b31baedc2f1574a09198097af7",
             "data": Object {
               "arn": Object {
                 "Fn::GetAtt": Array [
-                  "csv2ddbsdk36F8948B2",
+                  "csv2ddbsdk3modulescjsminify5127CBB1DAC",
                   "Arn",
                 ],
               },
-              "localId": "dev-my-app-test-stack-csv2ddb-sdk3",
+              "localId": "dev-my-app-test-stack-csv2ddb-sdk3-modules-cjs-minify-512",
             },
-            "id": "csv2ddb-sdk3",
+            "id": "csv2ddb-sdk3-modules-cjs-minify-512",
             "stack": "dev-my-app-test-stack",
             "type": "Function",
           },
           Object {
-            "addr": "c835311c98a928cbfd2258092956182909c047bb6b",
+            "addr": "c85621510f95c6aa3e2599b7d7e4f4c787d6692adf",
             "data": Object {
               "arn": Object {
                 "Fn::GetAtt": Array [
-                  "csv2ddbsdk3xrayDE9353DD",
+                  "csv2ddbsdk3xrayesmminify512BF473005",
                   "Arn",
                 ],
               },
-              "localId": "dev-my-app-test-stack-csv2ddb-sdk3-xray",
+              "localId": "dev-my-app-test-stack-csv2ddb-sdk3-xray-esm-minify-512",
             },
-            "id": "csv2ddb-sdk3-xray",
+            "id": "csv2ddb-sdk3-xray-esm-minify-512",
+            "stack": "dev-my-app-test-stack",
+            "type": "Function",
+          },
+          Object {
+            "addr": "c8c217373306145ce4e297673912acf8f975b8c377",
+            "data": Object {
+              "arn": Object {
+                "Fn::GetAtt": Array [
+                  "csv2ddbsdk3esmminify51207512DCD",
+                  "Arn",
+                ],
+              },
+              "localId": "dev-my-app-test-stack-csv2ddb-sdk3-esm-minify-512",
+            },
+            "id": "csv2ddb-sdk3-esm-minify-512",
+            "stack": "dev-my-app-test-stack",
+            "type": "Function",
+          },
+          Object {
+            "addr": "c8d30660e31aa1ca766872731b4620c2cb04fd0f4e",
+            "data": Object {
+              "arn": Object {
+                "Fn::GetAtt": Array [
+                  "csv2ddbsdk3modulesxrayesmminify512FEF203EC",
+                  "Arn",
+                ],
+              },
+              "localId": "dev-my-app-test-stack-csv2ddb-sdk3-modules-xray-esm-minify-512",
+            },
+            "id": "csv2ddb-sdk3-modules-xray-esm-minify-512",
+            "stack": "dev-my-app-test-stack",
+            "type": "Function",
+          },
+          Object {
+            "addr": "c8dd8086805c99359d41907fb6ae8c63057c71960b",
+            "data": Object {
+              "arn": Object {
+                "Fn::GetAtt": Array [
+                  "csv2ddbsdk3modulesesmminify51277869FF4",
+                  "Arn",
+                ],
+              },
+              "localId": "dev-my-app-test-stack-csv2ddb-sdk3-modules-esm-minify-512",
+            },
+            "id": "csv2ddb-sdk3-modules-esm-minify-512",
             "stack": "dev-my-app-test-stack",
             "type": "Function",
           },
@@ -664,19 +841,10 @@ Object {
       "Type": "AWS::DynamoDB::Table",
       "UpdateReplacePolicy": "Delete",
     },
-    "SdkLayer90B54D5D": Object {
-      "Properties": Object {
-        "Content": Object {
-          "S3Bucket": "cdk-hnb659fds-assets-my-account-us-east-1",
-          "S3Key": "[HASH REMOVED].zip",
-        },
-      },
-      "Type": "AWS::Lambda::LayerVersion",
-    },
-    "csv2ddbsdk2clientsesmA6A974D3": Object {
+    "csv2ddbsdk2cjsminify5125F978CF7": Object {
       "DependsOn": Array [
-        "csv2ddbsdk2clientsesmServiceRoleDefaultPolicy9E3821AA",
-        "csv2ddbsdk2clientsesmServiceRoleAAF49954",
+        "csv2ddbsdk2cjsminify512ServiceRoleDefaultPolicy5A024C1E",
+        "csv2ddbsdk2cjsminify512ServiceRole1B27DE49",
       ],
       "Properties": Object {
         "Architectures": Array [
@@ -686,7 +854,7 @@ Object {
           "S3Bucket": "cdk-hnb659fds-assets-my-account-us-east-1",
           "S3Key": "[HASH REMOVED].zip",
         },
-        "Description": "Reads 100 rows of CSV and writes to DynamoDB. Installs only clients from aws-sdk v2 bundled with esm.",
+        "Description": "{"xray":false,"sdk":"sdk2","minify":true,"memorySize":512,"format":"cjs"}",
         "Environment": Object {
           "Variables": Object {
             "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
@@ -701,12 +869,183 @@ Object {
             },
           },
         },
-        "FunctionName": "csv2ddb-sdk2-clients-esm",
+        "FunctionName": "csv2ddb-sdk2-cjs-minify-512",
+        "Handler": "src/csv2ddb/csv2ddb-sdk2.handler",
+        "MemorySize": 512,
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "csv2ddbsdk2cjsminify512ServiceRole1B27DE49",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs12.x",
+        "Tags": Array [
+          Object {
+            "Key": "sst:app",
+            "Value": "my-app",
+          },
+          Object {
+            "Key": "sst:stage",
+            "Value": "dev",
+          },
+        ],
+        "Timeout": 60,
+        "TracingConfig": Object {
+          "Mode": "Active",
+        },
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "csv2ddbsdk2cjsminify512ServiceRole1B27DE49": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+        "Tags": Array [
+          Object {
+            "Key": "sst:app",
+            "Value": "my-app",
+          },
+          Object {
+            "Key": "sst:stage",
+            "Value": "dev",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "csv2ddbsdk2cjsminify512ServiceRoleDefaultPolicy5A024C1E": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": Array [
+                "xray:PutTraceSegments",
+                "xray:PutTelemetryRecords",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+            Object {
+              "Action": Array [
+                "s3:GetObject*",
+                "s3:GetBucket*",
+                "s3:List*",
+              ],
+              "Effect": "Allow",
+              "Resource": Array [
+                Object {
+                  "Fn::GetAtt": Array [
+                    "SalesCsvBucket1224326F",
+                    "Arn",
+                  ],
+                },
+                Object {
+                  "Fn::Join": Array [
+                    "",
+                    Array [
+                      Object {
+                        "Fn::GetAtt": Array [
+                          "SalesCsvBucket1224326F",
+                          "Arn",
+                        ],
+                      },
+                      "/*",
+                    ],
+                  ],
+                },
+              ],
+            },
+            Object {
+              "Action": Array [
+                "dynamodb:BatchWriteItem",
+                "dynamodb:PutItem",
+                "dynamodb:UpdateItem",
+                "dynamodb:DeleteItem",
+                "dynamodb:DescribeTable",
+              ],
+              "Effect": "Allow",
+              "Resource": Array [
+                Object {
+                  "Fn::GetAtt": Array [
+                    "SalesTableB987FA65",
+                    "Arn",
+                  ],
+                },
+                Object {
+                  "Ref": "AWS::NoValue",
+                },
+              ],
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "csv2ddbsdk2cjsminify512ServiceRoleDefaultPolicy5A024C1E",
+        "Roles": Array [
+          Object {
+            "Ref": "csv2ddbsdk2cjsminify512ServiceRole1B27DE49",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "csv2ddbsdk2clientscjsminify512EBB0FB35": Object {
+      "DependsOn": Array [
+        "csv2ddbsdk2clientscjsminify512ServiceRoleDefaultPolicy66E80D12",
+        "csv2ddbsdk2clientscjsminify512ServiceRole1E61EE64",
+      ],
+      "Properties": Object {
+        "Architectures": Array [
+          "arm64",
+        ],
+        "Code": Object {
+          "S3Bucket": "cdk-hnb659fds-assets-my-account-us-east-1",
+          "S3Key": "[HASH REMOVED].zip",
+        },
+        "Description": "{"xray":false,"sdk":"sdk2-clients","minify":true,"memorySize":512,"format":"cjs"}",
+        "Environment": Object {
+          "Variables": Object {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+            "BUCKET_KEY": "100 Sales Records.csv",
+            "BUCKET_NAME": Object {
+              "Ref": "SalesCsvBucket1224326F",
+            },
+            "COLD_STARTER": "2020-04-01T04:00:00.000Z",
+            "NODE_OPTIONS": "--enable-source-maps",
+            "TABLE_NAME": Object {
+              "Ref": "SalesTableB987FA65",
+            },
+          },
+        },
+        "FunctionName": "csv2ddb-sdk2-clients-cjs-minify-512",
         "Handler": "src/csv2ddb/csv2ddb-sdk2-clients.handler",
         "MemorySize": 512,
         "Role": Object {
           "Fn::GetAtt": Array [
-            "csv2ddbsdk2clientsesmServiceRoleAAF49954",
+            "csv2ddbsdk2clientscjsminify512ServiceRole1E61EE64",
             "Arn",
           ],
         },
@@ -728,30 +1067,7 @@ Object {
       },
       "Type": "AWS::Lambda::Function",
     },
-    "csv2ddbsdk2clientsesmLogRetentionCAD2A5F7": Object {
-      "Properties": Object {
-        "LogGroupName": Object {
-          "Fn::Join": Array [
-            "",
-            Array [
-              "/aws/lambda/",
-              Object {
-                "Ref": "csv2ddbsdk2clientsesmA6A974D3",
-              },
-            ],
-          ],
-        },
-        "RetentionInDays": 1,
-        "ServiceToken": Object {
-          "Fn::GetAtt": Array [
-            "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A",
-            "Arn",
-          ],
-        },
-      },
-      "Type": "Custom::LogRetention",
-    },
-    "csv2ddbsdk2clientsesmServiceRoleAAF49954": Object {
+    "csv2ddbsdk2clientscjsminify512ServiceRole1E61EE64": Object {
       "Properties": Object {
         "AssumeRolePolicyDocument": Object {
           "Statement": Array [
@@ -792,7 +1108,7 @@ Object {
       },
       "Type": "AWS::IAM::Role",
     },
-    "csv2ddbsdk2clientsesmServiceRoleDefaultPolicy9E3821AA": Object {
+    "csv2ddbsdk2clientscjsminify512ServiceRoleDefaultPolicy66E80D12": Object {
       "Properties": Object {
         "PolicyDocument": Object {
           "Statement": Array [
@@ -858,19 +1174,19 @@ Object {
           ],
           "Version": "2012-10-17",
         },
-        "PolicyName": "csv2ddbsdk2clientsesmServiceRoleDefaultPolicy9E3821AA",
+        "PolicyName": "csv2ddbsdk2clientscjsminify512ServiceRoleDefaultPolicy66E80D12",
         "Roles": Array [
           Object {
-            "Ref": "csv2ddbsdk2clientsesmServiceRoleAAF49954",
+            "Ref": "csv2ddbsdk2clientscjsminify512ServiceRole1E61EE64",
           },
         ],
       },
       "Type": "AWS::IAM::Policy",
     },
-    "csv2ddbsdk2clientsesmxray2C0FF26C": Object {
+    "csv2ddbsdk2clientsxraycjsminify512E6E7868F": Object {
       "DependsOn": Array [
-        "csv2ddbsdk2clientsesmxrayServiceRoleDefaultPolicy2DCA88CC",
-        "csv2ddbsdk2clientsesmxrayServiceRole1B6C54A9",
+        "csv2ddbsdk2clientsxraycjsminify512ServiceRoleDefaultPolicy2FCBACA4",
+        "csv2ddbsdk2clientsxraycjsminify512ServiceRole60C91356",
       ],
       "Properties": Object {
         "Architectures": Array [
@@ -880,7 +1196,7 @@ Object {
           "S3Bucket": "cdk-hnb659fds-assets-my-account-us-east-1",
           "S3Key": "[HASH REMOVED].zip",
         },
-        "Description": "Reads 100 rows of CSV and writes to DynamoDB. Installs only clients from aws-sdk v2 bundled with esm.",
+        "Description": "{"xray":true,"sdk":"sdk2-clients","minify":true,"memorySize":512,"format":"cjs"}",
         "Environment": Object {
           "Variables": Object {
             "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
@@ -895,12 +1211,12 @@ Object {
             },
           },
         },
-        "FunctionName": "csv2ddb-sdk2-clients-esm-xray",
+        "FunctionName": "csv2ddb-sdk2-clients-xray-cjs-minify-512",
         "Handler": "src/csv2ddb/csv2ddb-sdk2-clients-xray.handler",
         "MemorySize": 512,
         "Role": Object {
           "Fn::GetAtt": Array [
-            "csv2ddbsdk2clientsesmxrayServiceRole1B6C54A9",
+            "csv2ddbsdk2clientsxraycjsminify512ServiceRole60C91356",
             "Arn",
           ],
         },
@@ -922,30 +1238,7 @@ Object {
       },
       "Type": "AWS::Lambda::Function",
     },
-    "csv2ddbsdk2clientsesmxrayLogRetentionF1A326F7": Object {
-      "Properties": Object {
-        "LogGroupName": Object {
-          "Fn::Join": Array [
-            "",
-            Array [
-              "/aws/lambda/",
-              Object {
-                "Ref": "csv2ddbsdk2clientsesmxray2C0FF26C",
-              },
-            ],
-          ],
-        },
-        "RetentionInDays": 1,
-        "ServiceToken": Object {
-          "Fn::GetAtt": Array [
-            "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A",
-            "Arn",
-          ],
-        },
-      },
-      "Type": "Custom::LogRetention",
-    },
-    "csv2ddbsdk2clientsesmxrayServiceRole1B6C54A9": Object {
+    "csv2ddbsdk2clientsxraycjsminify512ServiceRole60C91356": Object {
       "Properties": Object {
         "AssumeRolePolicyDocument": Object {
           "Statement": Array [
@@ -986,7 +1279,7 @@ Object {
       },
       "Type": "AWS::IAM::Role",
     },
-    "csv2ddbsdk2clientsesmxrayServiceRoleDefaultPolicy2DCA88CC": Object {
+    "csv2ddbsdk2clientsxraycjsminify512ServiceRoleDefaultPolicy2FCBACA4": Object {
       "Properties": Object {
         "PolicyDocument": Object {
           "Statement": Array [
@@ -1052,19 +1345,19 @@ Object {
           ],
           "Version": "2012-10-17",
         },
-        "PolicyName": "csv2ddbsdk2clientsesmxrayServiceRoleDefaultPolicy2DCA88CC",
+        "PolicyName": "csv2ddbsdk2clientsxraycjsminify512ServiceRoleDefaultPolicy2FCBACA4",
         "Roles": Array [
           Object {
-            "Ref": "csv2ddbsdk2clientsesmxrayServiceRole1B6C54A9",
+            "Ref": "csv2ddbsdk2clientsxraycjsminify512ServiceRole60C91356",
           },
         ],
       },
       "Type": "AWS::IAM::Policy",
     },
-    "csv2ddbsdk2clientsnativeBE3257EF": Object {
+    "csv2ddbsdk2xraycjsminify512DDF87217": Object {
       "DependsOn": Array [
-        "csv2ddbsdk2clientsnativeServiceRoleDefaultPolicyDE5D02C0",
-        "csv2ddbsdk2clientsnativeServiceRoleE4858F6B",
+        "csv2ddbsdk2xraycjsminify512ServiceRoleDefaultPolicy72EDF852",
+        "csv2ddbsdk2xraycjsminify512ServiceRoleD9CC9C73",
       ],
       "Properties": Object {
         "Architectures": Array [
@@ -1074,7 +1367,7 @@ Object {
           "S3Bucket": "cdk-hnb659fds-assets-my-account-us-east-1",
           "S3Key": "[HASH REMOVED].zip",
         },
-        "Description": "Reads 100 rows of CSV and writes to DynamoDB. Installs only clients using native aws-sdk v2.",
+        "Description": "{"xray":true,"sdk":"sdk2","minify":true,"memorySize":512,"format":"cjs"}",
         "Environment": Object {
           "Variables": Object {
             "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
@@ -1089,12 +1382,12 @@ Object {
             },
           },
         },
-        "FunctionName": "csv2ddb-sdk2-clients-native",
-        "Handler": "src/csv2ddb/csv2ddb-sdk2-clients.handler",
+        "FunctionName": "csv2ddb-sdk2-xray-cjs-minify-512",
+        "Handler": "src/csv2ddb/csv2ddb-sdk2-xray.handler",
         "MemorySize": 512,
         "Role": Object {
           "Fn::GetAtt": Array [
-            "csv2ddbsdk2clientsnativeServiceRoleE4858F6B",
+            "csv2ddbsdk2xraycjsminify512ServiceRoleD9CC9C73",
             "Arn",
           ],
         },
@@ -1116,30 +1409,48 @@ Object {
       },
       "Type": "AWS::Lambda::Function",
     },
-    "csv2ddbsdk2clientsnativeLogRetentionB2CA8742": Object {
+    "csv2ddbsdk2xraycjsminify512ServiceRoleD9CC9C73": Object {
       "Properties": Object {
-        "LogGroupName": Object {
-          "Fn::Join": Array [
-            "",
-            Array [
-              "/aws/lambda/",
-              Object {
-                "Ref": "csv2ddbsdk2clientsnativeBE3257EF",
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
               },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
             ],
-          ],
-        },
-        "RetentionInDays": 1,
-        "ServiceToken": Object {
-          "Fn::GetAtt": Array [
-            "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A",
-            "Arn",
-          ],
-        },
+          },
+        ],
+        "Tags": Array [
+          Object {
+            "Key": "sst:app",
+            "Value": "my-app",
+          },
+          Object {
+            "Key": "sst:stage",
+            "Value": "dev",
+          },
+        ],
       },
-      "Type": "Custom::LogRetention",
+      "Type": "AWS::IAM::Role",
     },
-    "csv2ddbsdk2clientsnativeServiceRoleDefaultPolicyDE5D02C0": Object {
+    "csv2ddbsdk2xraycjsminify512ServiceRoleDefaultPolicy72EDF852": Object {
       "Properties": Object {
         "PolicyDocument": Object {
           "Statement": Array [
@@ -1205,60 +1516,19 @@ Object {
           ],
           "Version": "2012-10-17",
         },
-        "PolicyName": "csv2ddbsdk2clientsnativeServiceRoleDefaultPolicyDE5D02C0",
+        "PolicyName": "csv2ddbsdk2xraycjsminify512ServiceRoleDefaultPolicy72EDF852",
         "Roles": Array [
           Object {
-            "Ref": "csv2ddbsdk2clientsnativeServiceRoleE4858F6B",
+            "Ref": "csv2ddbsdk2xraycjsminify512ServiceRoleD9CC9C73",
           },
         ],
       },
       "Type": "AWS::IAM::Policy",
     },
-    "csv2ddbsdk2clientsnativeServiceRoleE4858F6B": Object {
-      "Properties": Object {
-        "AssumeRolePolicyDocument": Object {
-          "Statement": Array [
-            Object {
-              "Action": "sts:AssumeRole",
-              "Effect": "Allow",
-              "Principal": Object {
-                "Service": "lambda.amazonaws.com",
-              },
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "ManagedPolicyArns": Array [
-          Object {
-            "Fn::Join": Array [
-              "",
-              Array [
-                "arn:",
-                Object {
-                  "Ref": "AWS::Partition",
-                },
-                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
-              ],
-            ],
-          },
-        ],
-        "Tags": Array [
-          Object {
-            "Key": "sst:app",
-            "Value": "my-app",
-          },
-          Object {
-            "Key": "sst:stage",
-            "Value": "dev",
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Role",
-    },
-    "csv2ddbsdk2clientsnativexrayA37185C1": Object {
+    "csv2ddbsdk3cjsminify5120F04D776": Object {
       "DependsOn": Array [
-        "csv2ddbsdk2clientsnativexrayServiceRoleDefaultPolicyCF7DD094",
-        "csv2ddbsdk2clientsnativexrayServiceRole2B852A36",
+        "csv2ddbsdk3cjsminify512ServiceRoleDefaultPolicy81FDE5EE",
+        "csv2ddbsdk3cjsminify512ServiceRoleDE72B585",
       ],
       "Properties": Object {
         "Architectures": Array [
@@ -1268,7 +1538,7 @@ Object {
           "S3Bucket": "cdk-hnb659fds-assets-my-account-us-east-1",
           "S3Key": "[HASH REMOVED].zip",
         },
-        "Description": "Reads 100 rows of CSV and writes to DynamoDB. Installs only clients using native aws-sdk v2.",
+        "Description": "{"xray":false,"sdk":"sdk3","minify":true,"memorySize":512,"format":"cjs"}",
         "Environment": Object {
           "Variables": Object {
             "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
@@ -1283,1569 +1553,12 @@ Object {
             },
           },
         },
-        "FunctionName": "csv2ddb-sdk2-clients-native-xray",
-        "Handler": "src/csv2ddb/csv2ddb-sdk2-clients-xray.handler",
-        "MemorySize": 512,
-        "Role": Object {
-          "Fn::GetAtt": Array [
-            "csv2ddbsdk2clientsnativexrayServiceRole2B852A36",
-            "Arn",
-          ],
-        },
-        "Runtime": "nodejs12.x",
-        "Tags": Array [
-          Object {
-            "Key": "sst:app",
-            "Value": "my-app",
-          },
-          Object {
-            "Key": "sst:stage",
-            "Value": "dev",
-          },
-        ],
-        "Timeout": 60,
-        "TracingConfig": Object {
-          "Mode": "Active",
-        },
-      },
-      "Type": "AWS::Lambda::Function",
-    },
-    "csv2ddbsdk2clientsnativexrayLogRetention489A3637": Object {
-      "Properties": Object {
-        "LogGroupName": Object {
-          "Fn::Join": Array [
-            "",
-            Array [
-              "/aws/lambda/",
-              Object {
-                "Ref": "csv2ddbsdk2clientsnativexrayA37185C1",
-              },
-            ],
-          ],
-        },
-        "RetentionInDays": 1,
-        "ServiceToken": Object {
-          "Fn::GetAtt": Array [
-            "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A",
-            "Arn",
-          ],
-        },
-      },
-      "Type": "Custom::LogRetention",
-    },
-    "csv2ddbsdk2clientsnativexrayServiceRole2B852A36": Object {
-      "Properties": Object {
-        "AssumeRolePolicyDocument": Object {
-          "Statement": Array [
-            Object {
-              "Action": "sts:AssumeRole",
-              "Effect": "Allow",
-              "Principal": Object {
-                "Service": "lambda.amazonaws.com",
-              },
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "ManagedPolicyArns": Array [
-          Object {
-            "Fn::Join": Array [
-              "",
-              Array [
-                "arn:",
-                Object {
-                  "Ref": "AWS::Partition",
-                },
-                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
-              ],
-            ],
-          },
-        ],
-        "Tags": Array [
-          Object {
-            "Key": "sst:app",
-            "Value": "my-app",
-          },
-          Object {
-            "Key": "sst:stage",
-            "Value": "dev",
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Role",
-    },
-    "csv2ddbsdk2clientsnativexrayServiceRoleDefaultPolicyCF7DD094": Object {
-      "Properties": Object {
-        "PolicyDocument": Object {
-          "Statement": Array [
-            Object {
-              "Action": Array [
-                "xray:PutTraceSegments",
-                "xray:PutTelemetryRecords",
-              ],
-              "Effect": "Allow",
-              "Resource": "*",
-            },
-            Object {
-              "Action": Array [
-                "s3:GetObject*",
-                "s3:GetBucket*",
-                "s3:List*",
-              ],
-              "Effect": "Allow",
-              "Resource": Array [
-                Object {
-                  "Fn::GetAtt": Array [
-                    "SalesCsvBucket1224326F",
-                    "Arn",
-                  ],
-                },
-                Object {
-                  "Fn::Join": Array [
-                    "",
-                    Array [
-                      Object {
-                        "Fn::GetAtt": Array [
-                          "SalesCsvBucket1224326F",
-                          "Arn",
-                        ],
-                      },
-                      "/*",
-                    ],
-                  ],
-                },
-              ],
-            },
-            Object {
-              "Action": Array [
-                "dynamodb:BatchWriteItem",
-                "dynamodb:PutItem",
-                "dynamodb:UpdateItem",
-                "dynamodb:DeleteItem",
-                "dynamodb:DescribeTable",
-              ],
-              "Effect": "Allow",
-              "Resource": Array [
-                Object {
-                  "Fn::GetAtt": Array [
-                    "SalesTableB987FA65",
-                    "Arn",
-                  ],
-                },
-                Object {
-                  "Ref": "AWS::NoValue",
-                },
-              ],
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "PolicyName": "csv2ddbsdk2clientsnativexrayServiceRoleDefaultPolicyCF7DD094",
-        "Roles": Array [
-          Object {
-            "Ref": "csv2ddbsdk2clientsnativexrayServiceRole2B852A36",
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Policy",
-    },
-    "csv2ddbsdk2esm3E1312F5": Object {
-      "DependsOn": Array [
-        "csv2ddbsdk2esmServiceRoleDefaultPolicy50F918D4",
-        "csv2ddbsdk2esmServiceRole5219004A",
-      ],
-      "Properties": Object {
-        "Architectures": Array [
-          "arm64",
-        ],
-        "Code": Object {
-          "S3Bucket": "cdk-hnb659fds-assets-my-account-us-east-1",
-          "S3Key": "[HASH REMOVED].zip",
-        },
-        "Description": "Reads 100 rows of CSV and writes to DynamoDB. Installs full aws-sdk v2 bundled with esm.",
-        "Environment": Object {
-          "Variables": Object {
-            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
-            "BUCKET_KEY": "100 Sales Records.csv",
-            "BUCKET_NAME": Object {
-              "Ref": "SalesCsvBucket1224326F",
-            },
-            "COLD_STARTER": "2020-04-01T04:00:00.000Z",
-            "NODE_OPTIONS": "--enable-source-maps",
-            "TABLE_NAME": Object {
-              "Ref": "SalesTableB987FA65",
-            },
-          },
-        },
-        "FunctionName": "csv2ddb-sdk2-esm",
-        "Handler": "src/csv2ddb/csv2ddb-sdk2.handler",
-        "MemorySize": 512,
-        "Role": Object {
-          "Fn::GetAtt": Array [
-            "csv2ddbsdk2esmServiceRole5219004A",
-            "Arn",
-          ],
-        },
-        "Runtime": "nodejs12.x",
-        "Tags": Array [
-          Object {
-            "Key": "sst:app",
-            "Value": "my-app",
-          },
-          Object {
-            "Key": "sst:stage",
-            "Value": "dev",
-          },
-        ],
-        "Timeout": 60,
-        "TracingConfig": Object {
-          "Mode": "Active",
-        },
-      },
-      "Type": "AWS::Lambda::Function",
-    },
-    "csv2ddbsdk2esmLogRetention2A86644A": Object {
-      "Properties": Object {
-        "LogGroupName": Object {
-          "Fn::Join": Array [
-            "",
-            Array [
-              "/aws/lambda/",
-              Object {
-                "Ref": "csv2ddbsdk2esm3E1312F5",
-              },
-            ],
-          ],
-        },
-        "RetentionInDays": 1,
-        "ServiceToken": Object {
-          "Fn::GetAtt": Array [
-            "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A",
-            "Arn",
-          ],
-        },
-      },
-      "Type": "Custom::LogRetention",
-    },
-    "csv2ddbsdk2esmServiceRole5219004A": Object {
-      "Properties": Object {
-        "AssumeRolePolicyDocument": Object {
-          "Statement": Array [
-            Object {
-              "Action": "sts:AssumeRole",
-              "Effect": "Allow",
-              "Principal": Object {
-                "Service": "lambda.amazonaws.com",
-              },
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "ManagedPolicyArns": Array [
-          Object {
-            "Fn::Join": Array [
-              "",
-              Array [
-                "arn:",
-                Object {
-                  "Ref": "AWS::Partition",
-                },
-                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
-              ],
-            ],
-          },
-        ],
-        "Tags": Array [
-          Object {
-            "Key": "sst:app",
-            "Value": "my-app",
-          },
-          Object {
-            "Key": "sst:stage",
-            "Value": "dev",
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Role",
-    },
-    "csv2ddbsdk2esmServiceRoleDefaultPolicy50F918D4": Object {
-      "Properties": Object {
-        "PolicyDocument": Object {
-          "Statement": Array [
-            Object {
-              "Action": Array [
-                "xray:PutTraceSegments",
-                "xray:PutTelemetryRecords",
-              ],
-              "Effect": "Allow",
-              "Resource": "*",
-            },
-            Object {
-              "Action": Array [
-                "s3:GetObject*",
-                "s3:GetBucket*",
-                "s3:List*",
-              ],
-              "Effect": "Allow",
-              "Resource": Array [
-                Object {
-                  "Fn::GetAtt": Array [
-                    "SalesCsvBucket1224326F",
-                    "Arn",
-                  ],
-                },
-                Object {
-                  "Fn::Join": Array [
-                    "",
-                    Array [
-                      Object {
-                        "Fn::GetAtt": Array [
-                          "SalesCsvBucket1224326F",
-                          "Arn",
-                        ],
-                      },
-                      "/*",
-                    ],
-                  ],
-                },
-              ],
-            },
-            Object {
-              "Action": Array [
-                "dynamodb:BatchWriteItem",
-                "dynamodb:PutItem",
-                "dynamodb:UpdateItem",
-                "dynamodb:DeleteItem",
-                "dynamodb:DescribeTable",
-              ],
-              "Effect": "Allow",
-              "Resource": Array [
-                Object {
-                  "Fn::GetAtt": Array [
-                    "SalesTableB987FA65",
-                    "Arn",
-                  ],
-                },
-                Object {
-                  "Ref": "AWS::NoValue",
-                },
-              ],
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "PolicyName": "csv2ddbsdk2esmServiceRoleDefaultPolicy50F918D4",
-        "Roles": Array [
-          Object {
-            "Ref": "csv2ddbsdk2esmServiceRole5219004A",
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Policy",
-    },
-    "csv2ddbsdk2js81A46296": Object {
-      "DependsOn": Array [
-        "csv2ddbsdk2jsServiceRoleDefaultPolicyDB948E0B",
-        "csv2ddbsdk2jsServiceRoleBE12116D",
-      ],
-      "Properties": Object {
-        "Architectures": Array [
-          "arm64",
-        ],
-        "Code": Object {
-          "S3Bucket": "cdk-hnb659fds-assets-my-account-us-east-1",
-          "S3Key": "[HASH REMOVED].zip",
-        },
-        "Description": "Reads 100 rows of CSV and writes to DynamoDB. Uses native aws-sdk v2 and is CommonJS JavaScript-only with no transpiling.",
-        "Environment": Object {
-          "Variables": Object {
-            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
-            "BUCKET_KEY": "100 Sales Records.csv",
-            "BUCKET_NAME": Object {
-              "Ref": "SalesCsvBucket1224326F",
-            },
-            "COLD_STARTER": "2020-04-01T04:00:00.000Z",
-            "NODE_OPTIONS": "--enable-source-maps",
-            "TABLE_NAME": Object {
-              "Ref": "SalesTableB987FA65",
-            },
-          },
-        },
-        "FunctionName": "csv2ddb-sdk2-js",
-        "Handler": "csv2ddb-sdk2-js.handler",
-        "MemorySize": 512,
-        "Role": Object {
-          "Fn::GetAtt": Array [
-            "csv2ddbsdk2jsServiceRoleBE12116D",
-            "Arn",
-          ],
-        },
-        "Runtime": "nodejs14.x",
-        "Tags": Array [
-          Object {
-            "Key": "sst:app",
-            "Value": "my-app",
-          },
-          Object {
-            "Key": "sst:stage",
-            "Value": "dev",
-          },
-        ],
-        "Timeout": 60,
-        "TracingConfig": Object {
-          "Mode": "Active",
-        },
-      },
-      "Type": "AWS::Lambda::Function",
-    },
-    "csv2ddbsdk2jsLogRetention6C95A82F": Object {
-      "Properties": Object {
-        "LogGroupName": Object {
-          "Fn::Join": Array [
-            "",
-            Array [
-              "/aws/lambda/",
-              Object {
-                "Ref": "csv2ddbsdk2js81A46296",
-              },
-            ],
-          ],
-        },
-        "RetentionInDays": 1,
-        "ServiceToken": Object {
-          "Fn::GetAtt": Array [
-            "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A",
-            "Arn",
-          ],
-        },
-      },
-      "Type": "Custom::LogRetention",
-    },
-    "csv2ddbsdk2jsServiceRoleBE12116D": Object {
-      "Properties": Object {
-        "AssumeRolePolicyDocument": Object {
-          "Statement": Array [
-            Object {
-              "Action": "sts:AssumeRole",
-              "Effect": "Allow",
-              "Principal": Object {
-                "Service": "lambda.amazonaws.com",
-              },
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "ManagedPolicyArns": Array [
-          Object {
-            "Fn::Join": Array [
-              "",
-              Array [
-                "arn:",
-                Object {
-                  "Ref": "AWS::Partition",
-                },
-                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
-              ],
-            ],
-          },
-        ],
-        "Tags": Array [
-          Object {
-            "Key": "sst:app",
-            "Value": "my-app",
-          },
-          Object {
-            "Key": "sst:stage",
-            "Value": "dev",
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Role",
-    },
-    "csv2ddbsdk2jsServiceRoleDefaultPolicyDB948E0B": Object {
-      "Properties": Object {
-        "PolicyDocument": Object {
-          "Statement": Array [
-            Object {
-              "Action": Array [
-                "xray:PutTraceSegments",
-                "xray:PutTelemetryRecords",
-              ],
-              "Effect": "Allow",
-              "Resource": "*",
-            },
-            Object {
-              "Action": Array [
-                "s3:GetObject*",
-                "s3:GetBucket*",
-                "s3:List*",
-              ],
-              "Effect": "Allow",
-              "Resource": Array [
-                Object {
-                  "Fn::GetAtt": Array [
-                    "SalesCsvBucket1224326F",
-                    "Arn",
-                  ],
-                },
-                Object {
-                  "Fn::Join": Array [
-                    "",
-                    Array [
-                      Object {
-                        "Fn::GetAtt": Array [
-                          "SalesCsvBucket1224326F",
-                          "Arn",
-                        ],
-                      },
-                      "/*",
-                    ],
-                  ],
-                },
-              ],
-            },
-            Object {
-              "Action": Array [
-                "dynamodb:BatchWriteItem",
-                "dynamodb:PutItem",
-                "dynamodb:UpdateItem",
-                "dynamodb:DeleteItem",
-                "dynamodb:DescribeTable",
-              ],
-              "Effect": "Allow",
-              "Resource": Array [
-                Object {
-                  "Fn::GetAtt": Array [
-                    "SalesTableB987FA65",
-                    "Arn",
-                  ],
-                },
-                Object {
-                  "Ref": "AWS::NoValue",
-                },
-              ],
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "PolicyName": "csv2ddbsdk2jsServiceRoleDefaultPolicyDB948E0B",
-        "Roles": Array [
-          Object {
-            "Ref": "csv2ddbsdk2jsServiceRoleBE12116D",
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Policy",
-    },
-    "csv2ddbsdk2jsxrayDC7686A0": Object {
-      "DependsOn": Array [
-        "csv2ddbsdk2jsxrayServiceRoleDefaultPolicy03B55781",
-        "csv2ddbsdk2jsxrayServiceRole7B57CB5C",
-      ],
-      "Properties": Object {
-        "Architectures": Array [
-          "arm64",
-        ],
-        "Code": Object {
-          "S3Bucket": "cdk-hnb659fds-assets-my-account-us-east-1",
-          "S3Key": "[HASH REMOVED].zip",
-        },
-        "Description": "Reads 100 rows of CSV and writes to DynamoDB. Uses native aws-sdk v2 and is CommonJS JavaScript-only with no transpiling.",
-        "Environment": Object {
-          "Variables": Object {
-            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
-            "BUCKET_KEY": "100 Sales Records.csv",
-            "BUCKET_NAME": Object {
-              "Ref": "SalesCsvBucket1224326F",
-            },
-            "COLD_STARTER": "2020-04-01T04:00:00.000Z",
-            "NODE_OPTIONS": "--enable-source-maps",
-            "TABLE_NAME": Object {
-              "Ref": "SalesTableB987FA65",
-            },
-          },
-        },
-        "FunctionName": "csv2ddb-sdk2-js-xray",
-        "Handler": "csv2ddb-sdk2-js-xray.handler",
-        "MemorySize": 512,
-        "Role": Object {
-          "Fn::GetAtt": Array [
-            "csv2ddbsdk2jsxrayServiceRole7B57CB5C",
-            "Arn",
-          ],
-        },
-        "Runtime": "nodejs14.x",
-        "Tags": Array [
-          Object {
-            "Key": "sst:app",
-            "Value": "my-app",
-          },
-          Object {
-            "Key": "sst:stage",
-            "Value": "dev",
-          },
-        ],
-        "Timeout": 60,
-        "TracingConfig": Object {
-          "Mode": "Active",
-        },
-      },
-      "Type": "AWS::Lambda::Function",
-    },
-    "csv2ddbsdk2jsxrayLogRetention7D045C1A": Object {
-      "Properties": Object {
-        "LogGroupName": Object {
-          "Fn::Join": Array [
-            "",
-            Array [
-              "/aws/lambda/",
-              Object {
-                "Ref": "csv2ddbsdk2jsxrayDC7686A0",
-              },
-            ],
-          ],
-        },
-        "RetentionInDays": 1,
-        "ServiceToken": Object {
-          "Fn::GetAtt": Array [
-            "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A",
-            "Arn",
-          ],
-        },
-      },
-      "Type": "Custom::LogRetention",
-    },
-    "csv2ddbsdk2jsxrayServiceRole7B57CB5C": Object {
-      "Properties": Object {
-        "AssumeRolePolicyDocument": Object {
-          "Statement": Array [
-            Object {
-              "Action": "sts:AssumeRole",
-              "Effect": "Allow",
-              "Principal": Object {
-                "Service": "lambda.amazonaws.com",
-              },
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "ManagedPolicyArns": Array [
-          Object {
-            "Fn::Join": Array [
-              "",
-              Array [
-                "arn:",
-                Object {
-                  "Ref": "AWS::Partition",
-                },
-                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
-              ],
-            ],
-          },
-        ],
-        "Tags": Array [
-          Object {
-            "Key": "sst:app",
-            "Value": "my-app",
-          },
-          Object {
-            "Key": "sst:stage",
-            "Value": "dev",
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Role",
-    },
-    "csv2ddbsdk2jsxrayServiceRoleDefaultPolicy03B55781": Object {
-      "Properties": Object {
-        "PolicyDocument": Object {
-          "Statement": Array [
-            Object {
-              "Action": Array [
-                "xray:PutTraceSegments",
-                "xray:PutTelemetryRecords",
-              ],
-              "Effect": "Allow",
-              "Resource": "*",
-            },
-            Object {
-              "Action": Array [
-                "s3:GetObject*",
-                "s3:GetBucket*",
-                "s3:List*",
-              ],
-              "Effect": "Allow",
-              "Resource": Array [
-                Object {
-                  "Fn::GetAtt": Array [
-                    "SalesCsvBucket1224326F",
-                    "Arn",
-                  ],
-                },
-                Object {
-                  "Fn::Join": Array [
-                    "",
-                    Array [
-                      Object {
-                        "Fn::GetAtt": Array [
-                          "SalesCsvBucket1224326F",
-                          "Arn",
-                        ],
-                      },
-                      "/*",
-                    ],
-                  ],
-                },
-              ],
-            },
-            Object {
-              "Action": Array [
-                "dynamodb:BatchWriteItem",
-                "dynamodb:PutItem",
-                "dynamodb:UpdateItem",
-                "dynamodb:DeleteItem",
-                "dynamodb:DescribeTable",
-              ],
-              "Effect": "Allow",
-              "Resource": Array [
-                Object {
-                  "Fn::GetAtt": Array [
-                    "SalesTableB987FA65",
-                    "Arn",
-                  ],
-                },
-                Object {
-                  "Ref": "AWS::NoValue",
-                },
-              ],
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "PolicyName": "csv2ddbsdk2jsxrayServiceRoleDefaultPolicy03B55781",
-        "Roles": Array [
-          Object {
-            "Ref": "csv2ddbsdk2jsxrayServiceRole7B57CB5C",
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Policy",
-    },
-    "csv2ddbsdk2layer5594B8E6": Object {
-      "DependsOn": Array [
-        "csv2ddbsdk2layerServiceRoleDefaultPolicyCAAF3587",
-        "csv2ddbsdk2layerServiceRole7AF4E34B",
-      ],
-      "Properties": Object {
-        "Architectures": Array [
-          "arm64",
-        ],
-        "Code": Object {
-          "S3Bucket": "cdk-hnb659fds-assets-my-account-us-east-1",
-          "S3Key": "[HASH REMOVED].zip",
-        },
-        "Description": "Reads 100 rows of CSV and writes to DynamoDB. Uses aws-sdk v2 from a Lambda Layer.",
-        "Environment": Object {
-          "Variables": Object {
-            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
-            "BUCKET_KEY": "100 Sales Records.csv",
-            "BUCKET_NAME": Object {
-              "Ref": "SalesCsvBucket1224326F",
-            },
-            "COLD_STARTER": "2020-04-01T04:00:00.000Z",
-            "NODE_OPTIONS": "--enable-source-maps",
-            "TABLE_NAME": Object {
-              "Ref": "SalesTableB987FA65",
-            },
-          },
-        },
-        "FunctionName": "csv2ddb-sdk2-layer",
-        "Handler": "src/csv2ddb/csv2ddb-sdk2.handler",
-        "Layers": Array [
-          Object {
-            "Ref": "SdkLayer90B54D5D",
-          },
-        ],
-        "MemorySize": 512,
-        "Role": Object {
-          "Fn::GetAtt": Array [
-            "csv2ddbsdk2layerServiceRole7AF4E34B",
-            "Arn",
-          ],
-        },
-        "Runtime": "nodejs12.x",
-        "Tags": Array [
-          Object {
-            "Key": "sst:app",
-            "Value": "my-app",
-          },
-          Object {
-            "Key": "sst:stage",
-            "Value": "dev",
-          },
-        ],
-        "Timeout": 60,
-        "TracingConfig": Object {
-          "Mode": "Active",
-        },
-      },
-      "Type": "AWS::Lambda::Function",
-    },
-    "csv2ddbsdk2layerLogRetention9E793A37": Object {
-      "Properties": Object {
-        "LogGroupName": Object {
-          "Fn::Join": Array [
-            "",
-            Array [
-              "/aws/lambda/",
-              Object {
-                "Ref": "csv2ddbsdk2layer5594B8E6",
-              },
-            ],
-          ],
-        },
-        "RetentionInDays": 1,
-        "ServiceToken": Object {
-          "Fn::GetAtt": Array [
-            "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A",
-            "Arn",
-          ],
-        },
-      },
-      "Type": "Custom::LogRetention",
-    },
-    "csv2ddbsdk2layerServiceRole7AF4E34B": Object {
-      "Properties": Object {
-        "AssumeRolePolicyDocument": Object {
-          "Statement": Array [
-            Object {
-              "Action": "sts:AssumeRole",
-              "Effect": "Allow",
-              "Principal": Object {
-                "Service": "lambda.amazonaws.com",
-              },
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "ManagedPolicyArns": Array [
-          Object {
-            "Fn::Join": Array [
-              "",
-              Array [
-                "arn:",
-                Object {
-                  "Ref": "AWS::Partition",
-                },
-                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
-              ],
-            ],
-          },
-        ],
-        "Tags": Array [
-          Object {
-            "Key": "sst:app",
-            "Value": "my-app",
-          },
-          Object {
-            "Key": "sst:stage",
-            "Value": "dev",
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Role",
-    },
-    "csv2ddbsdk2layerServiceRoleDefaultPolicyCAAF3587": Object {
-      "Properties": Object {
-        "PolicyDocument": Object {
-          "Statement": Array [
-            Object {
-              "Action": Array [
-                "xray:PutTraceSegments",
-                "xray:PutTelemetryRecords",
-              ],
-              "Effect": "Allow",
-              "Resource": "*",
-            },
-            Object {
-              "Action": Array [
-                "s3:GetObject*",
-                "s3:GetBucket*",
-                "s3:List*",
-              ],
-              "Effect": "Allow",
-              "Resource": Array [
-                Object {
-                  "Fn::GetAtt": Array [
-                    "SalesCsvBucket1224326F",
-                    "Arn",
-                  ],
-                },
-                Object {
-                  "Fn::Join": Array [
-                    "",
-                    Array [
-                      Object {
-                        "Fn::GetAtt": Array [
-                          "SalesCsvBucket1224326F",
-                          "Arn",
-                        ],
-                      },
-                      "/*",
-                    ],
-                  ],
-                },
-              ],
-            },
-            Object {
-              "Action": Array [
-                "dynamodb:BatchWriteItem",
-                "dynamodb:PutItem",
-                "dynamodb:UpdateItem",
-                "dynamodb:DeleteItem",
-                "dynamodb:DescribeTable",
-              ],
-              "Effect": "Allow",
-              "Resource": Array [
-                Object {
-                  "Fn::GetAtt": Array [
-                    "SalesTableB987FA65",
-                    "Arn",
-                  ],
-                },
-                Object {
-                  "Ref": "AWS::NoValue",
-                },
-              ],
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "PolicyName": "csv2ddbsdk2layerServiceRoleDefaultPolicyCAAF3587",
-        "Roles": Array [
-          Object {
-            "Ref": "csv2ddbsdk2layerServiceRole7AF4E34B",
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Policy",
-    },
-    "csv2ddbsdk2mjs51082C6D": Object {
-      "DependsOn": Array [
-        "csv2ddbsdk2mjsServiceRoleDefaultPolicyBA092903",
-        "csv2ddbsdk2mjsServiceRoleA1AE0A5E",
-      ],
-      "Properties": Object {
-        "Architectures": Array [
-          "arm64",
-        ],
-        "Code": Object {
-          "S3Bucket": "cdk-hnb659fds-assets-my-account-us-east-1",
-          "S3Key": "[HASH REMOVED].zip",
-        },
-        "Description": "Reads 100 rows of CSV and writes to DynamoDB. Uses native aws-sdk v2 and is ESModule JavaScript-only with no transpiling.",
-        "Environment": Object {
-          "Variables": Object {
-            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
-            "BUCKET_KEY": "100 Sales Records.csv",
-            "BUCKET_NAME": Object {
-              "Ref": "SalesCsvBucket1224326F",
-            },
-            "COLD_STARTER": "2020-04-01T04:00:00.000Z",
-            "NODE_OPTIONS": "--enable-source-maps",
-            "TABLE_NAME": Object {
-              "Ref": "SalesTableB987FA65",
-            },
-          },
-        },
-        "FunctionName": "csv2ddb-sdk2-mjs",
-        "Handler": "csv2ddb-sdk2-mjs.handler",
-        "MemorySize": 512,
-        "Role": Object {
-          "Fn::GetAtt": Array [
-            "csv2ddbsdk2mjsServiceRoleA1AE0A5E",
-            "Arn",
-          ],
-        },
-        "Runtime": "nodejs14.x",
-        "Tags": Array [
-          Object {
-            "Key": "sst:app",
-            "Value": "my-app",
-          },
-          Object {
-            "Key": "sst:stage",
-            "Value": "dev",
-          },
-        ],
-        "Timeout": 60,
-        "TracingConfig": Object {
-          "Mode": "Active",
-        },
-      },
-      "Type": "AWS::Lambda::Function",
-    },
-    "csv2ddbsdk2mjsLogRetentionB8043ACA": Object {
-      "Properties": Object {
-        "LogGroupName": Object {
-          "Fn::Join": Array [
-            "",
-            Array [
-              "/aws/lambda/",
-              Object {
-                "Ref": "csv2ddbsdk2mjs51082C6D",
-              },
-            ],
-          ],
-        },
-        "RetentionInDays": 1,
-        "ServiceToken": Object {
-          "Fn::GetAtt": Array [
-            "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A",
-            "Arn",
-          ],
-        },
-      },
-      "Type": "Custom::LogRetention",
-    },
-    "csv2ddbsdk2mjsServiceRoleA1AE0A5E": Object {
-      "Properties": Object {
-        "AssumeRolePolicyDocument": Object {
-          "Statement": Array [
-            Object {
-              "Action": "sts:AssumeRole",
-              "Effect": "Allow",
-              "Principal": Object {
-                "Service": "lambda.amazonaws.com",
-              },
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "ManagedPolicyArns": Array [
-          Object {
-            "Fn::Join": Array [
-              "",
-              Array [
-                "arn:",
-                Object {
-                  "Ref": "AWS::Partition",
-                },
-                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
-              ],
-            ],
-          },
-        ],
-        "Tags": Array [
-          Object {
-            "Key": "sst:app",
-            "Value": "my-app",
-          },
-          Object {
-            "Key": "sst:stage",
-            "Value": "dev",
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Role",
-    },
-    "csv2ddbsdk2mjsServiceRoleDefaultPolicyBA092903": Object {
-      "Properties": Object {
-        "PolicyDocument": Object {
-          "Statement": Array [
-            Object {
-              "Action": Array [
-                "xray:PutTraceSegments",
-                "xray:PutTelemetryRecords",
-              ],
-              "Effect": "Allow",
-              "Resource": "*",
-            },
-            Object {
-              "Action": Array [
-                "s3:GetObject*",
-                "s3:GetBucket*",
-                "s3:List*",
-              ],
-              "Effect": "Allow",
-              "Resource": Array [
-                Object {
-                  "Fn::GetAtt": Array [
-                    "SalesCsvBucket1224326F",
-                    "Arn",
-                  ],
-                },
-                Object {
-                  "Fn::Join": Array [
-                    "",
-                    Array [
-                      Object {
-                        "Fn::GetAtt": Array [
-                          "SalesCsvBucket1224326F",
-                          "Arn",
-                        ],
-                      },
-                      "/*",
-                    ],
-                  ],
-                },
-              ],
-            },
-            Object {
-              "Action": Array [
-                "dynamodb:BatchWriteItem",
-                "dynamodb:PutItem",
-                "dynamodb:UpdateItem",
-                "dynamodb:DeleteItem",
-                "dynamodb:DescribeTable",
-              ],
-              "Effect": "Allow",
-              "Resource": Array [
-                Object {
-                  "Fn::GetAtt": Array [
-                    "SalesTableB987FA65",
-                    "Arn",
-                  ],
-                },
-                Object {
-                  "Ref": "AWS::NoValue",
-                },
-              ],
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "PolicyName": "csv2ddbsdk2mjsServiceRoleDefaultPolicyBA092903",
-        "Roles": Array [
-          Object {
-            "Ref": "csv2ddbsdk2mjsServiceRoleA1AE0A5E",
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Policy",
-    },
-    "csv2ddbsdk2mjsxrayB8C7AB75": Object {
-      "DependsOn": Array [
-        "csv2ddbsdk2mjsxrayServiceRoleDefaultPolicy4C072199",
-        "csv2ddbsdk2mjsxrayServiceRoleD3258CD6",
-      ],
-      "Properties": Object {
-        "Architectures": Array [
-          "arm64",
-        ],
-        "Code": Object {
-          "S3Bucket": "cdk-hnb659fds-assets-my-account-us-east-1",
-          "S3Key": "[HASH REMOVED].zip",
-        },
-        "Description": "Reads 100 rows of CSV and writes to DynamoDB. Uses native aws-sdk v2 and is ESModule JavaScript-only with no transpiling.",
-        "Environment": Object {
-          "Variables": Object {
-            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
-            "BUCKET_KEY": "100 Sales Records.csv",
-            "BUCKET_NAME": Object {
-              "Ref": "SalesCsvBucket1224326F",
-            },
-            "COLD_STARTER": "2020-04-01T04:00:00.000Z",
-            "NODE_OPTIONS": "--enable-source-maps",
-            "TABLE_NAME": Object {
-              "Ref": "SalesTableB987FA65",
-            },
-          },
-        },
-        "FunctionName": "csv2ddb-sdk2-mjs-xray",
-        "Handler": "csv2ddb-sdk2-mjs-xray.handler",
-        "MemorySize": 512,
-        "Role": Object {
-          "Fn::GetAtt": Array [
-            "csv2ddbsdk2mjsxrayServiceRoleD3258CD6",
-            "Arn",
-          ],
-        },
-        "Runtime": "nodejs14.x",
-        "Tags": Array [
-          Object {
-            "Key": "sst:app",
-            "Value": "my-app",
-          },
-          Object {
-            "Key": "sst:stage",
-            "Value": "dev",
-          },
-        ],
-        "Timeout": 60,
-        "TracingConfig": Object {
-          "Mode": "Active",
-        },
-      },
-      "Type": "AWS::Lambda::Function",
-    },
-    "csv2ddbsdk2mjsxrayLogRetentionA0826E81": Object {
-      "Properties": Object {
-        "LogGroupName": Object {
-          "Fn::Join": Array [
-            "",
-            Array [
-              "/aws/lambda/",
-              Object {
-                "Ref": "csv2ddbsdk2mjsxrayB8C7AB75",
-              },
-            ],
-          ],
-        },
-        "RetentionInDays": 1,
-        "ServiceToken": Object {
-          "Fn::GetAtt": Array [
-            "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A",
-            "Arn",
-          ],
-        },
-      },
-      "Type": "Custom::LogRetention",
-    },
-    "csv2ddbsdk2mjsxrayServiceRoleD3258CD6": Object {
-      "Properties": Object {
-        "AssumeRolePolicyDocument": Object {
-          "Statement": Array [
-            Object {
-              "Action": "sts:AssumeRole",
-              "Effect": "Allow",
-              "Principal": Object {
-                "Service": "lambda.amazonaws.com",
-              },
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "ManagedPolicyArns": Array [
-          Object {
-            "Fn::Join": Array [
-              "",
-              Array [
-                "arn:",
-                Object {
-                  "Ref": "AWS::Partition",
-                },
-                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
-              ],
-            ],
-          },
-        ],
-        "Tags": Array [
-          Object {
-            "Key": "sst:app",
-            "Value": "my-app",
-          },
-          Object {
-            "Key": "sst:stage",
-            "Value": "dev",
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Role",
-    },
-    "csv2ddbsdk2mjsxrayServiceRoleDefaultPolicy4C072199": Object {
-      "Properties": Object {
-        "PolicyDocument": Object {
-          "Statement": Array [
-            Object {
-              "Action": Array [
-                "xray:PutTraceSegments",
-                "xray:PutTelemetryRecords",
-              ],
-              "Effect": "Allow",
-              "Resource": "*",
-            },
-            Object {
-              "Action": Array [
-                "s3:GetObject*",
-                "s3:GetBucket*",
-                "s3:List*",
-              ],
-              "Effect": "Allow",
-              "Resource": Array [
-                Object {
-                  "Fn::GetAtt": Array [
-                    "SalesCsvBucket1224326F",
-                    "Arn",
-                  ],
-                },
-                Object {
-                  "Fn::Join": Array [
-                    "",
-                    Array [
-                      Object {
-                        "Fn::GetAtt": Array [
-                          "SalesCsvBucket1224326F",
-                          "Arn",
-                        ],
-                      },
-                      "/*",
-                    ],
-                  ],
-                },
-              ],
-            },
-            Object {
-              "Action": Array [
-                "dynamodb:BatchWriteItem",
-                "dynamodb:PutItem",
-                "dynamodb:UpdateItem",
-                "dynamodb:DeleteItem",
-                "dynamodb:DescribeTable",
-              ],
-              "Effect": "Allow",
-              "Resource": Array [
-                Object {
-                  "Fn::GetAtt": Array [
-                    "SalesTableB987FA65",
-                    "Arn",
-                  ],
-                },
-                Object {
-                  "Ref": "AWS::NoValue",
-                },
-              ],
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "PolicyName": "csv2ddbsdk2mjsxrayServiceRoleDefaultPolicy4C072199",
-        "Roles": Array [
-          Object {
-            "Ref": "csv2ddbsdk2mjsxrayServiceRoleD3258CD6",
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Policy",
-    },
-    "csv2ddbsdk2nativeE2BC785A": Object {
-      "DependsOn": Array [
-        "csv2ddbsdk2nativeServiceRoleDefaultPolicy0CB3A6BD",
-        "csv2ddbsdk2nativeServiceRole6D6BD9E0",
-      ],
-      "Properties": Object {
-        "Architectures": Array [
-          "arm64",
-        ],
-        "Code": Object {
-          "S3Bucket": "cdk-hnb659fds-assets-my-account-us-east-1",
-          "S3Key": "[HASH REMOVED].zip",
-        },
-        "Description": "Reads 100 rows of CSV and writes to DynamoDB. Uses native aws-sdk v2.",
-        "Environment": Object {
-          "Variables": Object {
-            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
-            "BUCKET_KEY": "100 Sales Records.csv",
-            "BUCKET_NAME": Object {
-              "Ref": "SalesCsvBucket1224326F",
-            },
-            "COLD_STARTER": "2020-04-01T04:00:00.000Z",
-            "NODE_OPTIONS": "--enable-source-maps",
-            "TABLE_NAME": Object {
-              "Ref": "SalesTableB987FA65",
-            },
-          },
-        },
-        "FunctionName": "csv2ddb-sdk2-native",
-        "Handler": "src/csv2ddb/csv2ddb-sdk2.handler",
-        "MemorySize": 512,
-        "Role": Object {
-          "Fn::GetAtt": Array [
-            "csv2ddbsdk2nativeServiceRole6D6BD9E0",
-            "Arn",
-          ],
-        },
-        "Runtime": "nodejs12.x",
-        "Tags": Array [
-          Object {
-            "Key": "sst:app",
-            "Value": "my-app",
-          },
-          Object {
-            "Key": "sst:stage",
-            "Value": "dev",
-          },
-        ],
-        "Timeout": 60,
-        "TracingConfig": Object {
-          "Mode": "Active",
-        },
-      },
-      "Type": "AWS::Lambda::Function",
-    },
-    "csv2ddbsdk2nativeLogRetentionD3669CB0": Object {
-      "Properties": Object {
-        "LogGroupName": Object {
-          "Fn::Join": Array [
-            "",
-            Array [
-              "/aws/lambda/",
-              Object {
-                "Ref": "csv2ddbsdk2nativeE2BC785A",
-              },
-            ],
-          ],
-        },
-        "RetentionInDays": 1,
-        "ServiceToken": Object {
-          "Fn::GetAtt": Array [
-            "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A",
-            "Arn",
-          ],
-        },
-      },
-      "Type": "Custom::LogRetention",
-    },
-    "csv2ddbsdk2nativeServiceRole6D6BD9E0": Object {
-      "Properties": Object {
-        "AssumeRolePolicyDocument": Object {
-          "Statement": Array [
-            Object {
-              "Action": "sts:AssumeRole",
-              "Effect": "Allow",
-              "Principal": Object {
-                "Service": "lambda.amazonaws.com",
-              },
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "ManagedPolicyArns": Array [
-          Object {
-            "Fn::Join": Array [
-              "",
-              Array [
-                "arn:",
-                Object {
-                  "Ref": "AWS::Partition",
-                },
-                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
-              ],
-            ],
-          },
-        ],
-        "Tags": Array [
-          Object {
-            "Key": "sst:app",
-            "Value": "my-app",
-          },
-          Object {
-            "Key": "sst:stage",
-            "Value": "dev",
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Role",
-    },
-    "csv2ddbsdk2nativeServiceRoleDefaultPolicy0CB3A6BD": Object {
-      "Properties": Object {
-        "PolicyDocument": Object {
-          "Statement": Array [
-            Object {
-              "Action": Array [
-                "xray:PutTraceSegments",
-                "xray:PutTelemetryRecords",
-              ],
-              "Effect": "Allow",
-              "Resource": "*",
-            },
-            Object {
-              "Action": Array [
-                "s3:GetObject*",
-                "s3:GetBucket*",
-                "s3:List*",
-              ],
-              "Effect": "Allow",
-              "Resource": Array [
-                Object {
-                  "Fn::GetAtt": Array [
-                    "SalesCsvBucket1224326F",
-                    "Arn",
-                  ],
-                },
-                Object {
-                  "Fn::Join": Array [
-                    "",
-                    Array [
-                      Object {
-                        "Fn::GetAtt": Array [
-                          "SalesCsvBucket1224326F",
-                          "Arn",
-                        ],
-                      },
-                      "/*",
-                    ],
-                  ],
-                },
-              ],
-            },
-            Object {
-              "Action": Array [
-                "dynamodb:BatchWriteItem",
-                "dynamodb:PutItem",
-                "dynamodb:UpdateItem",
-                "dynamodb:DeleteItem",
-                "dynamodb:DescribeTable",
-              ],
-              "Effect": "Allow",
-              "Resource": Array [
-                Object {
-                  "Fn::GetAtt": Array [
-                    "SalesTableB987FA65",
-                    "Arn",
-                  ],
-                },
-                Object {
-                  "Ref": "AWS::NoValue",
-                },
-              ],
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "PolicyName": "csv2ddbsdk2nativeServiceRoleDefaultPolicy0CB3A6BD",
-        "Roles": Array [
-          Object {
-            "Ref": "csv2ddbsdk2nativeServiceRole6D6BD9E0",
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Policy",
-    },
-    "csv2ddbsdk36F8948B2": Object {
-      "DependsOn": Array [
-        "csv2ddbsdk3ServiceRoleDefaultPolicy9A4C323A",
-        "csv2ddbsdk3ServiceRoleD36ED863",
-      ],
-      "Properties": Object {
-        "Architectures": Array [
-          "arm64",
-        ],
-        "Code": Object {
-          "S3Bucket": "cdk-hnb659fds-assets-my-account-us-east-1",
-          "S3Key": "[HASH REMOVED].zip",
-        },
-        "Description": "Reads 100 rows of CSV and writes to DynamoDB. Uses modular aws sdk v3 bundled with esm.",
-        "Environment": Object {
-          "Variables": Object {
-            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
-            "BUCKET_KEY": "100 Sales Records.csv",
-            "BUCKET_NAME": Object {
-              "Ref": "SalesCsvBucket1224326F",
-            },
-            "COLD_STARTER": "2020-04-01T04:00:00.000Z",
-            "NODE_OPTIONS": "--enable-source-maps",
-            "TABLE_NAME": Object {
-              "Ref": "SalesTableB987FA65",
-            },
-          },
-        },
-        "FunctionName": "csv2ddb-sdk3",
+        "FunctionName": "csv2ddb-sdk3-cjs-minify-512",
         "Handler": "src/csv2ddb/csv2ddb-sdk3.handler",
         "MemorySize": 512,
         "Role": Object {
           "Fn::GetAtt": Array [
-            "csv2ddbsdk3ServiceRoleD36ED863",
+            "csv2ddbsdk3cjsminify512ServiceRoleDE72B585",
             "Arn",
           ],
         },
@@ -2867,30 +1580,7 @@ Object {
       },
       "Type": "AWS::Lambda::Function",
     },
-    "csv2ddbsdk3LogRetention9E431755": Object {
-      "Properties": Object {
-        "LogGroupName": Object {
-          "Fn::Join": Array [
-            "",
-            Array [
-              "/aws/lambda/",
-              Object {
-                "Ref": "csv2ddbsdk36F8948B2",
-              },
-            ],
-          ],
-        },
-        "RetentionInDays": 1,
-        "ServiceToken": Object {
-          "Fn::GetAtt": Array [
-            "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A",
-            "Arn",
-          ],
-        },
-      },
-      "Type": "Custom::LogRetention",
-    },
-    "csv2ddbsdk3ServiceRoleD36ED863": Object {
+    "csv2ddbsdk3cjsminify512ServiceRoleDE72B585": Object {
       "Properties": Object {
         "AssumeRolePolicyDocument": Object {
           "Statement": Array [
@@ -2931,7 +1621,7 @@ Object {
       },
       "Type": "AWS::IAM::Role",
     },
-    "csv2ddbsdk3ServiceRoleDefaultPolicy9A4C323A": Object {
+    "csv2ddbsdk3cjsminify512ServiceRoleDefaultPolicy81FDE5EE": Object {
       "Properties": Object {
         "PolicyDocument": Object {
           "Statement": Array [
@@ -2997,19 +1687,19 @@ Object {
           ],
           "Version": "2012-10-17",
         },
-        "PolicyName": "csv2ddbsdk3ServiceRoleDefaultPolicy9A4C323A",
+        "PolicyName": "csv2ddbsdk3cjsminify512ServiceRoleDefaultPolicy81FDE5EE",
         "Roles": Array [
           Object {
-            "Ref": "csv2ddbsdk3ServiceRoleD36ED863",
+            "Ref": "csv2ddbsdk3cjsminify512ServiceRoleDE72B585",
           },
         ],
       },
       "Type": "AWS::IAM::Policy",
     },
-    "csv2ddbsdk3mjs1AB0D658": Object {
+    "csv2ddbsdk3esmminify51207512DCD": Object {
       "DependsOn": Array [
-        "csv2ddbsdk3mjsServiceRoleDefaultPolicyD3F103D1",
-        "csv2ddbsdk3mjsServiceRole898FC6B2",
+        "csv2ddbsdk3esmminify512ServiceRoleDefaultPolicy15922DCC",
+        "csv2ddbsdk3esmminify512ServiceRole88FA9EE4",
       ],
       "Properties": Object {
         "Architectures": Array [
@@ -3019,7 +1709,7 @@ Object {
           "S3Bucket": "cdk-hnb659fds-assets-my-account-us-east-1",
           "S3Key": "[HASH REMOVED].zip",
         },
-        "Description": "Reads 100 rows of CSV and writes to DynamoDB. Uses native aws-sdk v2 and is ESModule JavaScript-only with no transpiling.",
+        "Description": "{"xray":false,"sdk":"sdk3","minify":true,"memorySize":512,"format":"esm"}",
         "Environment": Object {
           "Variables": Object {
             "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
@@ -3034,16 +1724,16 @@ Object {
             },
           },
         },
-        "FunctionName": "csv2ddb-sdk3-mjs",
-        "Handler": "csv2ddb-sdk3-mjs.handler",
+        "FunctionName": "csv2ddb-sdk3-esm-minify-512",
+        "Handler": "src/csv2ddb/csv2ddb-sdk3.handler",
         "MemorySize": 512,
         "Role": Object {
           "Fn::GetAtt": Array [
-            "csv2ddbsdk3mjsServiceRole898FC6B2",
+            "csv2ddbsdk3esmminify512ServiceRole88FA9EE4",
             "Arn",
           ],
         },
-        "Runtime": "nodejs14.x",
+        "Runtime": "nodejs12.x",
         "Tags": Array [
           Object {
             "Key": "sst:app",
@@ -3061,30 +1751,7 @@ Object {
       },
       "Type": "AWS::Lambda::Function",
     },
-    "csv2ddbsdk3mjsLogRetention2F3DF1D9": Object {
-      "Properties": Object {
-        "LogGroupName": Object {
-          "Fn::Join": Array [
-            "",
-            Array [
-              "/aws/lambda/",
-              Object {
-                "Ref": "csv2ddbsdk3mjs1AB0D658",
-              },
-            ],
-          ],
-        },
-        "RetentionInDays": 1,
-        "ServiceToken": Object {
-          "Fn::GetAtt": Array [
-            "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A",
-            "Arn",
-          ],
-        },
-      },
-      "Type": "Custom::LogRetention",
-    },
-    "csv2ddbsdk3mjsServiceRole898FC6B2": Object {
+    "csv2ddbsdk3esmminify512ServiceRole88FA9EE4": Object {
       "Properties": Object {
         "AssumeRolePolicyDocument": Object {
           "Statement": Array [
@@ -3125,7 +1792,7 @@ Object {
       },
       "Type": "AWS::IAM::Role",
     },
-    "csv2ddbsdk3mjsServiceRoleDefaultPolicyD3F103D1": Object {
+    "csv2ddbsdk3esmminify512ServiceRoleDefaultPolicy15922DCC": Object {
       "Properties": Object {
         "PolicyDocument": Object {
           "Statement": Array [
@@ -3191,19 +1858,19 @@ Object {
           ],
           "Version": "2012-10-17",
         },
-        "PolicyName": "csv2ddbsdk3mjsServiceRoleDefaultPolicyD3F103D1",
+        "PolicyName": "csv2ddbsdk3esmminify512ServiceRoleDefaultPolicy15922DCC",
         "Roles": Array [
           Object {
-            "Ref": "csv2ddbsdk3mjsServiceRole898FC6B2",
+            "Ref": "csv2ddbsdk3esmminify512ServiceRole88FA9EE4",
           },
         ],
       },
       "Type": "AWS::IAM::Policy",
     },
-    "csv2ddbsdk3mjsxray0931266F": Object {
+    "csv2ddbsdk3modulescjsminify5127CBB1DAC": Object {
       "DependsOn": Array [
-        "csv2ddbsdk3mjsxrayServiceRoleDefaultPolicy6304D122",
-        "csv2ddbsdk3mjsxrayServiceRoleFAF833F0",
+        "csv2ddbsdk3modulescjsminify512ServiceRoleDefaultPolicy33DC3A85",
+        "csv2ddbsdk3modulescjsminify512ServiceRole3F58D8D1",
       ],
       "Properties": Object {
         "Architectures": Array [
@@ -3213,7 +1880,7 @@ Object {
           "S3Bucket": "cdk-hnb659fds-assets-my-account-us-east-1",
           "S3Key": "[HASH REMOVED].zip",
         },
-        "Description": "Reads 100 rows of CSV and writes to DynamoDB. Uses native aws-sdk v2 and is ESModule JavaScript-only with no transpiling.",
+        "Description": "{"xray":false,"sdk":"sdk3-modules","minify":true,"memorySize":512,"format":"cjs"}",
         "Environment": Object {
           "Variables": Object {
             "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
@@ -3228,16 +1895,16 @@ Object {
             },
           },
         },
-        "FunctionName": "csv2ddb-sdk3-mjs-xray",
-        "Handler": "csv2ddb-sdk3-mjs-xray.handler",
+        "FunctionName": "csv2ddb-sdk3-modules-cjs-minify-512",
+        "Handler": "src/csv2ddb/csv2ddb-sdk3-modules.handler",
         "MemorySize": 512,
         "Role": Object {
           "Fn::GetAtt": Array [
-            "csv2ddbsdk3mjsxrayServiceRoleFAF833F0",
+            "csv2ddbsdk3modulescjsminify512ServiceRole3F58D8D1",
             "Arn",
           ],
         },
-        "Runtime": "nodejs14.x",
+        "Runtime": "nodejs12.x",
         "Tags": Array [
           Object {
             "Key": "sst:app",
@@ -3255,30 +1922,48 @@ Object {
       },
       "Type": "AWS::Lambda::Function",
     },
-    "csv2ddbsdk3mjsxrayLogRetention0558B464": Object {
+    "csv2ddbsdk3modulescjsminify512ServiceRole3F58D8D1": Object {
       "Properties": Object {
-        "LogGroupName": Object {
-          "Fn::Join": Array [
-            "",
-            Array [
-              "/aws/lambda/",
-              Object {
-                "Ref": "csv2ddbsdk3mjsxray0931266F",
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
               },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
             ],
-          ],
-        },
-        "RetentionInDays": 1,
-        "ServiceToken": Object {
-          "Fn::GetAtt": Array [
-            "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A",
-            "Arn",
-          ],
-        },
+          },
+        ],
+        "Tags": Array [
+          Object {
+            "Key": "sst:app",
+            "Value": "my-app",
+          },
+          Object {
+            "Key": "sst:stage",
+            "Value": "dev",
+          },
+        ],
       },
-      "Type": "Custom::LogRetention",
+      "Type": "AWS::IAM::Role",
     },
-    "csv2ddbsdk3mjsxrayServiceRoleDefaultPolicy6304D122": Object {
+    "csv2ddbsdk3modulescjsminify512ServiceRoleDefaultPolicy33DC3A85": Object {
       "Properties": Object {
         "PolicyDocument": Object {
           "Statement": Array [
@@ -3344,16 +2029,71 @@ Object {
           ],
           "Version": "2012-10-17",
         },
-        "PolicyName": "csv2ddbsdk3mjsxrayServiceRoleDefaultPolicy6304D122",
+        "PolicyName": "csv2ddbsdk3modulescjsminify512ServiceRoleDefaultPolicy33DC3A85",
         "Roles": Array [
           Object {
-            "Ref": "csv2ddbsdk3mjsxrayServiceRoleFAF833F0",
+            "Ref": "csv2ddbsdk3modulescjsminify512ServiceRole3F58D8D1",
           },
         ],
       },
       "Type": "AWS::IAM::Policy",
     },
-    "csv2ddbsdk3mjsxrayServiceRoleFAF833F0": Object {
+    "csv2ddbsdk3modulesesmminify51277869FF4": Object {
+      "DependsOn": Array [
+        "csv2ddbsdk3modulesesmminify512ServiceRoleDefaultPolicy2098D55C",
+        "csv2ddbsdk3modulesesmminify512ServiceRoleDD4D076B",
+      ],
+      "Properties": Object {
+        "Architectures": Array [
+          "arm64",
+        ],
+        "Code": Object {
+          "S3Bucket": "cdk-hnb659fds-assets-my-account-us-east-1",
+          "S3Key": "[HASH REMOVED].zip",
+        },
+        "Description": "{"xray":false,"sdk":"sdk3-modules","minify":true,"memorySize":512,"format":"esm"}",
+        "Environment": Object {
+          "Variables": Object {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+            "BUCKET_KEY": "100 Sales Records.csv",
+            "BUCKET_NAME": Object {
+              "Ref": "SalesCsvBucket1224326F",
+            },
+            "COLD_STARTER": "2020-04-01T04:00:00.000Z",
+            "NODE_OPTIONS": "--enable-source-maps",
+            "TABLE_NAME": Object {
+              "Ref": "SalesTableB987FA65",
+            },
+          },
+        },
+        "FunctionName": "csv2ddb-sdk3-modules-esm-minify-512",
+        "Handler": "src/csv2ddb/csv2ddb-sdk3-modules.handler",
+        "MemorySize": 512,
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "csv2ddbsdk3modulesesmminify512ServiceRoleDD4D076B",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs12.x",
+        "Tags": Array [
+          Object {
+            "Key": "sst:app",
+            "Value": "my-app",
+          },
+          Object {
+            "Key": "sst:stage",
+            "Value": "dev",
+          },
+        ],
+        "Timeout": 60,
+        "TracingConfig": Object {
+          "Mode": "Active",
+        },
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "csv2ddbsdk3modulesesmminify512ServiceRoleDD4D076B": Object {
       "Properties": Object {
         "AssumeRolePolicyDocument": Object {
           "Statement": Array [
@@ -3394,10 +2134,85 @@ Object {
       },
       "Type": "AWS::IAM::Role",
     },
-    "csv2ddbsdk3xrayDE9353DD": Object {
+    "csv2ddbsdk3modulesesmminify512ServiceRoleDefaultPolicy2098D55C": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": Array [
+                "xray:PutTraceSegments",
+                "xray:PutTelemetryRecords",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+            Object {
+              "Action": Array [
+                "s3:GetObject*",
+                "s3:GetBucket*",
+                "s3:List*",
+              ],
+              "Effect": "Allow",
+              "Resource": Array [
+                Object {
+                  "Fn::GetAtt": Array [
+                    "SalesCsvBucket1224326F",
+                    "Arn",
+                  ],
+                },
+                Object {
+                  "Fn::Join": Array [
+                    "",
+                    Array [
+                      Object {
+                        "Fn::GetAtt": Array [
+                          "SalesCsvBucket1224326F",
+                          "Arn",
+                        ],
+                      },
+                      "/*",
+                    ],
+                  ],
+                },
+              ],
+            },
+            Object {
+              "Action": Array [
+                "dynamodb:BatchWriteItem",
+                "dynamodb:PutItem",
+                "dynamodb:UpdateItem",
+                "dynamodb:DeleteItem",
+                "dynamodb:DescribeTable",
+              ],
+              "Effect": "Allow",
+              "Resource": Array [
+                Object {
+                  "Fn::GetAtt": Array [
+                    "SalesTableB987FA65",
+                    "Arn",
+                  ],
+                },
+                Object {
+                  "Ref": "AWS::NoValue",
+                },
+              ],
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "csv2ddbsdk3modulesesmminify512ServiceRoleDefaultPolicy2098D55C",
+        "Roles": Array [
+          Object {
+            "Ref": "csv2ddbsdk3modulesesmminify512ServiceRoleDD4D076B",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "csv2ddbsdk3modulesxraycjsminify5128D939583": Object {
       "DependsOn": Array [
-        "csv2ddbsdk3xrayServiceRoleDefaultPolicy9A6A3943",
-        "csv2ddbsdk3xrayServiceRoleBEB6B426",
+        "csv2ddbsdk3modulesxraycjsminify512ServiceRoleDefaultPolicy23C79859",
+        "csv2ddbsdk3modulesxraycjsminify512ServiceRole43484162",
       ],
       "Properties": Object {
         "Architectures": Array [
@@ -3407,7 +2222,7 @@ Object {
           "S3Bucket": "cdk-hnb659fds-assets-my-account-us-east-1",
           "S3Key": "[HASH REMOVED].zip",
         },
-        "Description": "Reads 100 rows of CSV and writes to DynamoDB. Uses modular aws sdk v3 bundled with esm.",
+        "Description": "{"xray":true,"sdk":"sdk3-modules","minify":true,"memorySize":512,"format":"cjs"}",
         "Environment": Object {
           "Variables": Object {
             "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
@@ -3422,12 +2237,354 @@ Object {
             },
           },
         },
-        "FunctionName": "csv2ddb-sdk3-xray",
+        "FunctionName": "csv2ddb-sdk3-modules-xray-cjs-minify-512",
+        "Handler": "src/csv2ddb/csv2ddb-sdk3-modules-xray.handler",
+        "MemorySize": 512,
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "csv2ddbsdk3modulesxraycjsminify512ServiceRole43484162",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs12.x",
+        "Tags": Array [
+          Object {
+            "Key": "sst:app",
+            "Value": "my-app",
+          },
+          Object {
+            "Key": "sst:stage",
+            "Value": "dev",
+          },
+        ],
+        "Timeout": 60,
+        "TracingConfig": Object {
+          "Mode": "Active",
+        },
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "csv2ddbsdk3modulesxraycjsminify512ServiceRole43484162": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+        "Tags": Array [
+          Object {
+            "Key": "sst:app",
+            "Value": "my-app",
+          },
+          Object {
+            "Key": "sst:stage",
+            "Value": "dev",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "csv2ddbsdk3modulesxraycjsminify512ServiceRoleDefaultPolicy23C79859": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": Array [
+                "xray:PutTraceSegments",
+                "xray:PutTelemetryRecords",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+            Object {
+              "Action": Array [
+                "s3:GetObject*",
+                "s3:GetBucket*",
+                "s3:List*",
+              ],
+              "Effect": "Allow",
+              "Resource": Array [
+                Object {
+                  "Fn::GetAtt": Array [
+                    "SalesCsvBucket1224326F",
+                    "Arn",
+                  ],
+                },
+                Object {
+                  "Fn::Join": Array [
+                    "",
+                    Array [
+                      Object {
+                        "Fn::GetAtt": Array [
+                          "SalesCsvBucket1224326F",
+                          "Arn",
+                        ],
+                      },
+                      "/*",
+                    ],
+                  ],
+                },
+              ],
+            },
+            Object {
+              "Action": Array [
+                "dynamodb:BatchWriteItem",
+                "dynamodb:PutItem",
+                "dynamodb:UpdateItem",
+                "dynamodb:DeleteItem",
+                "dynamodb:DescribeTable",
+              ],
+              "Effect": "Allow",
+              "Resource": Array [
+                Object {
+                  "Fn::GetAtt": Array [
+                    "SalesTableB987FA65",
+                    "Arn",
+                  ],
+                },
+                Object {
+                  "Ref": "AWS::NoValue",
+                },
+              ],
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "csv2ddbsdk3modulesxraycjsminify512ServiceRoleDefaultPolicy23C79859",
+        "Roles": Array [
+          Object {
+            "Ref": "csv2ddbsdk3modulesxraycjsminify512ServiceRole43484162",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "csv2ddbsdk3modulesxrayesmminify512FEF203EC": Object {
+      "DependsOn": Array [
+        "csv2ddbsdk3modulesxrayesmminify512ServiceRoleDefaultPolicyB8C740C0",
+        "csv2ddbsdk3modulesxrayesmminify512ServiceRoleD71A1A60",
+      ],
+      "Properties": Object {
+        "Architectures": Array [
+          "arm64",
+        ],
+        "Code": Object {
+          "S3Bucket": "cdk-hnb659fds-assets-my-account-us-east-1",
+          "S3Key": "[HASH REMOVED].zip",
+        },
+        "Description": "{"xray":true,"sdk":"sdk3-modules","minify":true,"memorySize":512,"format":"esm"}",
+        "Environment": Object {
+          "Variables": Object {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+            "BUCKET_KEY": "100 Sales Records.csv",
+            "BUCKET_NAME": Object {
+              "Ref": "SalesCsvBucket1224326F",
+            },
+            "COLD_STARTER": "2020-04-01T04:00:00.000Z",
+            "NODE_OPTIONS": "--enable-source-maps",
+            "TABLE_NAME": Object {
+              "Ref": "SalesTableB987FA65",
+            },
+          },
+        },
+        "FunctionName": "csv2ddb-sdk3-modules-xray-esm-minify-512",
+        "Handler": "src/csv2ddb/csv2ddb-sdk3-modules-xray.handler",
+        "MemorySize": 512,
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "csv2ddbsdk3modulesxrayesmminify512ServiceRoleD71A1A60",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs12.x",
+        "Tags": Array [
+          Object {
+            "Key": "sst:app",
+            "Value": "my-app",
+          },
+          Object {
+            "Key": "sst:stage",
+            "Value": "dev",
+          },
+        ],
+        "Timeout": 60,
+        "TracingConfig": Object {
+          "Mode": "Active",
+        },
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "csv2ddbsdk3modulesxrayesmminify512ServiceRoleD71A1A60": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+        "Tags": Array [
+          Object {
+            "Key": "sst:app",
+            "Value": "my-app",
+          },
+          Object {
+            "Key": "sst:stage",
+            "Value": "dev",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "csv2ddbsdk3modulesxrayesmminify512ServiceRoleDefaultPolicyB8C740C0": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": Array [
+                "xray:PutTraceSegments",
+                "xray:PutTelemetryRecords",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+            Object {
+              "Action": Array [
+                "s3:GetObject*",
+                "s3:GetBucket*",
+                "s3:List*",
+              ],
+              "Effect": "Allow",
+              "Resource": Array [
+                Object {
+                  "Fn::GetAtt": Array [
+                    "SalesCsvBucket1224326F",
+                    "Arn",
+                  ],
+                },
+                Object {
+                  "Fn::Join": Array [
+                    "",
+                    Array [
+                      Object {
+                        "Fn::GetAtt": Array [
+                          "SalesCsvBucket1224326F",
+                          "Arn",
+                        ],
+                      },
+                      "/*",
+                    ],
+                  ],
+                },
+              ],
+            },
+            Object {
+              "Action": Array [
+                "dynamodb:BatchWriteItem",
+                "dynamodb:PutItem",
+                "dynamodb:UpdateItem",
+                "dynamodb:DeleteItem",
+                "dynamodb:DescribeTable",
+              ],
+              "Effect": "Allow",
+              "Resource": Array [
+                Object {
+                  "Fn::GetAtt": Array [
+                    "SalesTableB987FA65",
+                    "Arn",
+                  ],
+                },
+                Object {
+                  "Ref": "AWS::NoValue",
+                },
+              ],
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "csv2ddbsdk3modulesxrayesmminify512ServiceRoleDefaultPolicyB8C740C0",
+        "Roles": Array [
+          Object {
+            "Ref": "csv2ddbsdk3modulesxrayesmminify512ServiceRoleD71A1A60",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "csv2ddbsdk3xraycjsminify512DB4EDD6D": Object {
+      "DependsOn": Array [
+        "csv2ddbsdk3xraycjsminify512ServiceRoleDefaultPolicy52ACD621",
+        "csv2ddbsdk3xraycjsminify512ServiceRole4F924154",
+      ],
+      "Properties": Object {
+        "Architectures": Array [
+          "arm64",
+        ],
+        "Code": Object {
+          "S3Bucket": "cdk-hnb659fds-assets-my-account-us-east-1",
+          "S3Key": "[HASH REMOVED].zip",
+        },
+        "Description": "{"xray":true,"sdk":"sdk3","minify":true,"memorySize":512,"format":"cjs"}",
+        "Environment": Object {
+          "Variables": Object {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+            "BUCKET_KEY": "100 Sales Records.csv",
+            "BUCKET_NAME": Object {
+              "Ref": "SalesCsvBucket1224326F",
+            },
+            "COLD_STARTER": "2020-04-01T04:00:00.000Z",
+            "NODE_OPTIONS": "--enable-source-maps",
+            "TABLE_NAME": Object {
+              "Ref": "SalesTableB987FA65",
+            },
+          },
+        },
+        "FunctionName": "csv2ddb-sdk3-xray-cjs-minify-512",
         "Handler": "src/csv2ddb/csv2ddb-sdk3-xray.handler",
         "MemorySize": 512,
         "Role": Object {
           "Fn::GetAtt": Array [
-            "csv2ddbsdk3xrayServiceRoleBEB6B426",
+            "csv2ddbsdk3xraycjsminify512ServiceRole4F924154",
             "Arn",
           ],
         },
@@ -3449,30 +2606,7 @@ Object {
       },
       "Type": "AWS::Lambda::Function",
     },
-    "csv2ddbsdk3xrayLogRetentionB13695D5": Object {
-      "Properties": Object {
-        "LogGroupName": Object {
-          "Fn::Join": Array [
-            "",
-            Array [
-              "/aws/lambda/",
-              Object {
-                "Ref": "csv2ddbsdk3xrayDE9353DD",
-              },
-            ],
-          ],
-        },
-        "RetentionInDays": 1,
-        "ServiceToken": Object {
-          "Fn::GetAtt": Array [
-            "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A",
-            "Arn",
-          ],
-        },
-      },
-      "Type": "Custom::LogRetention",
-    },
-    "csv2ddbsdk3xrayServiceRoleBEB6B426": Object {
+    "csv2ddbsdk3xraycjsminify512ServiceRole4F924154": Object {
       "Properties": Object {
         "AssumeRolePolicyDocument": Object {
           "Statement": Array [
@@ -3513,7 +2647,7 @@ Object {
       },
       "Type": "AWS::IAM::Role",
     },
-    "csv2ddbsdk3xrayServiceRoleDefaultPolicy9A6A3943": Object {
+    "csv2ddbsdk3xraycjsminify512ServiceRoleDefaultPolicy52ACD621": Object {
       "Properties": Object {
         "PolicyDocument": Object {
           "Statement": Array [
@@ -3579,10 +2713,181 @@ Object {
           ],
           "Version": "2012-10-17",
         },
-        "PolicyName": "csv2ddbsdk3xrayServiceRoleDefaultPolicy9A6A3943",
+        "PolicyName": "csv2ddbsdk3xraycjsminify512ServiceRoleDefaultPolicy52ACD621",
         "Roles": Array [
           Object {
-            "Ref": "csv2ddbsdk3xrayServiceRoleBEB6B426",
+            "Ref": "csv2ddbsdk3xraycjsminify512ServiceRole4F924154",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "csv2ddbsdk3xrayesmminify512BF473005": Object {
+      "DependsOn": Array [
+        "csv2ddbsdk3xrayesmminify512ServiceRoleDefaultPolicy34D85B8F",
+        "csv2ddbsdk3xrayesmminify512ServiceRole2331162C",
+      ],
+      "Properties": Object {
+        "Architectures": Array [
+          "arm64",
+        ],
+        "Code": Object {
+          "S3Bucket": "cdk-hnb659fds-assets-my-account-us-east-1",
+          "S3Key": "[HASH REMOVED].zip",
+        },
+        "Description": "{"xray":true,"sdk":"sdk3","minify":true,"memorySize":512,"format":"esm"}",
+        "Environment": Object {
+          "Variables": Object {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+            "BUCKET_KEY": "100 Sales Records.csv",
+            "BUCKET_NAME": Object {
+              "Ref": "SalesCsvBucket1224326F",
+            },
+            "COLD_STARTER": "2020-04-01T04:00:00.000Z",
+            "NODE_OPTIONS": "--enable-source-maps",
+            "TABLE_NAME": Object {
+              "Ref": "SalesTableB987FA65",
+            },
+          },
+        },
+        "FunctionName": "csv2ddb-sdk3-xray-esm-minify-512",
+        "Handler": "src/csv2ddb/csv2ddb-sdk3-xray.handler",
+        "MemorySize": 512,
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "csv2ddbsdk3xrayesmminify512ServiceRole2331162C",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs12.x",
+        "Tags": Array [
+          Object {
+            "Key": "sst:app",
+            "Value": "my-app",
+          },
+          Object {
+            "Key": "sst:stage",
+            "Value": "dev",
+          },
+        ],
+        "Timeout": 60,
+        "TracingConfig": Object {
+          "Mode": "Active",
+        },
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "csv2ddbsdk3xrayesmminify512ServiceRole2331162C": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+        "Tags": Array [
+          Object {
+            "Key": "sst:app",
+            "Value": "my-app",
+          },
+          Object {
+            "Key": "sst:stage",
+            "Value": "dev",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "csv2ddbsdk3xrayesmminify512ServiceRoleDefaultPolicy34D85B8F": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": Array [
+                "xray:PutTraceSegments",
+                "xray:PutTelemetryRecords",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+            Object {
+              "Action": Array [
+                "s3:GetObject*",
+                "s3:GetBucket*",
+                "s3:List*",
+              ],
+              "Effect": "Allow",
+              "Resource": Array [
+                Object {
+                  "Fn::GetAtt": Array [
+                    "SalesCsvBucket1224326F",
+                    "Arn",
+                  ],
+                },
+                Object {
+                  "Fn::Join": Array [
+                    "",
+                    Array [
+                      Object {
+                        "Fn::GetAtt": Array [
+                          "SalesCsvBucket1224326F",
+                          "Arn",
+                        ],
+                      },
+                      "/*",
+                    ],
+                  ],
+                },
+              ],
+            },
+            Object {
+              "Action": Array [
+                "dynamodb:BatchWriteItem",
+                "dynamodb:PutItem",
+                "dynamodb:UpdateItem",
+                "dynamodb:DeleteItem",
+                "dynamodb:DescribeTable",
+              ],
+              "Effect": "Allow",
+              "Resource": Array [
+                Object {
+                  "Fn::GetAtt": Array [
+                    "SalesTableB987FA65",
+                    "Arn",
+                  ],
+                },
+                Object {
+                  "Ref": "AWS::NoValue",
+                },
+              ],
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "csv2ddbsdk3xrayesmminify512ServiceRoleDefaultPolicy34D85B8F",
+        "Roles": Array [
+          Object {
+            "Ref": "csv2ddbsdk3xrayesmminify512ServiceRole2331162C",
           },
         ],
       },
