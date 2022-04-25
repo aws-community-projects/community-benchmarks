@@ -21,7 +21,7 @@
     "@tsconfig/node14": "^1.0.1",
     "@types/aws-lambda": "^8.10.95",
     "@types/jest": "^27.4.1",
-    "@types/node": "^14.18.13",
+    "@types/node": "^14.18.14",
     "aws-cdk-lib": "2.15.0",
     "aws-sdk-client-mock": "^0.6.2",
     "aws-sdk-mock": "^5.6.2",
