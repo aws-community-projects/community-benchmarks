@@ -4,9 +4,21 @@ import {
   Stack,
 } from '@serverless-stack/resources';
 import { RemovalPolicy } from 'aws-cdk-lib';
-import { Architecture } from 'aws-cdk-lib/aws-lambda';
+import {
+  Architecture,
+  Code,
+  Function as CDKFunction,
+  Runtime,
+  Tracing,
+} from 'aws-cdk-lib/aws-lambda';
 import { LogGroup, RetentionDays } from 'aws-cdk-lib/aws-logs';
 import { findImportsSync } from 'find-imports-ts';
+
+export enum SourceTypeOptions {
+  CJS = 'cjs',
+  ESM = 'mjs',
+  TYPESCRIPT = 'ts',
+}
 
 export enum NodeJSSDKOptions {
   SDKV2_BUNDLED = 'sdk2',
@@ -25,6 +37,7 @@ interface FunctionVariation {
   memorySize: number;
   minify: boolean;
   sdk: NodeJSSDKOptions;
+  sourceType: SourceTypeOptions;
   xray: boolean;
 }
 
@@ -34,6 +47,7 @@ interface Variations {
   memorySize?: number[];
   minify?: boolean[];
   sdk: NodeJSSDKOptions[];
+  sourceType: SourceTypeOptions[];
   xray?: boolean[];
 }
 
@@ -44,7 +58,6 @@ type VariationTypes =
   | NodeJSSDKOptions[];
 
 interface BenchmarkFunctionProps {
-  extension: 'js' | 'mjs' | 'ts';
   name: string;
   variations: Variations;
 }
@@ -81,21 +94,41 @@ const buildFunction = (
   benchmarkProps: BenchmarkFunctionProps,
   variation: FunctionVariation,
   defaultProps: FunctionProps
+): CDKFunction | SSTFunction => {
+  switch (variation.sourceType) {
+    case SourceTypeOptions.ESM:
+      return buildNodeFunction(scope, benchmarkProps, variation, defaultProps);
+    default:
+      return buildBundledNodeFunction(
+        scope,
+        benchmarkProps,
+        variation,
+        defaultProps
+      );
+  }
+};
+
+const buildBundledNodeFunction = (
+  scope: Stack,
+  benchmarkProps: BenchmarkFunctionProps,
+  variation: FunctionVariation,
+  defaultProps: FunctionProps
 ): SSTFunction => {
-  const { extension, name } = benchmarkProps;
+  const { name } = benchmarkProps;
   const {
     architecture = Architecture.ARM_64,
     format = 'esm',
     memorySize = 128,
     minify = true,
     sdk,
+    sourceType,
     xray = false,
   } = variation;
   const modules = useModules(sdk);
   const fileName = `${name}-${sdk}${xray ? '-xray' : ''}`;
-  const functionName = `${fileName}-${architecture.name}-${format}${
-    minify ? '-minify' : ''
-  }-${memorySize}`;
+  const functionName = `${fileName}-${
+    architecture.name
+  }-${sourceType}-${format}${minify ? '-minify' : ''}-${memorySize}`;
   new LogGroup(scope, `LG-${functionName}`, {
     logGroupName: `/aws/lambda/${functionName}`,
     retention: RetentionDays.ONE_DAY,
@@ -108,13 +141,51 @@ const buildFunction = (
       format,
       minify,
       nodeModules: modules
-        ? getImports(`${defaultProps.srcPath}/${fileName}.${extension}`)
+        ? getImports(`${defaultProps.srcPath}/${fileName}.${sourceType}`)
         : [],
     },
     description: JSON.stringify(variation),
     functionName,
     handler: `${fileName}.handler`,
     memorySize,
+  });
+};
+
+const buildNodeFunction = (
+  scope: Stack,
+  benchmarkProps: BenchmarkFunctionProps,
+  variation: FunctionVariation,
+  defaultProps: FunctionProps
+): CDKFunction => {
+  const { name } = benchmarkProps;
+  const {
+    architecture = Architecture.ARM_64,
+    format = 'esm',
+    memorySize = 128,
+    minify = true,
+    sdk,
+    sourceType,
+    xray = false,
+  } = variation;
+  const fileName = `${name}-${sdk}${xray ? '-xray' : ''}`;
+  const functionName = `${fileName}-${
+    architecture.name
+  }-${sourceType}-${format}${minify ? '-minify' : ''}-${memorySize}`;
+  new LogGroup(scope, `LG-${functionName}`, {
+    logGroupName: `/aws/lambda/${functionName}`,
+    retention: RetentionDays.ONE_DAY,
+    removalPolicy: RemovalPolicy.DESTROY,
+  });
+  return new CDKFunction(scope, functionName, {
+    architecture,
+    code: Code.fromAsset(`${defaultProps.srcPath}${xray ? '-xray' : ''}`),
+    description: JSON.stringify(variation),
+    environment: defaultProps.environment,
+    functionName,
+    handler: `${fileName}.handler`,
+    memorySize,
+    runtime: Runtime.NODEJS_14_X,
+    tracing: Tracing.ACTIVE,
   });
 };
 
@@ -132,7 +203,9 @@ const useModules = (sdk: NodeJSSDKOptions): boolean =>
     sdk
   );
 
-export const buildFunctions = (props: FunctionFactoryProps): SSTFunction[] => {
+export const buildFunctions = (
+  props: FunctionFactoryProps
+): (CDKFunction | SSTFunction)[] => {
   const { defaultFunctionProps, fns, scope } = props;
   return fns.flatMap((fn) => {
     const variations = getVariations(fn.variations);

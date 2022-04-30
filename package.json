@@ -6,7 +6,7 @@
     "build": "sst build",
     "cover": "sst test --coverage",
     "deploy": "sst deploy",
-    "postinstall": "cd src/csv2ddb && npm i",
+    "postinstall": "./install.sh",
     "remove": "sst remove",
     "start": "sst start",
     "test": "sst test"

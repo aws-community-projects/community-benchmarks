@@ -14,6 +14,7 @@ import { Construct } from 'constructs';
 import {
   buildFunctions,
   NodeJSSDKOptions,
+  SourceTypeOptions,
 } from '../../constructs/FunctionFactory';
 import { LambdaTest } from '../benchmark/BenchmarkMachineStack';
 
@@ -111,7 +112,6 @@ export class Csv2DdbStack extends Stack {
       defaultFunctionProps: lambdaProps,
       fns: [
         {
-          extension: 'ts',
           name: 'csv2ddb',
           variations: {
             format: ['cjs', 'esm'],
@@ -121,11 +121,11 @@ export class Csv2DdbStack extends Stack {
               NodeJSSDKOptions.SDKV2_BUNDLED,
               NodeJSSDKOptions.SDKV2_BUNDLED_CLIENTS,
             ],
+            sourceType: [SourceTypeOptions.TYPESCRIPT],
             xray: [false, true],
           },
         },
         {
-          extension: 'ts',
           name: 'csv2ddb',
           variations: {
             format: ['cjs', 'esm'],
@@ -135,12 +135,34 @@ export class Csv2DdbStack extends Stack {
               NodeJSSDKOptions.SDKV3_BUNDLED,
               NodeJSSDKOptions.SDKV3_MODULES,
             ],
+            sourceType: [SourceTypeOptions.TYPESCRIPT],
             xray: [true, false],
           },
         },
       ],
       scope: this,
-    });
+    }).concat(
+      buildFunctions({
+        defaultFunctionProps: {
+          ...lambdaProps,
+          srcPath: './src/csv2ddb/sdk3-mjs',
+        },
+        fns: [
+          {
+            name: 'csv2ddb',
+            variations: {
+              format: ['esm'],
+              memorySize: [512],
+              minify: [false],
+              sdk: [NodeJSSDKOptions.SDKV3_MODULES],
+              sourceType: [SourceTypeOptions.ESM],
+              xray: [true, false],
+            },
+          },
+        ],
+        scope: this,
+      })
+    );
 
     // const csv2ddbSdk2ClientsEsmXRay = new Function(
     //   this,

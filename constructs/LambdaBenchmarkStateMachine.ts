@@ -154,6 +154,11 @@ export class LambdaBenchmarkStateMachine extends Construct {
             '$.Function.Configuration.Description.Description.sdk'
           )
         ),
+        sourceType: DynamoAttributeValue.fromString(
+          JsonPath.stringAt(
+            '$.Function.Configuration.Description.Description.sourceType'
+          )
+        ),
         xray: DynamoAttributeValue.booleanFromJsonPath(
           JsonPath.stringAt(
             '$.Function.Configuration.Description.Description.xray'
