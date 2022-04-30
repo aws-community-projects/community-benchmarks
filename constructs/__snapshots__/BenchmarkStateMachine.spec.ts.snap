@@ -189,15 +189,15 @@ Object {
                   "Arn",
                 ],
               },
-              "","Payload.$":"$"}},"GetFunc":{"Next":"PutItem","Type":"Task","ResultPath":"$.Function","Resource":"arn:",
+              "","Payload.$":"$"}},"GetFunc":{"Next":"ParseDescription","Type":"Task","ResultPath":"$.Function","Resource":"arn:",
               Object {
                 "Ref": "AWS::Partition",
               },
-              ":states:::aws-sdk:lambda:getFunction","Parameters":{"FunctionName":"arn:aws:lambda:us-east-9:987654321:function:test-func1"}},"PutItem":{"Next":"SendSuccess","Type":"Task","ResultPath":"$.PutItem","Resource":"arn:",
+              ":states:::aws-sdk:lambda:getFunction","Parameters":{"FunctionName":"arn:aws:lambda:us-east-9:987654321:function:test-func1"}},"ParseDescription":{"Type":"Pass","ResultPath":"$.Function.Configuration.Description","Parameters":{"Description.$":"States.StringToJson($.Function.Configuration.Description)"},"Next":"PutItem"},"PutItem":{"Next":"SendSuccess","Type":"Task","ResultPath":"$.PutItem","Resource":"arn:",
               Object {
                 "Ref": "AWS::Partition",
               },
-              ":states:::dynamodb:putItem","Parameters":{"Item":{"pk":{"S.$":"$.Traces.Payload.name"},"sk":{"S.$":"States.Format('{}#{}', $.Traces.Payload.date, $.Traces.Payload.name)"},"date":{"S.$":"$.Traces.Payload.date"},"architectures":{"S.$":"$.Function.Configuration.Architectures[0]"},"codeSize":{"N.$":"States.Format('{}', $.Function.Configuration.CodeSize)"},"description":{"S.$":"$.Function.Configuration.Description"},"name":{"S.$":"$.Traces.Payload.name"},"memorySize":{"N.$":"States.Format('{}', $.Function.Configuration.MemorySize)"},"runtime":{"S.$":"$.Function.Configuration.Runtime"},"coldStartPercent":{"N.$":"States.Format('{}', $.Traces.Payload.coldStartPercent)"},"averageColdStart":{"N.$":"States.Format('{}', $.Traces.Payload.averageColdStart)"},"averageDuration":{"N.$":"States.Format('{}', $.Traces.Payload.averageDuration)"},"iterations":{"N.$":"States.Format('{}', $.Traces.Payload.iterations)"},"p90ColdStart":{"N.$":"States.Format('{}', $.Traces.Payload.p90ColdStart)"},"p90Duration":{"N.$":"States.Format('{}', $.Traces.Payload.p90Duration)"}},"TableName":"",
+              ":states:::dynamodb:putItem","Parameters":{"Item":{"pk":{"S.$":"$.Traces.Payload.name"},"sk":{"S.$":"States.Format('{}#{}', $.Traces.Payload.date, $.Traces.Payload.name)"},"date":{"S.$":"$.Traces.Payload.date"},"architectures":{"S.$":"$.Function.Configuration.Architectures[0]"},"codeSize":{"N.$":"States.Format('{}', $.Function.Configuration.CodeSize)"},"format":{"S.$":"$.Function.Configuration.Description.Description.format"},"minify":{"BOOL.$":"$.Function.Configuration.Description.Description.minify"},"sdk":{"S.$":"$.Function.Configuration.Description.Description.sdk"},"xray":{"BOOL.$":"$.Function.Configuration.Description.Description.xray"},"name":{"S.$":"$.Traces.Payload.name"},"memorySize":{"N.$":"States.Format('{}', $.Function.Configuration.MemorySize)"},"runtime":{"S.$":"$.Function.Configuration.Runtime"},"coldStartPercent":{"N.$":"States.Format('{}', $.Traces.Payload.coldStartPercent)"},"averageColdStart":{"N.$":"States.Format('{}', $.Traces.Payload.averageColdStart)"},"averageDuration":{"N.$":"States.Format('{}', $.Traces.Payload.averageDuration)"},"iterations":{"N.$":"States.Format('{}', $.Traces.Payload.iterations)"},"p90ColdStart":{"N.$":"States.Format('{}', $.Traces.Payload.p90ColdStart)"},"p90Duration":{"N.$":"States.Format('{}', $.Traces.Payload.p90Duration)"}},"TableName":"",
               Object {
                 "Ref": "BenchmarksTable35A54DAA",
               },
@@ -370,15 +370,15 @@ Object {
                   "Arn",
                 ],
               },
-              "","Payload.$":"$"}},"GetFunc":{"Next":"PutItem","Type":"Task","ResultPath":"$.Function","Resource":"arn:",
+              "","Payload.$":"$"}},"GetFunc":{"Next":"ParseDescription","Type":"Task","ResultPath":"$.Function","Resource":"arn:",
               Object {
                 "Ref": "AWS::Partition",
               },
-              ":states:::aws-sdk:lambda:getFunction","Parameters":{"FunctionName":"arn:aws:lambda:us-east-9:987654321:function:test-func2"}},"PutItem":{"Next":"SendSuccess","Type":"Task","ResultPath":"$.PutItem","Resource":"arn:",
+              ":states:::aws-sdk:lambda:getFunction","Parameters":{"FunctionName":"arn:aws:lambda:us-east-9:987654321:function:test-func2"}},"ParseDescription":{"Type":"Pass","ResultPath":"$.Function.Configuration.Description","Parameters":{"Description.$":"States.StringToJson($.Function.Configuration.Description)"},"Next":"PutItem"},"PutItem":{"Next":"SendSuccess","Type":"Task","ResultPath":"$.PutItem","Resource":"arn:",
               Object {
                 "Ref": "AWS::Partition",
               },
-              ":states:::dynamodb:putItem","Parameters":{"Item":{"pk":{"S.$":"$.Traces.Payload.name"},"sk":{"S.$":"States.Format('{}#{}', $.Traces.Payload.date, $.Traces.Payload.name)"},"date":{"S.$":"$.Traces.Payload.date"},"architectures":{"S.$":"$.Function.Configuration.Architectures[0]"},"codeSize":{"N.$":"States.Format('{}', $.Function.Configuration.CodeSize)"},"description":{"S.$":"$.Function.Configuration.Description"},"name":{"S.$":"$.Traces.Payload.name"},"memorySize":{"N.$":"States.Format('{}', $.Function.Configuration.MemorySize)"},"runtime":{"S.$":"$.Function.Configuration.Runtime"},"coldStartPercent":{"N.$":"States.Format('{}', $.Traces.Payload.coldStartPercent)"},"averageColdStart":{"N.$":"States.Format('{}', $.Traces.Payload.averageColdStart)"},"averageDuration":{"N.$":"States.Format('{}', $.Traces.Payload.averageDuration)"},"iterations":{"N.$":"States.Format('{}', $.Traces.Payload.iterations)"},"p90ColdStart":{"N.$":"States.Format('{}', $.Traces.Payload.p90ColdStart)"},"p90Duration":{"N.$":"States.Format('{}', $.Traces.Payload.p90Duration)"}},"TableName":"",
+              ":states:::dynamodb:putItem","Parameters":{"Item":{"pk":{"S.$":"$.Traces.Payload.name"},"sk":{"S.$":"States.Format('{}#{}', $.Traces.Payload.date, $.Traces.Payload.name)"},"date":{"S.$":"$.Traces.Payload.date"},"architectures":{"S.$":"$.Function.Configuration.Architectures[0]"},"codeSize":{"N.$":"States.Format('{}', $.Function.Configuration.CodeSize)"},"format":{"S.$":"$.Function.Configuration.Description.Description.format"},"minify":{"BOOL.$":"$.Function.Configuration.Description.Description.minify"},"sdk":{"S.$":"$.Function.Configuration.Description.Description.sdk"},"xray":{"BOOL.$":"$.Function.Configuration.Description.Description.xray"},"name":{"S.$":"$.Traces.Payload.name"},"memorySize":{"N.$":"States.Format('{}', $.Function.Configuration.MemorySize)"},"runtime":{"S.$":"$.Function.Configuration.Runtime"},"coldStartPercent":{"N.$":"States.Format('{}', $.Traces.Payload.coldStartPercent)"},"averageColdStart":{"N.$":"States.Format('{}', $.Traces.Payload.averageColdStart)"},"averageDuration":{"N.$":"States.Format('{}', $.Traces.Payload.averageDuration)"},"iterations":{"N.$":"States.Format('{}', $.Traces.Payload.iterations)"},"p90ColdStart":{"N.$":"States.Format('{}', $.Traces.Payload.p90ColdStart)"},"p90Duration":{"N.$":"States.Format('{}', $.Traces.Payload.p90Duration)"}},"TableName":"",
               Object {
                 "Ref": "BenchmarksTable35A54DAA",
               },
@@ -551,15 +551,15 @@ Object {
                   "Arn",
                 ],
               },
-              "","Payload.$":"$"}},"GetFunc":{"Next":"PutItem","Type":"Task","ResultPath":"$.Function","Resource":"arn:",
+              "","Payload.$":"$"}},"GetFunc":{"Next":"ParseDescription","Type":"Task","ResultPath":"$.Function","Resource":"arn:",
               Object {
                 "Ref": "AWS::Partition",
               },
-              ":states:::aws-sdk:lambda:getFunction","Parameters":{"FunctionName":"arn:aws:lambda:us-east-9:987654321:function:test-func3"}},"PutItem":{"Next":"SendSuccess","Type":"Task","ResultPath":"$.PutItem","Resource":"arn:",
+              ":states:::aws-sdk:lambda:getFunction","Parameters":{"FunctionName":"arn:aws:lambda:us-east-9:987654321:function:test-func3"}},"ParseDescription":{"Type":"Pass","ResultPath":"$.Function.Configuration.Description","Parameters":{"Description.$":"States.StringToJson($.Function.Configuration.Description)"},"Next":"PutItem"},"PutItem":{"Next":"SendSuccess","Type":"Task","ResultPath":"$.PutItem","Resource":"arn:",
               Object {
                 "Ref": "AWS::Partition",
               },
-              ":states:::dynamodb:putItem","Parameters":{"Item":{"pk":{"S.$":"$.Traces.Payload.name"},"sk":{"S.$":"States.Format('{}#{}', $.Traces.Payload.date, $.Traces.Payload.name)"},"date":{"S.$":"$.Traces.Payload.date"},"architectures":{"S.$":"$.Function.Configuration.Architectures[0]"},"codeSize":{"N.$":"States.Format('{}', $.Function.Configuration.CodeSize)"},"description":{"S.$":"$.Function.Configuration.Description"},"name":{"S.$":"$.Traces.Payload.name"},"memorySize":{"N.$":"States.Format('{}', $.Function.Configuration.MemorySize)"},"runtime":{"S.$":"$.Function.Configuration.Runtime"},"coldStartPercent":{"N.$":"States.Format('{}', $.Traces.Payload.coldStartPercent)"},"averageColdStart":{"N.$":"States.Format('{}', $.Traces.Payload.averageColdStart)"},"averageDuration":{"N.$":"States.Format('{}', $.Traces.Payload.averageDuration)"},"iterations":{"N.$":"States.Format('{}', $.Traces.Payload.iterations)"},"p90ColdStart":{"N.$":"States.Format('{}', $.Traces.Payload.p90ColdStart)"},"p90Duration":{"N.$":"States.Format('{}', $.Traces.Payload.p90Duration)"}},"TableName":"",
+              ":states:::dynamodb:putItem","Parameters":{"Item":{"pk":{"S.$":"$.Traces.Payload.name"},"sk":{"S.$":"States.Format('{}#{}', $.Traces.Payload.date, $.Traces.Payload.name)"},"date":{"S.$":"$.Traces.Payload.date"},"architectures":{"S.$":"$.Function.Configuration.Architectures[0]"},"codeSize":{"N.$":"States.Format('{}', $.Function.Configuration.CodeSize)"},"format":{"S.$":"$.Function.Configuration.Description.Description.format"},"minify":{"BOOL.$":"$.Function.Configuration.Description.Description.minify"},"sdk":{"S.$":"$.Function.Configuration.Description.Description.sdk"},"xray":{"BOOL.$":"$.Function.Configuration.Description.Description.xray"},"name":{"S.$":"$.Traces.Payload.name"},"memorySize":{"N.$":"States.Format('{}', $.Function.Configuration.MemorySize)"},"runtime":{"S.$":"$.Function.Configuration.Runtime"},"coldStartPercent":{"N.$":"States.Format('{}', $.Traces.Payload.coldStartPercent)"},"averageColdStart":{"N.$":"States.Format('{}', $.Traces.Payload.averageColdStart)"},"averageDuration":{"N.$":"States.Format('{}', $.Traces.Payload.averageDuration)"},"iterations":{"N.$":"States.Format('{}', $.Traces.Payload.iterations)"},"p90ColdStart":{"N.$":"States.Format('{}', $.Traces.Payload.p90ColdStart)"},"p90Duration":{"N.$":"States.Format('{}', $.Traces.Payload.p90Duration)"}},"TableName":"",
               Object {
                 "Ref": "BenchmarksTable35A54DAA",
               },

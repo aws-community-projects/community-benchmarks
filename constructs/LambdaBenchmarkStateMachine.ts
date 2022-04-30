@@ -106,6 +106,15 @@ export class LambdaBenchmarkStateMachine extends Construct {
       service: 'lambda',
     });
 
+    const parseDescription = new Pass(this, 'ParseDescription', {
+      parameters: {
+        Description: JsonPath.stringToJson(
+          JsonPath.stringAt('$.Function.Configuration.Description')
+        ),
+      },
+      resultPath: '$.Function.Configuration.Description',
+    });
+
     const saveRun = new DynamoPutItem(this, `PutItem`, {
       item: {
         pk: DynamoAttributeValue.fromString(
@@ -130,8 +139,25 @@ export class LambdaBenchmarkStateMachine extends Construct {
             JsonPath.stringAt('$.Function.Configuration.CodeSize')
           )
         ),
-        description: DynamoAttributeValue.fromString(
-          JsonPath.stringAt('$.Function.Configuration.Description')
+        format: DynamoAttributeValue.fromString(
+          JsonPath.stringAt(
+            '$.Function.Configuration.Description.Description.format'
+          )
+        ),
+        minify: DynamoAttributeValue.booleanFromJsonPath(
+          JsonPath.stringAt(
+            '$.Function.Configuration.Description.Description.minify'
+          )
+        ),
+        sdk: DynamoAttributeValue.fromString(
+          JsonPath.stringAt(
+            '$.Function.Configuration.Description.Description.sdk'
+          )
+        ),
+        xray: DynamoAttributeValue.booleanFromJsonPath(
+          JsonPath.stringAt(
+            '$.Function.Configuration.Description.Description.xray'
+          )
         ),
         name: DynamoAttributeValue.fromString(
           JsonPath.stringAt('$.Traces.Payload.name')
@@ -201,7 +227,9 @@ export class LambdaBenchmarkStateMachine extends Construct {
       definition: pass.next(
         lambdaMap.next(
           invokeGetTraces.next(
-            getFunctionDescription.next(saveRun.next(sendSuccess))
+            getFunctionDescription.next(
+              parseDescription.next(saveRun.next(sendSuccess))
+            )
           )
         )
       ),
