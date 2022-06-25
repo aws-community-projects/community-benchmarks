@@ -1,5 +1,14 @@
 import { BatchGetTracesCommand, XRayClient } from '@aws-sdk/client-xray';
 import { mockClient } from 'aws-sdk-client-mock';
+import {
+  afterAll,
+  beforeAll,
+  beforeEach,
+  describe,
+  expect,
+  test,
+  vi,
+} from 'vitest';
 
 import trace from '../../fixtures/sample-trace.json';
 import { handler } from './get-traces';
@@ -16,14 +25,16 @@ const mockFnResult = {
 };
 
 beforeAll(() => {
-  jest.useFakeTimers('modern');
-  jest.setSystemTime(new Date(2020, 3, 1));
+  vi.useFakeTimers();
+  vi.setSystemTime(new Date(2020, 3, 1));
 });
 
-beforeEach(() => xrayMock.reset());
+beforeEach(() => {
+  xrayMock.reset();
+});
 
 afterAll(() => {
-  jest.useRealTimers();
+  vi.useRealTimers();
 });
 
 describe('get-traces function', () => {

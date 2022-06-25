@@ -1,5 +1,7 @@
 import { App, Stack } from '@serverless-stack/resources';
 import { Template } from 'aws-cdk-lib/assertions';
+import { expect, test } from 'vitest';
+
 import lambdaTests from '../fixtures/lambda-tests';
 import { BenchmarkStateMachine } from './BenchmarkStateMachine';
 
@@ -11,6 +13,6 @@ test('BenchmarkStateMachine', () => {
   });
   const template = Template.fromStack(stack);
   template.resourceCountIs('AWS::Lambda::Function', 1);
-  template.resourceCountIs('AWS::StepFunctions::StateMachine', 4);
+  template.resourceCountIs('AWS::StepFunctions::StateMachine', 10);
   expect(template.toJSON()).toMatchSnapshot();
 });

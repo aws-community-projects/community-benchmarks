@@ -214,7 +214,7 @@ export class LambdaBenchmarkStateMachine extends Construct {
         ),
       },
       resultPath: '$.PutItem',
-      table: table.dynamodbTable,
+      table: table.cdk.table,
     });
 
     // Return the task token to the parent state machine.

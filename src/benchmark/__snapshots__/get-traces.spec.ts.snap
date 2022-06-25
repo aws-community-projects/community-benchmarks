@@ -1,12 +1,12 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`get-traces function fetch and parse traces 1`] = `
-Object {
+exports[`get-traces function > fetch and parse traces 1`] = `
+{
   "averageColdStart": 1113.81,
   "averageDuration": 316.95,
   "coldStartPercent": 50,
   "date": "2020-04-01",
-  "durations": Array [
+  "durations": [
     138.48257064819336,
     172.29223251342773,
     175.9037971496582,
@@ -28,7 +28,7 @@ Object {
     594.3999290466309,
     1292.8972244262695,
   ],
-  "inits": Array [
+  "inits": [
     1118.757724761963,
     1108.151912689209,
     1133.9683532714844,

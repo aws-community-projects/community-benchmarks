@@ -1,6 +1,7 @@
 import {
   Function as SSTFunction,
   FunctionProps,
+  Runtime as SSTRuntime,
   Stack,
 } from '@serverless-stack/resources';
 import { RemovalPolicy } from 'aws-cdk-lib';
@@ -36,6 +37,7 @@ interface FunctionVariation {
   format: 'cjs' | 'esm';
   memorySize: number;
   minify: boolean;
+  runtime: Runtime;
   sdk: NodeJSSDKOptions;
   sourceType: SourceTypeOptions;
   xray: boolean;
@@ -46,6 +48,7 @@ interface Variations {
   format?: ('cjs' | 'esm')[];
   memorySize?: number[];
   minify?: boolean[];
+  runtime: Runtime[];
   sdk: NodeJSSDKOptions[];
   sourceType: SourceTypeOptions[];
   xray?: boolean[];
@@ -120,6 +123,7 @@ const buildBundledNodeFunction = (
     format = 'esm',
     memorySize = 128,
     minify = true,
+    runtime,
     sdk,
     sourceType,
     xray = false,
@@ -128,7 +132,9 @@ const buildBundledNodeFunction = (
   const fileName = `${name}-${sdk}${xray ? '-xray' : ''}`;
   const functionName = `${fileName}-${
     architecture.name
-  }-${sourceType}-${format}${minify ? '-minify' : ''}-${memorySize}`;
+  }-${sourceType}-${format}${
+    minify ? '-minify' : ''
+  }-${memorySize}-${runtime.name.replace('.', '')}`;
   new LogGroup(scope, `LG-${functionName}`, {
     logGroupName: `/aws/lambda/${functionName}`,
     retention: RetentionDays.ONE_DAY,
@@ -136,7 +142,7 @@ const buildBundledNodeFunction = (
   });
   return new SSTFunction(scope, functionName, {
     ...defaultProps,
-    architecture,
+    architecture: architecture === Architecture.X86_64 ? 'x86_64' : 'arm_64',
     bundle: {
       format,
       minify,
@@ -144,10 +150,11 @@ const buildBundledNodeFunction = (
         ? getImports(`${defaultProps.srcPath}/${fileName}.${sourceType}`)
         : [],
     },
-    description: JSON.stringify(variation),
+    description: JSON.stringify({ ...variation, runtime: runtime.name }),
     functionName,
     handler: `${fileName}.handler`,
     memorySize,
+    runtime: runtime.name as SSTRuntime,
   });
 };
 
@@ -163,6 +170,7 @@ const buildNodeFunction = (
     format = 'esm',
     memorySize = 128,
     minify = true,
+    runtime,
     sdk,
     sourceType,
     xray = false,
@@ -170,7 +178,9 @@ const buildNodeFunction = (
   const fileName = `${name}-${sdk}${xray ? '-xray' : ''}`;
   const functionName = `${fileName}-${
     architecture.name
-  }-${sourceType}-${format}${minify ? '-minify' : ''}-${memorySize}`;
+  }-${sourceType}-${format}${
+    minify ? '-minify' : ''
+  }-${memorySize}-${runtime.name.replace('.', '')}`;
   new LogGroup(scope, `LG-${functionName}`, {
     logGroupName: `/aws/lambda/${functionName}`,
     retention: RetentionDays.ONE_DAY,
@@ -179,12 +189,12 @@ const buildNodeFunction = (
   return new CDKFunction(scope, functionName, {
     architecture,
     code: Code.fromAsset(`${defaultProps.srcPath}${xray ? '-xray' : ''}`),
-    description: JSON.stringify(variation),
+    description: JSON.stringify({ ...variation, runtime: runtime.name }),
     environment: defaultProps.environment,
     functionName,
     handler: `${fileName}.handler`,
     memorySize,
-    runtime: Runtime.NODEJS_14_X,
+    runtime,
     tracing: Tracing.ACTIVE,
   });
 };

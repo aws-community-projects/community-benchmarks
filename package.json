@@ -9,7 +9,7 @@
     "postinstall": "./install.sh",
     "remove": "sst remove",
     "start": "sst start",
-    "test": "sst test"
+    "test": "vitest run --coverage"
   },
   "eslintConfig": {
     "extends": [
@@ -17,43 +17,28 @@
     ]
   },
   "devDependencies": {
-    "@serverless-stack/cli": "0.69.7",
-    "@serverless-stack/resources": "0.69.7",
+    "@serverless-stack/cli": "1.2.30",
+    "@serverless-stack/resources": "1.2.30",
     "@tsconfig/node14": "^1.0.1",
-    "@types/aws-lambda": "^8.10.95",
-    "@types/jest": "^27.4.1",
-    "@types/node": "^14.18.16",
-    "aws-cdk-lib": "2.15.0",
-    "aws-sdk-client-mock": "^0.6.2",
-    "aws-sdk-mock": "^5.7.0",
+    "@types/aws-lambda": "^8.10.97",
+    "@types/node": "^16.11.41",
+    "aws-cdk-lib": "2.24.0",
+    "aws-sdk-client-mock": "^1.0.0",
+    "c8": "^7.11.3",
     "find-imports-ts": "^0.4.0",
-    "typesafe-dynamodb": "^0.1.8",
-    "typescript": "^4.6.4"
+    "typesafe-dynamodb": "^0.2.2",
+    "typescript": "^4.6.4",
+    "vitest": "^0.16.0"
   },
   "dependencies": {
-    "@aws-sdk/client-dynamodb": "^3.81.0",
-    "@aws-sdk/client-lambda": "^3.81.0",
-    "@aws-sdk/client-s3": "^3.81.0",
-    "@aws-sdk/client-xray": "^3.81.0",
-    "@aws-sdk/lib-dynamodb": "^3.81.0",
-    "aws-sdk": "^2.1125.0",
+    "@aws-sdk/client-dynamodb": "^3.87.0",
+    "@aws-sdk/client-lambda": "^3.87.0",
+    "@aws-sdk/client-s3": "^3.87.0",
+    "@aws-sdk/client-xray": "^3.87.0",
+    "@aws-sdk/lib-dynamodb": "^3.87.0",
+    "aws-sdk": "^2.1131.0",
     "aws-xray-sdk-core": "^3.3.5",
     "csvtojson": "^2.0.10"
-  },
-  "jest": {
-    "collectCoverageFrom": [
-      "**/*.{js,ts}",
-      "!**/.build/**",
-      "!**/.sst/**",
-      "!**/cdk.out/**",
-      "!**/coverage/**",
-      "!**/fixtures/**",
-      "!**/node_modules/**",
-      "!stacks/index.ts"
-    ],
-    "setupFilesAfterEnv": [
-      "./jest.setup.ts"
-    ]
   },
   "description": "Benchmarking the cloud using [AWS CDK](https://aws.amazon.com/cdk/) and [Serverless Stack](https://serverless-stack.com/).",
   "main": "index.js",

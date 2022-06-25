@@ -1,9 +1,10 @@
 // Default env vars for csv2ddb stack
 // Need to re-require to override
+import { expect } from 'vitest';
+
 process.env.BUCKET_NAME = 'my-bucket';
 process.env.BUCKET_KEY = 'my-key';
 process.env.TABLE_NAME = 'my-table';
-
 // credit: https://www.irisclasson.com/2020/08/17/jest-snapshot-tests-with-custom-serializer-for-cloudformation-template-tests/
 expect.addSnapshotSerializer({
   serialize: (val: string): string =>

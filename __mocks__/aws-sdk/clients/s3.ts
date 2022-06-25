@@ -3,10 +3,11 @@
  * Only used methods are mocked.
  * @see https://dev.to/elthrasher/mocking-aws-with-jest-and-typescript-199i
  */
+import { vi } from 'vitest';
 
 import { awsSdkV2PromiseResponse } from '../../awsSdkV2PromiseResponse';
 
-export const getObjectFn = jest.fn().mockImplementation(() => ({
+export const getObjectFn = vi.fn().mockImplementation(() => ({
   createReadStream: awsSdkV2PromiseResponse,
 }));
 

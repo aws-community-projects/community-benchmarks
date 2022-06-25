@@ -1,8 +1,7 @@
-import { Function, Table, TableFieldType } from '@serverless-stack/resources';
+import { Function, Table } from '@serverless-stack/resources';
 import { Duration, RemovalPolicy } from 'aws-cdk-lib';
 import { BillingMode } from 'aws-cdk-lib/aws-dynamodb';
 import { PolicyStatement } from 'aws-cdk-lib/aws-iam';
-import { Tracing } from 'aws-cdk-lib/aws-lambda';
 import {
   IntegrationPattern,
   JsonPath,
@@ -26,12 +25,14 @@ export class BenchmarkStateMachine extends Construct {
     const stateMachineName = 'benchmark-machine';
 
     const table = new Table(scope, 'BenchmarksTable', {
-      dynamodbTable: {
-        billingMode: BillingMode.PAY_PER_REQUEST,
-        removalPolicy: RemovalPolicy.DESTROY,
-        tableName: 'Benchmarks',
+      cdk: {
+        table: {
+          billingMode: BillingMode.PAY_PER_REQUEST,
+          removalPolicy: RemovalPolicy.DESTROY,
+          tableName: 'Benchmarks',
+        },
       },
-      fields: { pk: TableFieldType.STRING, sk: TableFieldType.STRING },
+      fields: { pk: 'string', sk: 'string' },
       primaryIndex: { partitionKey: 'pk', sortKey: 'sk' },
     });
 
@@ -46,7 +47,7 @@ export class BenchmarkStateMachine extends Construct {
         }),
       ],
       srcPath: 'src/benchmark',
-      tracing: Tracing.ACTIVE,
+      tracing: 'active',
     });
 
     // Step Functions parallel step to fan out to nested Sfn executions.

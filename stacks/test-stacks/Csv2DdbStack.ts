@@ -4,10 +4,9 @@ import {
   Stack,
   StackProps,
   Table,
-  TableFieldType,
 } from '@serverless-stack/resources';
-import { Duration, RemovalPolicy } from 'aws-cdk-lib';
-import { Tracing } from 'aws-cdk-lib/aws-lambda';
+import { RemovalPolicy } from 'aws-cdk-lib';
+import { Runtime } from 'aws-cdk-lib/aws-lambda';
 import { BucketDeployment, Source } from 'aws-cdk-lib/aws-s3-deployment';
 import { Construct } from 'constructs';
 
@@ -27,24 +26,28 @@ export class Csv2DdbStack extends Stack {
 
     // Table to store sales figures.
     const table = new Table(this, 'SalesTable', {
-      dynamodbTable: {
-        removalPolicy: RemovalPolicy.DESTROY,
-        tableName: 'Sales',
+      cdk: {
+        table: {
+          removalPolicy: RemovalPolicy.DESTROY,
+          tableName: 'Sales',
+        },
       },
-      fields: { pk: TableFieldType.STRING, sk: TableFieldType.STRING },
+      fields: { pk: 'string', sk: 'string' },
       primaryIndex: { partitionKey: 'pk', sortKey: 'sk' },
     });
 
     // S3 bucket with csv.
     const bucket = new Bucket(this, 'SalesCsvBucket', {
-      s3Bucket: {
-        autoDeleteObjects: true,
-        removalPolicy: RemovalPolicy.DESTROY,
+      cdk: {
+        bucket: {
+          autoDeleteObjects: true,
+          removalPolicy: RemovalPolicy.DESTROY,
+        },
       },
     });
 
     new BucketDeployment(this, 'SalesCsvDeployment', {
-      destinationBucket: bucket.s3Bucket,
+      destinationBucket: bucket.cdk.bucket,
       sources: [Source.asset('assets/')],
     });
 
@@ -93,8 +96,8 @@ export class Csv2DdbStack extends Stack {
       environment,
       memorySize: 512,
       srcPath: './src/csv2ddb',
-      timeout: Duration.minutes(1),
-      tracing: Tracing.ACTIVE,
+      timeout: 60,
+      tracing: 'active',
     };
 
     // const csv2ddbSdk2ClientsEsm = new Function(
@@ -117,8 +120,9 @@ export class Csv2DdbStack extends Stack {
             format: ['cjs', 'esm'],
             memorySize: [512],
             minify: [true],
+            runtime: [Runtime.NODEJS_16_X, Runtime.NODEJS_14_X],
             sdk: [
-              NodeJSSDKOptions.SDKV2_BUNDLED,
+              // NodeJSSDKOptions.SDKV2_BUNDLED,
               NodeJSSDKOptions.SDKV2_BUNDLED_CLIENTS,
             ],
             sourceType: [SourceTypeOptions.TYPESCRIPT],
@@ -131,9 +135,10 @@ export class Csv2DdbStack extends Stack {
             format: ['cjs', 'esm'],
             memorySize: [512],
             minify: [true],
+            runtime: [Runtime.NODEJS_16_X, Runtime.NODEJS_14_X],
             sdk: [
               NodeJSSDKOptions.SDKV3_BUNDLED,
-              NodeJSSDKOptions.SDKV3_MODULES,
+              // NodeJSSDKOptions.SDKV3_MODULES,
             ],
             sourceType: [SourceTypeOptions.TYPESCRIPT],
             xray: [true, false],
@@ -154,6 +159,7 @@ export class Csv2DdbStack extends Stack {
               format: ['esm'],
               memorySize: [512],
               minify: [false],
+              runtime: [Runtime.NODEJS_16_X, Runtime.NODEJS_14_X],
               sdk: [NodeJSSDKOptions.SDKV3_MODULES],
               sourceType: [SourceTypeOptions.ESM],
               xray: [true, false],
@@ -504,8 +510,8 @@ export class Csv2DdbStack extends Stack {
     // ];
 
     fns.forEach((fn) => {
-      bucket.s3Bucket.grantRead(fn);
-      table.dynamodbTable.grantWriteData(fn);
+      bucket.cdk.bucket.grantRead(fn);
+      table.cdk.table.grantWriteData(fn);
 
       // Test props.
       this.lambdaTests.push({
