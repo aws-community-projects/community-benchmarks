@@ -1,5 +1,10 @@
 {
-  "compilerOptions": { "resolveJsonModule": true },
-  "extends": "@tsconfig/node14",
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "jsx": "react",
+    "lib": ["DOM", "ES2022"],
+    "resolveJsonModule": true
+  },
+  "extends": "@tsconfig/node16",
   "include": ["stacks", "src", "constructs"]
 }

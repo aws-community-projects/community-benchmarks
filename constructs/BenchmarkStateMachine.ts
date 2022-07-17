@@ -1,7 +1,8 @@
-import { Function, Table } from '@serverless-stack/resources';
-import { Duration, RemovalPolicy } from 'aws-cdk-lib';
+import { Api, Function, Table } from '@serverless-stack/resources';
+import { CfnOutput, Duration, RemovalPolicy } from 'aws-cdk-lib';
 import { BillingMode } from 'aws-cdk-lib/aws-dynamodb';
 import { PolicyStatement } from 'aws-cdk-lib/aws-iam';
+import { RetentionDays } from 'aws-cdk-lib/aws-logs';
 import {
   IntegrationPattern,
   JsonPath,
@@ -46,9 +47,16 @@ export class BenchmarkStateMachine extends Construct {
           resources: ['*'],
         }),
       ],
+      logRetention: RetentionDays.ONE_WEEK,
       srcPath: 'src/benchmark',
-      tracing: 'active',
     });
+
+    // // Get data from the table
+    // const getBenchmarks = new Function(scope, 'GetBenchmarks', {
+    //   functionName: 'get-benchmarks',
+    //   handler: 'get-benchmarks.handler',
+    //   srcPath: 'src/benchmark',
+    // });
 
     // Step Functions parallel step to fan out to nested Sfn executions.
     const parallel = new Parallel(scope, 'Parallel Execution 0');
@@ -92,6 +100,25 @@ export class BenchmarkStateMachine extends Construct {
       definition: parallel,
       stateMachineName,
       timeout: Duration.minutes(10),
+    });
+
+    const api = new Api(this, 'BenchmarksApi', {
+      cors: true,
+      defaults: {
+        function: {
+          environment: { TABLE_NAME: table.tableName },
+          logRetention: RetentionDays.ONE_WEEK,
+          runtime: 'nodejs16.x',
+        },
+      },
+      routes: {
+        'GET /benchmarks': 'src/benchmark/get-benchmarks.handler',
+      },
+    });
+    api.attachPermissions([table]);
+
+    new CfnOutput(this, 'BenchmarkUrl', {
+      value: api.cdk.httpApi.apiEndpoint,
     });
   }
 }

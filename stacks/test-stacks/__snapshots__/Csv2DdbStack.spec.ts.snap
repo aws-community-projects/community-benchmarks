@@ -611,6 +611,102 @@ exports[`Csv2DdbStack 1`] = `
       "Type": "AWS::Logs::LogGroup",
       "UpdateReplacePolicy": "Delete",
     },
+    "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A": {
+      "DependsOn": [
+        "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRoleDefaultPolicyADDA7DEB",
+        "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB",
+      ],
+      "Properties": {
+        "Code": {
+          "S3Bucket": "cdk-hnb659fds-assets-my-account-us-east-1",
+          "S3Key": "[HASH REMOVED].zip",
+        },
+        "Handler": "index.handler",
+        "Role": {
+          "Fn::GetAtt": [
+            "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs14.x",
+        "Tags": [
+          {
+            "Key": "sst:app",
+            "Value": "my-app",
+          },
+          {
+            "Key": "sst:stage",
+            "Value": "dev",
+          },
+        ],
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+        "Tags": [
+          {
+            "Key": "sst:app",
+            "Value": "my-app",
+          },
+          {
+            "Key": "sst:stage",
+            "Value": "dev",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRoleDefaultPolicyADDA7DEB": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "logs:PutRetentionPolicy",
+                "logs:DeleteRetentionPolicy",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRoleDefaultPolicyADDA7DEB",
+        "Roles": [
+          {
+            "Ref": "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
     "SSTMetadata": {
       "Metadata": {
         "sst:constructs": [
@@ -880,7 +976,7 @@ exports[`Csv2DdbStack 1`] = `
             "type": "Function",
           },
         ],
-        "sst:version": "1.2.30",
+        "sst:version": "1.4.0",
       },
       "Type": "AWS::CDK::Metadata",
     },
@@ -1112,6 +1208,29 @@ exports[`Csv2DdbStack 1`] = `
       },
       "Type": "AWS::Lambda::Function",
     },
+    "csv2ddbsdk2clientsarm64tscjsminify512nodejs14xLogRetentionE1FCFD5F": {
+      "Properties": {
+        "LogGroupName": {
+          "Fn::Join": [
+            "",
+            [
+              "/aws/lambda/",
+              {
+                "Ref": "csv2ddbsdk2clientsarm64tscjsminify512nodejs14xE30ED52A",
+              },
+            ],
+          ],
+        },
+        "RetentionInDays": 7,
+        "ServiceToken": {
+          "Fn::GetAtt": [
+            "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "Custom::LogRetention",
+    },
     "csv2ddbsdk2clientsarm64tscjsminify512nodejs14xServiceRole94AD4D8A": {
       "Properties": {
         "AssumeRolePolicyDocument": {
@@ -1285,6 +1404,29 @@ exports[`Csv2DdbStack 1`] = `
         },
       },
       "Type": "AWS::Lambda::Function",
+    },
+    "csv2ddbsdk2clientsarm64tscjsminify512nodejs16xLogRetention769CF5F1": {
+      "Properties": {
+        "LogGroupName": {
+          "Fn::Join": [
+            "",
+            [
+              "/aws/lambda/",
+              {
+                "Ref": "csv2ddbsdk2clientsarm64tscjsminify512nodejs16x9569FFB4",
+              },
+            ],
+          ],
+        },
+        "RetentionInDays": 7,
+        "ServiceToken": {
+          "Fn::GetAtt": [
+            "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "Custom::LogRetention",
     },
     "csv2ddbsdk2clientsarm64tscjsminify512nodejs16xServiceRole673D72D5": {
       "Properties": {
@@ -1460,6 +1602,29 @@ exports[`Csv2DdbStack 1`] = `
       },
       "Type": "AWS::Lambda::Function",
     },
+    "csv2ddbsdk2clientsarm64tsesmminify512nodejs14xLogRetention3636FD87": {
+      "Properties": {
+        "LogGroupName": {
+          "Fn::Join": [
+            "",
+            [
+              "/aws/lambda/",
+              {
+                "Ref": "csv2ddbsdk2clientsarm64tsesmminify512nodejs14xD277435C",
+              },
+            ],
+          ],
+        },
+        "RetentionInDays": 7,
+        "ServiceToken": {
+          "Fn::GetAtt": [
+            "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "Custom::LogRetention",
+    },
     "csv2ddbsdk2clientsarm64tsesmminify512nodejs14xServiceRole36B3FA57": {
       "Properties": {
         "AssumeRolePolicyDocument": {
@@ -1633,6 +1798,29 @@ exports[`Csv2DdbStack 1`] = `
         },
       },
       "Type": "AWS::Lambda::Function",
+    },
+    "csv2ddbsdk2clientsarm64tsesmminify512nodejs16xLogRetention837CE2C3": {
+      "Properties": {
+        "LogGroupName": {
+          "Fn::Join": [
+            "",
+            [
+              "/aws/lambda/",
+              {
+                "Ref": "csv2ddbsdk2clientsarm64tsesmminify512nodejs16xC4353F73",
+              },
+            ],
+          ],
+        },
+        "RetentionInDays": 7,
+        "ServiceToken": {
+          "Fn::GetAtt": [
+            "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "Custom::LogRetention",
     },
     "csv2ddbsdk2clientsarm64tsesmminify512nodejs16xServiceRole5B640178": {
       "Properties": {
@@ -1808,6 +1996,29 @@ exports[`Csv2DdbStack 1`] = `
       },
       "Type": "AWS::Lambda::Function",
     },
+    "csv2ddbsdk2clientsxrayarm64tscjsminify512nodejs14xLogRetention6599B710": {
+      "Properties": {
+        "LogGroupName": {
+          "Fn::Join": [
+            "",
+            [
+              "/aws/lambda/",
+              {
+                "Ref": "csv2ddbsdk2clientsxrayarm64tscjsminify512nodejs14x426FED93",
+              },
+            ],
+          ],
+        },
+        "RetentionInDays": 7,
+        "ServiceToken": {
+          "Fn::GetAtt": [
+            "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "Custom::LogRetention",
+    },
     "csv2ddbsdk2clientsxrayarm64tscjsminify512nodejs14xServiceRoleC469C81E": {
       "Properties": {
         "AssumeRolePolicyDocument": {
@@ -1981,6 +2192,29 @@ exports[`Csv2DdbStack 1`] = `
         },
       },
       "Type": "AWS::Lambda::Function",
+    },
+    "csv2ddbsdk2clientsxrayarm64tscjsminify512nodejs16xLogRetention351C318D": {
+      "Properties": {
+        "LogGroupName": {
+          "Fn::Join": [
+            "",
+            [
+              "/aws/lambda/",
+              {
+                "Ref": "csv2ddbsdk2clientsxrayarm64tscjsminify512nodejs16xE56616F7",
+              },
+            ],
+          ],
+        },
+        "RetentionInDays": 7,
+        "ServiceToken": {
+          "Fn::GetAtt": [
+            "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "Custom::LogRetention",
     },
     "csv2ddbsdk2clientsxrayarm64tscjsminify512nodejs16xServiceRole3C89C05D": {
       "Properties": {
@@ -2156,6 +2390,29 @@ exports[`Csv2DdbStack 1`] = `
       },
       "Type": "AWS::Lambda::Function",
     },
+    "csv2ddbsdk2clientsxrayarm64tsesmminify512nodejs14xLogRetention5A1C409D": {
+      "Properties": {
+        "LogGroupName": {
+          "Fn::Join": [
+            "",
+            [
+              "/aws/lambda/",
+              {
+                "Ref": "csv2ddbsdk2clientsxrayarm64tsesmminify512nodejs14x6DD34B54",
+              },
+            ],
+          ],
+        },
+        "RetentionInDays": 7,
+        "ServiceToken": {
+          "Fn::GetAtt": [
+            "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "Custom::LogRetention",
+    },
     "csv2ddbsdk2clientsxrayarm64tsesmminify512nodejs14xServiceRole855E5E23": {
       "Properties": {
         "AssumeRolePolicyDocument": {
@@ -2329,6 +2586,29 @@ exports[`Csv2DdbStack 1`] = `
         },
       },
       "Type": "AWS::Lambda::Function",
+    },
+    "csv2ddbsdk2clientsxrayarm64tsesmminify512nodejs16xLogRetention9DB9C52C": {
+      "Properties": {
+        "LogGroupName": {
+          "Fn::Join": [
+            "",
+            [
+              "/aws/lambda/",
+              {
+                "Ref": "csv2ddbsdk2clientsxrayarm64tsesmminify512nodejs16x0D78509E",
+              },
+            ],
+          ],
+        },
+        "RetentionInDays": 7,
+        "ServiceToken": {
+          "Fn::GetAtt": [
+            "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "Custom::LogRetention",
     },
     "csv2ddbsdk2clientsxrayarm64tsesmminify512nodejs16xServiceRoleDefaultPolicyA3871E07": {
       "Properties": {
@@ -2504,6 +2784,29 @@ exports[`Csv2DdbStack 1`] = `
       },
       "Type": "AWS::Lambda::Function",
     },
+    "csv2ddbsdk3arm64tscjsminify512nodejs14xLogRetention551EC5C4": {
+      "Properties": {
+        "LogGroupName": {
+          "Fn::Join": [
+            "",
+            [
+              "/aws/lambda/",
+              {
+                "Ref": "csv2ddbsdk3arm64tscjsminify512nodejs14x4F19876E",
+              },
+            ],
+          ],
+        },
+        "RetentionInDays": 7,
+        "ServiceToken": {
+          "Fn::GetAtt": [
+            "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "Custom::LogRetention",
+    },
     "csv2ddbsdk3arm64tscjsminify512nodejs14xServiceRole82F360D5": {
       "Properties": {
         "AssumeRolePolicyDocument": {
@@ -2677,6 +2980,29 @@ exports[`Csv2DdbStack 1`] = `
         },
       },
       "Type": "AWS::Lambda::Function",
+    },
+    "csv2ddbsdk3arm64tscjsminify512nodejs16xLogRetention684A8040": {
+      "Properties": {
+        "LogGroupName": {
+          "Fn::Join": [
+            "",
+            [
+              "/aws/lambda/",
+              {
+                "Ref": "csv2ddbsdk3arm64tscjsminify512nodejs16x89EA42E4",
+              },
+            ],
+          ],
+        },
+        "RetentionInDays": 7,
+        "ServiceToken": {
+          "Fn::GetAtt": [
+            "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "Custom::LogRetention",
     },
     "csv2ddbsdk3arm64tscjsminify512nodejs16xServiceRoleDF7CF5DB": {
       "Properties": {
@@ -2852,6 +3178,29 @@ exports[`Csv2DdbStack 1`] = `
       },
       "Type": "AWS::Lambda::Function",
     },
+    "csv2ddbsdk3arm64tsesmminify512nodejs14xLogRetention8C442CDB": {
+      "Properties": {
+        "LogGroupName": {
+          "Fn::Join": [
+            "",
+            [
+              "/aws/lambda/",
+              {
+                "Ref": "csv2ddbsdk3arm64tsesmminify512nodejs14x65A057A1",
+              },
+            ],
+          ],
+        },
+        "RetentionInDays": 7,
+        "ServiceToken": {
+          "Fn::GetAtt": [
+            "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "Custom::LogRetention",
+    },
     "csv2ddbsdk3arm64tsesmminify512nodejs14xServiceRole4DA29B8B": {
       "Properties": {
         "AssumeRolePolicyDocument": {
@@ -3025,6 +3374,29 @@ exports[`Csv2DdbStack 1`] = `
         },
       },
       "Type": "AWS::Lambda::Function",
+    },
+    "csv2ddbsdk3arm64tsesmminify512nodejs16xLogRetention6458865E": {
+      "Properties": {
+        "LogGroupName": {
+          "Fn::Join": [
+            "",
+            [
+              "/aws/lambda/",
+              {
+                "Ref": "csv2ddbsdk3arm64tsesmminify512nodejs16x832EB6E4",
+              },
+            ],
+          ],
+        },
+        "RetentionInDays": 7,
+        "ServiceToken": {
+          "Fn::GetAtt": [
+            "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "Custom::LogRetention",
     },
     "csv2ddbsdk3arm64tsesmminify512nodejs16xServiceRoleB22D4EED": {
       "Properties": {
@@ -3880,6 +4252,29 @@ exports[`Csv2DdbStack 1`] = `
       },
       "Type": "AWS::Lambda::Function",
     },
+    "csv2ddbsdk3xrayarm64tscjsminify512nodejs14xLogRetentionE69D3B96": {
+      "Properties": {
+        "LogGroupName": {
+          "Fn::Join": [
+            "",
+            [
+              "/aws/lambda/",
+              {
+                "Ref": "csv2ddbsdk3xrayarm64tscjsminify512nodejs14x75DE57B8",
+              },
+            ],
+          ],
+        },
+        "RetentionInDays": 7,
+        "ServiceToken": {
+          "Fn::GetAtt": [
+            "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "Custom::LogRetention",
+    },
     "csv2ddbsdk3xrayarm64tscjsminify512nodejs14xServiceRole633C2EFC": {
       "Properties": {
         "AssumeRolePolicyDocument": {
@@ -4053,6 +4448,29 @@ exports[`Csv2DdbStack 1`] = `
         },
       },
       "Type": "AWS::Lambda::Function",
+    },
+    "csv2ddbsdk3xrayarm64tscjsminify512nodejs16xLogRetentionB8F04FD6": {
+      "Properties": {
+        "LogGroupName": {
+          "Fn::Join": [
+            "",
+            [
+              "/aws/lambda/",
+              {
+                "Ref": "csv2ddbsdk3xrayarm64tscjsminify512nodejs16x4CD7CD6E",
+              },
+            ],
+          ],
+        },
+        "RetentionInDays": 7,
+        "ServiceToken": {
+          "Fn::GetAtt": [
+            "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "Custom::LogRetention",
     },
     "csv2ddbsdk3xrayarm64tscjsminify512nodejs16xServiceRole7B6E2C0D": {
       "Properties": {
@@ -4228,6 +4646,29 @@ exports[`Csv2DdbStack 1`] = `
       },
       "Type": "AWS::Lambda::Function",
     },
+    "csv2ddbsdk3xrayarm64tsesmminify512nodejs14xLogRetention835B1895": {
+      "Properties": {
+        "LogGroupName": {
+          "Fn::Join": [
+            "",
+            [
+              "/aws/lambda/",
+              {
+                "Ref": "csv2ddbsdk3xrayarm64tsesmminify512nodejs14x9006F5A7",
+              },
+            ],
+          ],
+        },
+        "RetentionInDays": 7,
+        "ServiceToken": {
+          "Fn::GetAtt": [
+            "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "Custom::LogRetention",
+    },
     "csv2ddbsdk3xrayarm64tsesmminify512nodejs14xServiceRoleBE640C6D": {
       "Properties": {
         "AssumeRolePolicyDocument": {
@@ -4401,6 +4842,29 @@ exports[`Csv2DdbStack 1`] = `
         },
       },
       "Type": "AWS::Lambda::Function",
+    },
+    "csv2ddbsdk3xrayarm64tsesmminify512nodejs16xLogRetention62BFCB56": {
+      "Properties": {
+        "LogGroupName": {
+          "Fn::Join": [
+            "",
+            [
+              "/aws/lambda/",
+              {
+                "Ref": "csv2ddbsdk3xrayarm64tsesmminify512nodejs16x6AB0A7AD",
+              },
+            ],
+          ],
+        },
+        "RetentionInDays": 7,
+        "ServiceToken": {
+          "Fn::GetAtt": [
+            "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "Custom::LogRetention",
     },
     "csv2ddbsdk3xrayarm64tsesmminify512nodejs16xServiceRoleDefaultPolicyDEAACF9B": {
       "Properties": {

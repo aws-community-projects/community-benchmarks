@@ -192,7 +192,7 @@ exports[`BenchmarkStateMachine 1`] = `
             "type": "Table",
           },
         ],
-        "sst:version": "1.2.30",
+        "sst:version": "1.4.0",
       },
       "Type": "AWS::CDK::Metadata",
     },

@@ -12,7 +12,7 @@ test('BenchmarkStateMachine', () => {
     lambdaTests,
   });
   const template = Template.fromStack(stack);
-  template.resourceCountIs('AWS::Lambda::Function', 1);
+  template.resourceCountIs('AWS::Lambda::Function', 3);
   template.resourceCountIs('AWS::StepFunctions::StateMachine', 10);
   expect(template.toJSON()).toMatchSnapshot();
 });

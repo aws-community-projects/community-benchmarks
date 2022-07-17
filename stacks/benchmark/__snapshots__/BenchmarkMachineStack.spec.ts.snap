@@ -2,6 +2,16 @@
 
 exports[`BenchmarkMachineStack 1`] = `
 {
+  "Outputs": {
+    "BenchmarkStateMachineBenchmarkUrlC4F2BF06": {
+      "Value": {
+        "Fn::GetAtt": [
+          "BenchmarkStateMachineBenchmarksApi934EB345",
+          "ApiEndpoint",
+        ],
+      },
+    },
+  },
   "Parameters": {
     "BootstrapVersion": {
       "Default": "/cdk-bootstrap/hnb659fds/version",
@@ -115,6 +125,307 @@ exports[`BenchmarkMachineStack 1`] = `
         ],
       },
       "Type": "AWS::StepFunctions::StateMachine",
+    },
+    "BenchmarkStateMachineBenchmarksApi934EB345": {
+      "Properties": {
+        "CorsConfiguration": {
+          "AllowHeaders": [
+            "*",
+          ],
+          "AllowMethods": [
+            "*",
+          ],
+          "AllowOrigins": [
+            "*",
+          ],
+        },
+        "Name": "dev-my-app-BenchmarksApi",
+        "ProtocolType": "HTTP",
+        "Tags": {
+          "sst:app": "my-app",
+          "sst:stage": "dev",
+        },
+      },
+      "Type": "AWS::ApiGatewayV2::Api",
+    },
+    "BenchmarkStateMachineBenchmarksApiDefaultStageAA6485B1": {
+      "Properties": {
+        "AccessLogSettings": {
+          "DestinationArn": {
+            "Fn::GetAtt": [
+              "BenchmarkStateMachineBenchmarksApiLogGroup7F39A594",
+              "Arn",
+            ],
+          },
+          "Format": "{"requestTime":"$context.requestTime","requestId":"$context.requestId","httpMethod":"$context.httpMethod","path":"$context.path","routeKey":"$context.routeKey","status":$context.status,"responseLatency":$context.responseLatency,"integrationRequestId":"$context.integration.requestId","integrationStatus":"$context.integration.status","integrationLatency":"$context.integration.latency","integrationServiceStatus":"$context.integration.integrationStatus","ip":"$context.identity.sourceIp","userAgent":"$context.identity.userAgent","cognitoIdentityId":"$context.identity.cognitoIdentityId"}",
+        },
+        "ApiId": {
+          "Ref": "BenchmarkStateMachineBenchmarksApi934EB345",
+        },
+        "AutoDeploy": true,
+        "StageName": "$default",
+        "Tags": {
+          "sst:app": "my-app",
+          "sst:stage": "dev",
+        },
+      },
+      "Type": "AWS::ApiGatewayV2::Stage",
+    },
+    "BenchmarkStateMachineBenchmarksApiLambdaGETbenchmarks1252843D": {
+      "DependsOn": [
+        "BenchmarkStateMachineBenchmarksApiLambdaGETbenchmarksServiceRoleDefaultPolicyC516314D",
+        "BenchmarkStateMachineBenchmarksApiLambdaGETbenchmarksServiceRoleC179DA88",
+      ],
+      "Properties": {
+        "Code": {
+          "S3Bucket": "cdk-hnb659fds-assets-my-account-us-east-1",
+          "S3Key": "[HASH REMOVED].zip",
+        },
+        "Environment": {
+          "Variables": {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+            "TABLE_NAME": {
+              "Ref": "BenchmarksTable35A54DAA",
+            },
+          },
+        },
+        "EphemeralStorage": {
+          "Size": 512,
+        },
+        "Handler": "src/benchmark/get-benchmarks.handler",
+        "MemorySize": 1024,
+        "Role": {
+          "Fn::GetAtt": [
+            "BenchmarkStateMachineBenchmarksApiLambdaGETbenchmarksServiceRoleC179DA88",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs16.x",
+        "Tags": [
+          {
+            "Key": "sst:app",
+            "Value": "my-app",
+          },
+          {
+            "Key": "sst:stage",
+            "Value": "dev",
+          },
+        ],
+        "Timeout": 10,
+        "TracingConfig": {
+          "Mode": "Active",
+        },
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "BenchmarkStateMachineBenchmarksApiLambdaGETbenchmarksLogRetention021D5D3D": {
+      "Properties": {
+        "LogGroupName": {
+          "Fn::Join": [
+            "",
+            [
+              "/aws/lambda/",
+              {
+                "Ref": "BenchmarkStateMachineBenchmarksApiLambdaGETbenchmarks1252843D",
+              },
+            ],
+          ],
+        },
+        "RetentionInDays": 7,
+        "ServiceToken": {
+          "Fn::GetAtt": [
+            "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "Custom::LogRetention",
+    },
+    "BenchmarkStateMachineBenchmarksApiLambdaGETbenchmarksServiceRoleC179DA88": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+        "Tags": [
+          {
+            "Key": "sst:app",
+            "Value": "my-app",
+          },
+          {
+            "Key": "sst:stage",
+            "Value": "dev",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "BenchmarkStateMachineBenchmarksApiLambdaGETbenchmarksServiceRoleDefaultPolicyC516314D": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "xray:PutTraceSegments",
+                "xray:PutTelemetryRecords",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+            {
+              "Action": "dynamodb:*",
+              "Effect": "Allow",
+              "Resource": [
+                {
+                  "Fn::GetAtt": [
+                    "BenchmarksTable35A54DAA",
+                    "Arn",
+                  ],
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      {
+                        "Fn::GetAtt": [
+                          "BenchmarksTable35A54DAA",
+                          "Arn",
+                        ],
+                      },
+                      "/*",
+                    ],
+                  ],
+                },
+              ],
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "BenchmarkStateMachineBenchmarksApiLambdaGETbenchmarksServiceRoleDefaultPolicyC516314D",
+        "Roles": [
+          {
+            "Ref": "BenchmarkStateMachineBenchmarksApiLambdaGETbenchmarksServiceRoleC179DA88",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "BenchmarkStateMachineBenchmarksApiLogGroup7F39A594": {
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "LogGroupName": {
+          "Fn::Join": [
+            "",
+            [
+              "/aws/vendedlogs/apis/dev-my-app-BenchmarksApi-",
+              {
+                "Ref": "BenchmarkStateMachineBenchmarksApi934EB345",
+              },
+              "/default",
+            ],
+          ],
+        },
+        "Tags": [
+          {
+            "Key": "sst:app",
+            "Value": "my-app",
+          },
+          {
+            "Key": "sst:stage",
+            "Value": "dev",
+          },
+        ],
+      },
+      "Type": "AWS::Logs::LogGroup",
+      "UpdateReplacePolicy": "Retain",
+    },
+    "BenchmarkStateMachineBenchmarksApiRouteGETbenchmarksD8E182D2": {
+      "Properties": {
+        "ApiId": {
+          "Ref": "BenchmarkStateMachineBenchmarksApi934EB345",
+        },
+        "AuthorizationType": "NONE",
+        "RouteKey": "GET /benchmarks",
+        "Target": {
+          "Fn::Join": [
+            "",
+            [
+              "integrations/",
+              {
+                "Ref": "BenchmarkStateMachineBenchmarksApiRouteGETbenchmarksIntegrationGETbenchmarksB1B0B28F",
+              },
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::ApiGatewayV2::Route",
+    },
+    "BenchmarkStateMachineBenchmarksApiRouteGETbenchmarksIntegrationGETbenchmarksB1B0B28F": {
+      "Properties": {
+        "ApiId": {
+          "Ref": "BenchmarkStateMachineBenchmarksApi934EB345",
+        },
+        "IntegrationType": "AWS_PROXY",
+        "IntegrationUri": {
+          "Fn::GetAtt": [
+            "BenchmarkStateMachineBenchmarksApiLambdaGETbenchmarks1252843D",
+            "Arn",
+          ],
+        },
+        "PayloadFormatVersion": "2.0",
+      },
+      "Type": "AWS::ApiGatewayV2::Integration",
+    },
+    "BenchmarkStateMachineBenchmarksApiRouteGETbenchmarksIntegrationGETbenchmarksPermission47CDCB00": {
+      "Properties": {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "BenchmarkStateMachineBenchmarksApiLambdaGETbenchmarks1252843D",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:us-east-1:my-account:",
+              {
+                "Ref": "BenchmarkStateMachineBenchmarksApi934EB345",
+              },
+              "/*/*/benchmarks",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
     },
     "BenchmarkStateMachineRole075570ED": {
       "Properties": {
@@ -308,6 +619,29 @@ exports[`BenchmarkMachineStack 1`] = `
         },
       },
       "Type": "AWS::Lambda::Function",
+    },
+    "GetTracesLogRetention3854B976": {
+      "Properties": {
+        "LogGroupName": {
+          "Fn::Join": [
+            "",
+            [
+              "/aws/lambda/",
+              {
+                "Ref": "GetTraces3BC6EA9B",
+              },
+            ],
+          ],
+        },
+        "RetentionInDays": 7,
+        "ServiceToken": {
+          "Fn::GetAtt": [
+            "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "Custom::LogRetention",
     },
     "GetTracesServiceRoleAB8F12D9": {
       "Properties": {
@@ -2179,9 +2513,158 @@ exports[`BenchmarkMachineStack 1`] = `
       },
       "Type": "AWS::IAM::Policy",
     },
+    "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A": {
+      "DependsOn": [
+        "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRoleDefaultPolicyADDA7DEB",
+        "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB",
+      ],
+      "Properties": {
+        "Code": {
+          "S3Bucket": "cdk-hnb659fds-assets-my-account-us-east-1",
+          "S3Key": "[HASH REMOVED].zip",
+        },
+        "Handler": "index.handler",
+        "Role": {
+          "Fn::GetAtt": [
+            "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs14.x",
+        "Tags": [
+          {
+            "Key": "sst:app",
+            "Value": "my-app",
+          },
+          {
+            "Key": "sst:stage",
+            "Value": "dev",
+          },
+        ],
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+        "Tags": [
+          {
+            "Key": "sst:app",
+            "Value": "my-app",
+          },
+          {
+            "Key": "sst:stage",
+            "Value": "dev",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRoleDefaultPolicyADDA7DEB": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "logs:PutRetentionPolicy",
+                "logs:DeleteRetentionPolicy",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRoleDefaultPolicyADDA7DEB",
+        "Roles": [
+          {
+            "Ref": "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
     "SSTMetadata": {
       "Metadata": {
         "sst:constructs": [
+          {
+            "addr": "c842736ac965064b10aa6473796069b9488631ba8f",
+            "data": {
+              "graphql": false,
+              "httpApiId": {
+                "Ref": "BenchmarkStateMachineBenchmarksApi934EB345",
+              },
+              "routes": [
+                {
+                  "fn": {
+                    "node": "c8958f08781297ccc7d02f4944f0c3824f3c2bad77",
+                    "stack": "dev-my-app-test-stack",
+                  },
+                  "route": "GET /benchmarks",
+                  "type": "function",
+                },
+              ],
+              "url": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "https://",
+                    {
+                      "Ref": "BenchmarkStateMachineBenchmarksApi934EB345",
+                    },
+                    ".execute-api.us-east-1.",
+                    {
+                      "Ref": "AWS::URLSuffix",
+                    },
+                    "/",
+                  ],
+                ],
+              },
+            },
+            "id": "BenchmarksApi",
+            "stack": "dev-my-app-test-stack",
+            "type": "Api",
+          },
+          {
+            "addr": "c8958f08781297ccc7d02f4944f0c3824f3c2bad77",
+            "data": {
+              "arn": {
+                "Fn::GetAtt": [
+                  "BenchmarkStateMachineBenchmarksApiLambdaGETbenchmarks1252843D",
+                  "Arn",
+                ],
+              },
+              "localId": "dev-my-app-test-stack-BenchmarkStateMachine-BenchmarksApi-Lambda_GET_-benchmarks",
+            },
+            "id": "Lambda_GET_--benchmarks",
+            "stack": "dev-my-app-test-stack",
+            "type": "Function",
+          },
           {
             "addr": "c88a2d14f35684213fa9de999b19bfb671a345c172",
             "data": {
@@ -2210,7 +2693,7 @@ exports[`BenchmarkMachineStack 1`] = `
             "type": "Function",
           },
         ],
-        "sst:version": "1.2.30",
+        "sst:version": "1.4.0",
       },
       "Type": "AWS::CDK::Metadata",
     },

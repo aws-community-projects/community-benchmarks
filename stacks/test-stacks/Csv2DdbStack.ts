@@ -7,6 +7,7 @@ import {
 } from '@serverless-stack/resources';
 import { RemovalPolicy } from 'aws-cdk-lib';
 import { Runtime } from 'aws-cdk-lib/aws-lambda';
+import { RetentionDays } from 'aws-cdk-lib/aws-logs';
 import { BucketDeployment, Source } from 'aws-cdk-lib/aws-s3-deployment';
 import { Construct } from 'constructs';
 
@@ -94,6 +95,7 @@ export class Csv2DdbStack extends Stack {
     // Default Lambda props that can be overridden in function declarations.
     const lambdaProps: FunctionProps = {
       environment,
+      logRetention: RetentionDays.ONE_WEEK,
       memorySize: 512,
       srcPath: './src/csv2ddb',
       timeout: 60,
