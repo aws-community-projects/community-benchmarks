@@ -1,8 +1,8 @@
-import { Function, Table, TableFieldType } from '@serverless-stack/resources';
-import { Duration, RemovalPolicy } from 'aws-cdk-lib';
+import { Api, Function, Table } from '@serverless-stack/resources';
+import { CfnOutput, Duration, RemovalPolicy } from 'aws-cdk-lib';
 import { BillingMode } from 'aws-cdk-lib/aws-dynamodb';
 import { PolicyStatement } from 'aws-cdk-lib/aws-iam';
-import { Tracing } from 'aws-cdk-lib/aws-lambda';
+import { RetentionDays } from 'aws-cdk-lib/aws-logs';
 import {
   IntegrationPattern,
   JsonPath,
@@ -26,12 +26,14 @@ export class BenchmarkStateMachine extends Construct {
     const stateMachineName = 'benchmark-machine';
 
     const table = new Table(scope, 'BenchmarksTable', {
-      dynamodbTable: {
-        billingMode: BillingMode.PAY_PER_REQUEST,
-        removalPolicy: RemovalPolicy.DESTROY,
-        tableName: 'Benchmarks',
+      cdk: {
+        table: {
+          billingMode: BillingMode.PAY_PER_REQUEST,
+          removalPolicy: RemovalPolicy.DESTROY,
+          tableName: 'Benchmarks',
+        },
       },
-      fields: { pk: TableFieldType.STRING, sk: TableFieldType.STRING },
+      fields: { pk: 'string', sk: 'string' },
       primaryIndex: { partitionKey: 'pk', sortKey: 'sk' },
     });
 
@@ -45,15 +47,22 @@ export class BenchmarkStateMachine extends Construct {
           resources: ['*'],
         }),
       ],
+      logRetention: RetentionDays.ONE_WEEK,
       srcPath: 'src/benchmark',
-      tracing: Tracing.ACTIVE,
     });
+
+    // // Get data from the table
+    // const getBenchmarks = new Function(scope, 'GetBenchmarks', {
+    //   functionName: 'get-benchmarks',
+    //   handler: 'get-benchmarks.handler',
+    //   srcPath: 'src/benchmark',
+    // });
 
     // Step Functions parallel step to fan out to nested Sfn executions.
     const parallel = new Parallel(scope, 'Parallel Execution 0');
     let p = parallel;
 
-    const MAX_PARALLEL = 10;
+    const MAX_PARALLEL = 8;
 
     // Loop over functions to test. We will create a new nested state machine for each function.
     props.lambdaTests.forEach((lambdaTest, index) => {
@@ -73,7 +82,7 @@ export class BenchmarkStateMachine extends Construct {
         }
       );
 
-      // sfExecution.addRetry({ maxAttempts: 2 });
+      sfExecution.addRetry({ maxAttempts: 2 });
 
       if (index && index % MAX_PARALLEL === 0) {
         const np = new Parallel(
@@ -91,6 +100,25 @@ export class BenchmarkStateMachine extends Construct {
       definition: parallel,
       stateMachineName,
       timeout: Duration.minutes(10),
+    });
+
+    const api = new Api(this, 'BenchmarksApi', {
+      cors: true,
+      defaults: {
+        function: {
+          environment: { TABLE_NAME: table.tableName },
+          logRetention: RetentionDays.ONE_WEEK,
+          runtime: 'nodejs16.x',
+        },
+      },
+      routes: {
+        'GET /benchmarks': 'src/benchmark/get-benchmarks.handler',
+      },
+    });
+    api.attachPermissions([table]);
+
+    new CfnOutput(this, 'BenchmarkUrl', {
+      value: api.cdk.httpApi.apiEndpoint,
     });
   }
 }

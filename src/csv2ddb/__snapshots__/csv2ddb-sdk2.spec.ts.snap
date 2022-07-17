@@ -1,14 +1,14 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`csv 2 dynamodb full sdk parse the file and write 100 items 1`] = `
-Array [
-  Array [
-    Object {
-      "RequestItems": Object {
-        "my-table": Array [
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+exports[`csv 2 dynamodb full sdk > parse the file and write 100 items 1`] = `
+[
+  [
+    {
+      "RequestItems": {
+        "my-table": [
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Tuvalu",
                 "Item Type": "Baby Food",
                 "Order Date": "5/28/2010",
@@ -28,9 +28,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Grenada",
                 "Item Type": "Cereal",
                 "Order Date": "8/22/2012",
@@ -50,9 +50,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Russia",
                 "Item Type": "Office Supplies",
                 "Order Date": "5/2/2014",
@@ -72,9 +72,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Sao Tome and Principe",
                 "Item Type": "Fruits",
                 "Order Date": "6/20/2014",
@@ -94,9 +94,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Rwanda",
                 "Item Type": "Office Supplies",
                 "Order Date": "2/1/2013",
@@ -116,9 +116,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Solomon Islands",
                 "Item Type": "Baby Food",
                 "Order Date": "2/4/2015",
@@ -138,9 +138,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Angola",
                 "Item Type": "Household",
                 "Order Date": "4/23/2011",
@@ -160,9 +160,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Burkina Faso",
                 "Item Type": "Vegetables",
                 "Order Date": "7/17/2012",
@@ -182,9 +182,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Republic of the Congo",
                 "Item Type": "Personal Care",
                 "Order Date": "7/14/2015",
@@ -204,9 +204,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Senegal",
                 "Item Type": "Cereal",
                 "Order Date": "4/18/2014",
@@ -226,9 +226,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Kyrgyzstan",
                 "Item Type": "Vegetables",
                 "Order Date": "6/24/2011",
@@ -248,9 +248,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Cape Verde",
                 "Item Type": "Clothes",
                 "Order Date": "8/2/2014",
@@ -270,9 +270,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Bangladesh",
                 "Item Type": "Clothes",
                 "Order Date": "1/13/2017",
@@ -292,9 +292,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Honduras",
                 "Item Type": "Household",
                 "Order Date": "2/8/2017",
@@ -314,9 +314,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Mongolia",
                 "Item Type": "Personal Care",
                 "Order Date": "2/19/2014",
@@ -336,9 +336,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Bulgaria",
                 "Item Type": "Clothes",
                 "Order Date": "4/23/2012",
@@ -358,9 +358,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Sri Lanka",
                 "Item Type": "Cosmetics",
                 "Order Date": "11/19/2016",
@@ -380,9 +380,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Cameroon",
                 "Item Type": "Beverages",
                 "Order Date": "4/1/2015",
@@ -402,9 +402,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Turkmenistan",
                 "Item Type": "Household",
                 "Order Date": "12/30/2010",
@@ -424,9 +424,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "East Timor",
                 "Item Type": "Meat",
                 "Order Date": "7/31/2012",
@@ -446,9 +446,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Norway",
                 "Item Type": "Baby Food",
                 "Order Date": "5/14/2014",
@@ -468,9 +468,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Portugal",
                 "Item Type": "Baby Food",
                 "Order Date": "7/31/2015",
@@ -490,9 +490,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Honduras",
                 "Item Type": "Snacks",
                 "Order Date": "6/30/2016",
@@ -512,9 +512,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "New Zealand",
                 "Item Type": "Fruits",
                 "Order Date": "9/8/2014",
@@ -534,9 +534,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Moldova",
                 "Item Type": "Personal Care",
                 "Order Date": "5/7/2016",
@@ -560,13 +560,13 @@ Array [
       },
     },
   ],
-  Array [
-    Object {
-      "RequestItems": Object {
-        "my-table": Array [
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+  [
+    {
+      "RequestItems": {
+        "my-table": [
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "France",
                 "Item Type": "Cosmetics",
                 "Order Date": "5/22/2017",
@@ -586,9 +586,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Kiribati",
                 "Item Type": "Fruits",
                 "Order Date": "10/13/2014",
@@ -608,9 +608,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Mali",
                 "Item Type": "Fruits",
                 "Order Date": "5/7/2010",
@@ -630,9 +630,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Norway",
                 "Item Type": "Beverages",
                 "Order Date": "7/18/2014",
@@ -652,9 +652,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "The Gambia",
                 "Item Type": "Household",
                 "Order Date": "5/26/2012",
@@ -674,9 +674,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Switzerland",
                 "Item Type": "Cosmetics",
                 "Order Date": "9/17/2012",
@@ -696,9 +696,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "South Sudan",
                 "Item Type": "Personal Care",
                 "Order Date": "12/29/2013",
@@ -718,9 +718,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Australia",
                 "Item Type": "Office Supplies",
                 "Order Date": "10/27/2015",
@@ -740,9 +740,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Myanmar",
                 "Item Type": "Household",
                 "Order Date": "1/16/2015",
@@ -762,9 +762,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Djibouti",
                 "Item Type": "Snacks",
                 "Order Date": "2/25/2017",
@@ -784,9 +784,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Costa Rica",
                 "Item Type": "Personal Care",
                 "Order Date": "5/8/2017",
@@ -806,9 +806,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Syria",
                 "Item Type": "Fruits",
                 "Order Date": "11/22/2011",
@@ -828,9 +828,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "The Gambia",
                 "Item Type": "Meat",
                 "Order Date": "1/14/2017",
@@ -850,9 +850,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Brunei",
                 "Item Type": "Office Supplies",
                 "Order Date": "4/1/2012",
@@ -872,9 +872,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Bulgaria",
                 "Item Type": "Office Supplies",
                 "Order Date": "2/16/2012",
@@ -894,9 +894,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Niger",
                 "Item Type": "Personal Care",
                 "Order Date": "3/11/2017",
@@ -916,9 +916,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Azerbaijan",
                 "Item Type": "Cosmetics",
                 "Order Date": "2/6/2010",
@@ -938,9 +938,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "The Gambia",
                 "Item Type": "Cereal",
                 "Order Date": "6/7/2012",
@@ -960,9 +960,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Slovakia",
                 "Item Type": "Vegetables",
                 "Order Date": "10/6/2012",
@@ -982,9 +982,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Myanmar",
                 "Item Type": "Clothes",
                 "Order Date": "11/14/2015",
@@ -1004,9 +1004,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Comoros",
                 "Item Type": "Cereal",
                 "Order Date": "3/29/2016",
@@ -1026,9 +1026,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Iceland",
                 "Item Type": "Cosmetics",
                 "Order Date": "12/31/2016",
@@ -1048,9 +1048,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Switzerland",
                 "Item Type": "Personal Care",
                 "Order Date": "12/23/2010",
@@ -1070,9 +1070,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Macedonia",
                 "Item Type": "Clothes",
                 "Order Date": "10/14/2014",
@@ -1092,9 +1092,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Mauritania",
                 "Item Type": "Office Supplies",
                 "Order Date": "1/11/2012",
@@ -1118,13 +1118,13 @@ Array [
       },
     },
   ],
-  Array [
-    Object {
-      "RequestItems": Object {
-        "my-table": Array [
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+  [
+    {
+      "RequestItems": {
+        "my-table": [
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Albania",
                 "Item Type": "Clothes",
                 "Order Date": "2/2/2010",
@@ -1144,9 +1144,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Lesotho",
                 "Item Type": "Fruits",
                 "Order Date": "8/18/2013",
@@ -1166,9 +1166,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Saudi Arabia",
                 "Item Type": "Cereal",
                 "Order Date": "3/25/2013",
@@ -1188,9 +1188,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Sierra Leone",
                 "Item Type": "Office Supplies",
                 "Order Date": "11/26/2011",
@@ -1210,9 +1210,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Sao Tome and Principe",
                 "Item Type": "Fruits",
                 "Order Date": "9/17/2013",
@@ -1232,9 +1232,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Cote d'Ivoire",
                 "Item Type": "Clothes",
                 "Order Date": "6/8/2012",
@@ -1254,9 +1254,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Fiji",
                 "Item Type": "Clothes",
                 "Order Date": "6/30/2010",
@@ -1276,9 +1276,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Austria",
                 "Item Type": "Cosmetics",
                 "Order Date": "2/23/2015",
@@ -1298,9 +1298,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "United Kingdom",
                 "Item Type": "Household",
                 "Order Date": "1/5/2012",
@@ -1320,9 +1320,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Djibouti",
                 "Item Type": "Cosmetics",
                 "Order Date": "4/7/2014",
@@ -1342,9 +1342,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Australia",
                 "Item Type": "Cereal",
                 "Order Date": "6/9/2013",
@@ -1364,9 +1364,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "San Marino",
                 "Item Type": "Baby Food",
                 "Order Date": "6/26/2013",
@@ -1386,9 +1386,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Cameroon",
                 "Item Type": "Office Supplies",
                 "Order Date": "11/7/2011",
@@ -1408,9 +1408,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Libya",
                 "Item Type": "Clothes",
                 "Order Date": "10/30/2010",
@@ -1430,9 +1430,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Haiti",
                 "Item Type": "Cosmetics",
                 "Order Date": "10/13/2013",
@@ -1452,9 +1452,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Rwanda",
                 "Item Type": "Cosmetics",
                 "Order Date": "10/11/2013",
@@ -1474,9 +1474,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Gabon",
                 "Item Type": "Personal Care",
                 "Order Date": "7/8/2012",
@@ -1496,9 +1496,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Belize",
                 "Item Type": "Clothes",
                 "Order Date": "7/25/2016",
@@ -1518,9 +1518,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Lithuania",
                 "Item Type": "Office Supplies",
                 "Order Date": "10/24/2010",
@@ -1540,9 +1540,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Madagascar",
                 "Item Type": "Clothes",
                 "Order Date": "4/25/2015",
@@ -1562,9 +1562,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Turkmenistan",
                 "Item Type": "Office Supplies",
                 "Order Date": "4/23/2013",
@@ -1584,9 +1584,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Libya",
                 "Item Type": "Fruits",
                 "Order Date": "8/14/2015",
@@ -1606,9 +1606,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Democratic Republic of the Congo",
                 "Item Type": "Beverages",
                 "Order Date": "5/26/2011",
@@ -1628,9 +1628,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Djibouti",
                 "Item Type": "Cereal",
                 "Order Date": "5/20/2017",
@@ -1650,9 +1650,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Pakistan",
                 "Item Type": "Cosmetics",
                 "Order Date": "7/5/2013",
@@ -1676,13 +1676,13 @@ Array [
       },
     },
   ],
-  Array [
-    Object {
-      "RequestItems": Object {
-        "my-table": Array [
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+  [
+    {
+      "RequestItems": {
+        "my-table": [
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Mexico",
                 "Item Type": "Household",
                 "Order Date": "11/6/2014",
@@ -1702,9 +1702,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Federated States of Micronesia",
                 "Item Type": "Beverages",
                 "Order Date": "10/28/2014",
@@ -1724,9 +1724,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Laos",
                 "Item Type": "Vegetables",
                 "Order Date": "9/15/2011",
@@ -1746,9 +1746,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Monaco",
                 "Item Type": "Baby Food",
                 "Order Date": "5/29/2012",
@@ -1768,9 +1768,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Samoa",
                 "Item Type": "Cosmetics",
                 "Order Date": "7/20/2013",
@@ -1790,9 +1790,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Spain",
                 "Item Type": "Household",
                 "Order Date": "10/21/2012",
@@ -1812,9 +1812,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Lebanon",
                 "Item Type": "Clothes",
                 "Order Date": "9/18/2012",
@@ -1834,9 +1834,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Iran",
                 "Item Type": "Cosmetics",
                 "Order Date": "11/15/2016",
@@ -1856,9 +1856,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Zambia",
                 "Item Type": "Snacks",
                 "Order Date": "1/4/2011",
@@ -1878,9 +1878,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Kenya",
                 "Item Type": "Vegetables",
                 "Order Date": "3/18/2012",
@@ -1900,9 +1900,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Mexico",
                 "Item Type": "Personal Care",
                 "Order Date": "2/17/2012",
@@ -1922,9 +1922,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Sao Tome and Principe",
                 "Item Type": "Beverages",
                 "Order Date": "1/16/2011",
@@ -1944,9 +1944,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "The Gambia",
                 "Item Type": "Baby Food",
                 "Order Date": "2/3/2014",
@@ -1966,9 +1966,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Kuwait",
                 "Item Type": "Fruits",
                 "Order Date": "4/30/2012",
@@ -1988,9 +1988,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Slovenia",
                 "Item Type": "Beverages",
                 "Order Date": "10/23/2016",
@@ -2010,9 +2010,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Sierra Leone",
                 "Item Type": "Office Supplies",
                 "Order Date": "12/6/2016",
@@ -2032,9 +2032,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Australia",
                 "Item Type": "Beverages",
                 "Order Date": "7/7/2014",
@@ -2054,9 +2054,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Azerbaijan",
                 "Item Type": "Office Supplies",
                 "Order Date": "6/13/2012",
@@ -2076,9 +2076,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Romania",
                 "Item Type": "Cosmetics",
                 "Order Date": "11/26/2010",
@@ -2098,9 +2098,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Nicaragua",
                 "Item Type": "Beverages",
                 "Order Date": "2/8/2011",
@@ -2120,9 +2120,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Mali",
                 "Item Type": "Clothes",
                 "Order Date": "7/26/2011",
@@ -2142,9 +2142,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Malaysia",
                 "Item Type": "Fruits",
                 "Order Date": "11/11/2011",
@@ -2164,9 +2164,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Sierra Leone",
                 "Item Type": "Vegetables",
                 "Order Date": "6/1/2016",
@@ -2186,9 +2186,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Mexico",
                 "Item Type": "Personal Care",
                 "Order Date": "7/30/2015",
@@ -2208,9 +2208,9 @@ Array [
               },
             },
           },
-          Object {
-            "PutRequest": Object {
-              "Item": Object {
+          {
+            "PutRequest": {
+              "Item": {
                 "Country": "Mozambique",
                 "Item Type": "Household",
                 "Order Date": "2/10/2012",
@@ -2237,10 +2237,10 @@ Array [
 ]
 `;
 
-exports[`csv 2 dynamodb full sdk parse the file and write 100 items 2`] = `
-Array [
-  Array [
-    Object {
+exports[`csv 2 dynamodb full sdk > parse the file and write 100 items 2`] = `
+[
+  [
+    {
       "Bucket": "my-bucket",
       "Key": "my-key",
     },

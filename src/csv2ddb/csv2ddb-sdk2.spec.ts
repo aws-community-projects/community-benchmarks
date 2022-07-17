@@ -1,12 +1,17 @@
 import { createReadStream } from 'fs';
+import { beforeEach, describe, expect, test, vi } from 'vitest';
 
 import { batchWriteFn } from '../../__mocks__/aws-sdk/clients/dynamodb';
 import { getObjectFn } from '../../__mocks__/aws-sdk/clients/s3';
 import { awsSdkV2PromiseResponse } from '../../__mocks__/awsSdkV2PromiseResponse';
 import { handler } from './csv2ddb-sdk2';
 
+vi.mock('aws-sdk');
+
 describe('csv 2 dynamodb full sdk', () => {
-  beforeEach(() => jest.resetModules());
+  beforeEach(() => {
+    vi.resetModules();
+  });
   test('parse the file and write 100 items', async () => {
     awsSdkV2PromiseResponse.mockReturnValueOnce(
       createReadStream('./assets/100 Sales Records.csv')
@@ -22,12 +27,9 @@ describe('csv 2 dynamodb full sdk', () => {
 
   test('ensure env vars are set', async () => {
     process.env.TABLE_NAME = '';
-    jest.resetModules();
-    try {
-      // eslint-disable-next-line @typescript-eslint/no-var-requires
-      await require('./csv2ddb-sdk2').handler();
-    } catch (e) {
-      expect((e as Error).message).toBe('Missing required env var!');
-    }
+    vi.resetModules();
+    await expect(async () =>
+      (await import('./csv2ddb-sdk2-clients')).handler()
+    ).rejects.toThrowError('Missing required env var!');
   });
 });

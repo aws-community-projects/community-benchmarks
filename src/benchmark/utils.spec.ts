@@ -1,3 +1,5 @@
+import { describe, expect, test } from 'vitest';
+
 import { quantile } from './utils';
 
 describe('utility functions', () => {

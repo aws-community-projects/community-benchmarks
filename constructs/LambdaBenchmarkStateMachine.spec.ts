@@ -1,11 +1,6 @@
-import {
-  App,
-  Function,
-  Stack,
-  Table,
-  TableFieldType,
-} from '@serverless-stack/resources';
+import { App, Function, Stack, Table } from '@serverless-stack/resources';
 import { Template } from 'aws-cdk-lib/assertions';
+import { expect, test } from 'vitest';
 
 import lambdaTests from '../fixtures/lambda-tests';
 import { LambdaBenchmarkStateMachine } from './LambdaBenchmarkStateMachine';
@@ -21,7 +16,7 @@ test('BenchmarkStateMachine', () => {
     }),
     lambdaTest: lambdaTests[0],
     table: new Table(stack, 'BenchmarksTable', {
-      fields: { pk: TableFieldType.STRING, sk: TableFieldType.STRING },
+      fields: { pk: 'string', sk: 'string' },
       primaryIndex: { partitionKey: 'pk', sortKey: 'sk' },
     }),
   });

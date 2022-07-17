@@ -4,6 +4,8 @@ import {
   BatchWriteCommand,
   DynamoDBDocumentClient,
 } from '@aws-sdk/lib-dynamodb';
+import csv from 'csvtojson';
+
 import imports from './imports.cjs';
 
 const bucketName = process.env.BUCKET_NAME;
@@ -47,8 +49,7 @@ export const handler = async (_, ctx) => {
 
   let items = [];
 
-  await imports
-    .csv()
+  await csv()
     .fromStream(response.Body)
     .subscribe(async (item) => {
       items.push(item);
