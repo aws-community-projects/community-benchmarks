@@ -16,7 +16,7 @@
     ]
   },
   "devDependencies": {
-    "@serverless-stack/cli": "0.69.7",
+    "@serverless-stack/cli": "1.18.4",
     "@serverless-stack/resources": "0.69.7",
     "@tsconfig/node14": "^1.0.1",
     "@types/aws-lambda": "^8.10.95",
